@@ -17,3 +17,12 @@ class Transaction(db.Model):
     # wallet_transaction = db.relationship("Wallet", back_populates="transaction")
     sender = db.relationship("Wallet", foreign_keys=[sender_id])
     receiver = db.relationship("Wallet", foreign_keys=[receiver_id])
+
+    def request_to_dict(self):
+        return {
+            'id': self.id,
+            'sender_id': self.sender_id,
+            'receiver_id': self.receiver_id,
+            'request_amount': self.request_amount,
+            'is_Pending': self.is_Pending
+        }

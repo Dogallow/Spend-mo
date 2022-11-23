@@ -4,10 +4,13 @@ from app.models import Wallet
 
 wallet_routes = Blueprint('wallet', __name__)
 
-@wallet_routes.routes('/')
-@login_required
+@wallet_routes.route('/')
+# @login_required
 def check_balance():
 
-    wallet = Wallet.query.filter(Wallet.id == current_user.id).first()
+    wallet = Wallet.query.filter(Wallet.id == 1).first()
 
-    return {'wallet': [x.to_dict() for x in wallet]}
+    return {'wallet': wallet.to_dict()}
+    # return {'wallet': [x.to_dict() for x in wallet]}
+
+
