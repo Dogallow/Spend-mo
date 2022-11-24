@@ -16,12 +16,12 @@ def initiate_request_transaction():
             "sender_id": form.data['sender_id'],
             "receiver_id": form.data['receiver_id'],
             "is_Pending": True,
-            "request_amount": form.data['request_amount']
+            "request_amount": int(form.data['request_amount'])
         }
-
+        print('--------------', params)
         req = Transaction(**params)
 
         db.session.add(req)
-        db.session.commit(req)
+        db.session.commit()
 
         return {'request' : req.request_to_dict()}
