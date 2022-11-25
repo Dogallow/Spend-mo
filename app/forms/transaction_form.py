@@ -4,8 +4,9 @@ from wtforms.validators import DataRequired, Email, ValidationError
 from app.models import Transaction
 
 class RequestTransactionForm(FlaskForm):
-    sender_id = StringField("sender", validators=[DataRequired()])
-    receiver_id = StringField("receiver", validators=[DataRequired()])
+    sender_username = StringField("sender", validators=[DataRequired()])
+    sender_id = StringField("sender")
+    receiver_id = StringField("receiver")
     request_amount = DecimalField("Request Amount")
     pay_amount = DecimalField("Pay Amount")
     is_Pending = BooleanField("Pending")

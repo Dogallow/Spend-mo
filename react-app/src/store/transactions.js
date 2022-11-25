@@ -1,3 +1,5 @@
+import { getBalanceThunk } from "./wallet"
+
 const REQUEST_SENT = 'transactions/REQUEST'
 const USER_TRANSACTIONS = 'transactions/USER_TRANSACTIONS'
 const APPROVE_TRANSACTION = 'transactions/APPROVE_TRANSACTION'
