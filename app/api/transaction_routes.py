@@ -5,21 +5,53 @@ from app.forms import RequestTransactionForm
 
 transaction_routes = Blueprint('transaction', __name__)
 
+def nameify(obj):
+    sender = User.query.get(obj['sender_id']).username
+    receiver = User.query.get(obj['receiver_id']).username
+    return {
+        'id': obj['id'],
+        'sender_id': sender,
+        'receiver_id': receiver,
+        'request_amount': obj['request_amount'],
+        'is_Pending': obj['is_Pending']
+    }
+
 @transaction_routes.route('/')
 @login_required
-def get_all_transactions():
+def get_sender_transactions():
     print('------------Current Logged in User', current_user.id)
 
-    transaction_list = Transaction.query.filter(Transaction.sender_id == current_user.id).all()
+    transaction_list = Transaction.query.all()
     print('############# List of transactions', transaction_list)
 
-    dict_transactions = [transaction.request_to_dict() for transaction in transaction_list]
+    dict_transactions = [transaction.username_to_dict() for transaction in transaction_list]
+    
+    print('$$$$$$$$$$$$ Dict Transactions', dict_transactions)
+
+
+
+    
+    
+    
+    
+    return {'transactions': dict_transactions}
+
+
+@transaction_routes.route('/requests')
+@login_required
+def get_all_request_transactions():
+    print('------------Current Logged in User', current_user.id)
+
+    transaction_list = Transaction.query.all()
+    print('############# List of transactions', transaction_list)
+
+    dict_transactions = [transaction.request_to_dict() for transaction in transaction_list if transaction.is_Pending == True]
     
     print('$$$$$$$$$$$$ Dict Transactions', dict_transactions)
 
     
     
-    print('$$$$$$$$$$$$ Dict Transactions', dict_transactions[0]['sender_id'])
+    # print('$$$$$$$$$$$$ Dict Transactions', dict_transactions[0]['sender_id'])
     new_dict = []
     for x in dict_transactions:
         
@@ -85,13 +117,23 @@ def approve_transaction(id):
     receive_payment_wallet.balance = receive_payment_wallet.balance + transaction.request_amount
     transaction.is_Pending = False
 
-    print('$$$$$$$$$$$$$$$ transaction', transaction.request_to_dict())
+    print('$$$$$$$$$$$$$$$ transaction', transaction.username_to_dict())
 
-    print('!!!!!!!!!!!!! Wallet of user Who is sending the money', send_payment_wallet.to_dict())
-    print('!!!!!!!!!!!!! Wallet of user Who is receiving the money', receive_payment_wallet.to_dict())
+    # print('!!!!!!!!!!!!! Wallet of user Who is sending the money', send_payment_wallet.to_dict())
+    # print('!!!!!!!!!!!!! Wallet of user Who is receiving the money', receive_payment_wallet.to_dict())
 
     db.session.commit()
 
     return {'transaction': transaction.username_to_dict()}
     
     
+@transaction_routes.route('/decline/<int:id>')
+@login_required
+def decline_transaction(id):
+    transaction = Transaction.query.get(id)
+
+    transaction.is_Pending = False
+
+    db.session.commit()
+
+    return {'transaction': transaction.username_to_dict()}
