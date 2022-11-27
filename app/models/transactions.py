@@ -28,7 +28,8 @@ class Transaction(db.Model):
             'sender_id': self.sender_id,
             'receiver_id': self.receiver_id,
             'request_amount': self.request_amount,
-            'is_Pending': self.is_Pending
+            'is_Pending': self.is_Pending,
+            'transaction_state': self.transaction_state
         }
 
     def username_to_dict(self):
@@ -48,6 +49,6 @@ class Transaction(db.Model):
             'sender_id': sender,
             'receiver_id': receiver,
             'request_amount': self.request_amount,
-            'is_Pending': self.is_Pending
-        
+            'is_Pending': self.is_Pending,
+            'transaction_state': self.transaction_state
         }

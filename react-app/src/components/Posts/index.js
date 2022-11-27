@@ -15,7 +15,7 @@ function Posts () {
     if (!posts) return <h1>Loading...</h1>
     return (
         <div>
-            {posts && !!posts.length && posts.filter(post => post.is_Pending == false).map(post => {
+            {posts && !!posts.length && posts.filter(post => post.is_Pending == false && post.transaction_state == 'approved').map(post => {
 
                 return(
                     <div>

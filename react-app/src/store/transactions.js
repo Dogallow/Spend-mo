@@ -1,5 +1,7 @@
 import { getBalanceThunk } from "./wallet"
 
+// Note: When approving, declining, and cancelling request possibly try reflecting the changes in all slices of relevant state
+
 const REQUEST_SENT = 'transactions/REQUEST'
 const USER_TRANSACTIONS = 'transactions/USER_TRANSACTIONS'
 const USER_PAYMENTS = 'transactions/PAYMENTS'
@@ -156,7 +158,9 @@ const transactionsReducer = (state = initialState, action) => {
     let newState = {}
     switch(action.type){
         case REQUEST_SENT:
+            
             newState = {...state}
+
             newState.request = {...action.request}
             return newState
         case USER_TRANSACTIONS: 
