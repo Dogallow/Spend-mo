@@ -1,10 +1,12 @@
 import React, {useEffect} from "react"
 import {useDispatch, useSelector} from 'react-redux'
-import { declineTransactionThunk, getAllRequestedTransactions } from "../../store/transactions"
+import { Redirect } from "react-router-dom"
+import { cancelTransactionThunk, getAllRequestedTransactions } from "../../store/transactions"
 
 function Incomplete(){
     const dispatch = useDispatch()
-    const requests = useSelector(state => state.transactions.transactions)
+    const user = useSelector(state => state.session.user)
+    const requests = useSelector(state => state.transactions.requestTransactions.transactions)
     
     console.log(requests)
 
@@ -13,9 +15,10 @@ function Incomplete(){
     },[dispatch])
 
     const cancelRequest = (request) => {
-        dispatch(declineTransactionThunk(request.id)).then(() => dispatch(getAllRequestedTransactions()))
+        dispatch(cancelTransactionThunk(request.id)).then(() => dispatch(getAllRequestedTransactions()))
     }
     
+    if (!user) return <Redirect to={'/login'} />
     if (requests == undefined) return <p>Loading...</p>
     return (
         <div>
@@ -26,6 +29,7 @@ function Incomplete(){
                 }
                 return (
                     <div>
+                        
                         <p>{request.receiver_id} requested ${request.request_amount} from {request.sender_id}</p>
                         {status && <p>status: {status}</p>}
                         {request.is_Pending && <button onClick={() => cancelRequest(request)}>Cancel Request</button>}

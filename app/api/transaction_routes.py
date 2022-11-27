@@ -137,3 +137,15 @@ def decline_transaction(id):
     db.session.commit()
 
     return {'transaction': transaction.username_to_dict()}
+
+
+@transaction_routes.route('/cancel/<int:id>')
+@login_required
+def cancel_transaction(id):
+    transaction = Transaction.query.get(id)
+
+    transaction.is_Pending = False
+
+    db.session.commit()
+
+    return {'transaction': transaction.username_to_dict()}

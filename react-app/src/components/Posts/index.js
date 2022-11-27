@@ -4,7 +4,7 @@ import { getAllUserTransactions } from '../../store/transactions'
 
 function Posts () {
     const dispatch = useDispatch()
-    const posts = useSelector(state => state.transactions.transactions)
+    const posts = useSelector(state => state.transactions.allTransactions.transactions)
 
     
     console.log(posts)
@@ -15,7 +15,7 @@ function Posts () {
     if (!posts) return <h1>Loading...</h1>
     return (
         <div>
-            {posts && !!posts.length && posts.map(post => {
+            {posts && !!posts.length && posts.filter(post => post.is_Pending == false).map(post => {
 
                 return(
                     <div>

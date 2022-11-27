@@ -1,11 +1,12 @@
 import React, {useEffect} from "react"
 import {useSelector, useDispatch} from 'react-redux'
-import { approveTransactionThunk, declineTransactionThunk, getAllUserTransactions } from "../../store/transactions"
+import { Redirect } from "react-router-dom"
+import { approveTransactionThunk, declineTransactionThunk, getAllSenderTransactions, getAllUserTransactions } from "../../store/transactions"
 import { getBalanceThunk } from "../../store/wallet"
 
 function UserTransactions () {
     const dispatch = useDispatch()
-    const transactions = useSelector(state => state.transactions.transactions)
+    const transactions = useSelector(state => state.transactions.sendTransactions.transactions)
     const wallet = useSelector(state => state.wallet)
     const user = useSelector(state => state.session.user)
     console.log(wallet)
@@ -18,10 +19,11 @@ function UserTransactions () {
     }
     console.log('$$ BALANCE', balance)
     useEffect(() => {
-        dispatch(getAllUserTransactions())
+        dispatch(getAllSenderTransactions())
         dispatch(getBalanceThunk())
     },[dispatch])
     if (!transactions) return <h1>...Loading</h1>
+    if (!user) return <Redirect to={'/login'} />
 
     const approveTransaction = (transaction) => {
         console.log(transaction)
