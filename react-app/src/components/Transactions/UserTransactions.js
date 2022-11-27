@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React, {useEffect, useState} from "react"
 import {useSelector, useDispatch} from 'react-redux'
 import { Redirect } from "react-router-dom"
 import { approveTransactionThunk, declineTransactionThunk, getAllSenderTransactions, getAllUserTransactions } from "../../store/transactions"
@@ -9,14 +9,18 @@ function UserTransactions () {
     const transactions = useSelector(state => state.transactions.sendTransactions.transactions)
     const wallet = useSelector(state => state.wallet)
     const user = useSelector(state => state.session.user)
+    const [errors, setErrors] = useState([])
     console.log(wallet)
     console.log(user)
     console.log('USE SELECTOR ', transactions)
+    
 
     let balance = null
+
     if ( wallet.wallet !== undefined ){
         balance = wallet.wallet
     }
+
     console.log('$$ BALANCE', balance)
     useEffect(() => {
         dispatch(getAllSenderTransactions())
@@ -25,14 +29,25 @@ function UserTransactions () {
     if (!transactions) return <h1>...Loading</h1>
     if (!user) return <Redirect to={'/login'} />
 
-    const approveTransaction = (transaction) => {
+    let validate = []
+
+    const approveTransaction = async (transaction) => {
         console.log(transaction)
+
+        validate = []
         // Need a thunk
-        dispatch(approveTransactionThunk(transaction.id)).then(() => dispatch(getBalanceThunk()))
+        const transactionResult = await dispatch(approveTransactionThunk(transaction.id))
+        await dispatch(getBalanceThunk())
+
+        if (transactionResult.errors){
+            validate = [transactionResult.errors]
+        }
+
+        setErrors([...validate])
     }
 
     const declineTransaction = (transaction) => {
-
+        setErrors([])
         // Need a thunk
         dispatch(declineTransactionThunk(transaction.id))
     }
@@ -41,6 +56,15 @@ function UserTransactions () {
         <div>
             <p>Transaction List</p>
             {balance && <h1>Your balance is: ${balance.balance}</h1>}
+            <ul>
+                {!!errors.length && errors.map((error, index) => {
+                    return (
+                        <li key={index}>
+                            {error}
+                        </li>
+                    )
+                })}
+            </ul>
             {transactions && !!transactions.length && transactions.filter(transaction => transaction.sender_id == user.username).map((transaction, index) => {
                 let button1 = null
                 let button2 = null
@@ -59,6 +83,7 @@ function UserTransactions () {
                     {button1}
                     {button2}
                     --------------------------
+
                     </div>
             }
             )}

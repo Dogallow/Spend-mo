@@ -1,4 +1,11 @@
 const BALANCE = 'wallet/BALANCE'
+const CLEAR_WALLET = 'wallet/CLEAR_WALLET'
+
+export const clearWallet = () => {
+    return {
+        type: CLEAR_WALLET
+    }
+}
 
 const balanceActionCreator = (wallet) => {
     return {
@@ -14,7 +21,7 @@ export const getBalanceThunk = () => async dispatch => {
         const wallet = await response.json()
         console.log('response from backend wallet', wallet)
         dispatch(balanceActionCreator(wallet))
-        return wallet
+        // return wallet
     }
 }
 
@@ -23,6 +30,9 @@ const walletReducer = (state = {}, action) => {
     switch(action.type){
         case BALANCE:
             newState = {...action.wallet}
+            return newState
+        case CLEAR_WALLET:
+            newState = {}
             return newState
         default:
             return state

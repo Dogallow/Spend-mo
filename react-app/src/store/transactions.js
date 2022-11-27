@@ -3,17 +3,32 @@ import { getBalanceThunk } from "./wallet"
 // Note: When approving, declining, and cancelling request possibly try reflecting the changes in all slices of relevant state
 
 const REQUEST_SENT = 'transactions/REQUEST'
+const SEND_PAYMENT = 'transactions/SEND_PAYMENT'
 const USER_TRANSACTIONS = 'transactions/USER_TRANSACTIONS'
 const USER_PAYMENTS = 'transactions/PAYMENTS'
 const USER_REQUESTS = 'transactions/USER_REQUESTS'
 const APPROVE_TRANSACTION = 'transactions/APPROVE_TRANSACTION'
 const DECLINE_TRANSACTION = 'transactions/DECLINE_TRANSACTION'
 const CANCEL_TRANSACTION = 'transactions/CANCEL_TRANSACTION'
+const CLEAR_TRANSACTION = 'transactions/CLEAR_TRANSACTION'
+
+export const clearTransaction = () => {
+    return {
+        type: CLEAR_TRANSACTION
+    }
+}
 
 const requestSent = (request) => {
     return {
         type: REQUEST_SENT,
         request
+    }
+}
+
+const paymentSent = (transaction) => {
+    return {
+        type: SEND_PAYMENT,
+        transaction
     }
 }
 
@@ -105,17 +120,47 @@ export const requestPaymentTransaction = (obj) => async dispatch => {
 
     if (response.ok){
         const requestDetails = await response.json()
+        if (requestDetails.errors){
+            console.log('there was an error', requestDetails)
+            return requestDetails
+        }
         console.log('request Details from the backend', requestDetails)
         dispatch(requestSent(requestDetails))
         return requestDetails
     }
 }   
 
+export const initiateTransactionAndSendPaymentThunk = (obj) => async dispatch => {
+    const response = await fetch(`/api/transaction/sendPayment`,{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(obj)
+    })
+
+    if (response.ok) {
+        const sendDetails = await response.json()
+        if (sendDetails.errors) {
+            console.log('there was an error', sendDetails)
+            return sendDetails
+        }
+        console.log('send Details from the backend', sendDetails)
+        dispatch(paymentSent(sendDetails))
+        return sendDetails
+    }
+
+
+}
 export const approveTransactionThunk = (id) => async dispatch => {
     const response = await fetch(`/api/transaction/approve/${id}`, )
 
     if (response.ok){
         const success = await response.json()
+
+        if (success.errors){
+            console.log('there was an error with approving transaction',success)
+            return success
+        }
+        
         console.log('Returned from the backend', success)
         dispatch(approveTransactionActionCreator(success))
         return success
@@ -145,6 +190,7 @@ export const cancelTransactionThunk = (id) => async dispatch => {
 
 }
 
+
 const initialState ={
     allTransactions: {},
     requestTransactions: {},
@@ -170,6 +216,10 @@ const transactionsReducer = (state = initialState, action) => {
         case USER_REQUESTS:
             newState = {...state}
             newState.requestTransactions = {...action.requests}
+            return newState
+        case SEND_PAYMENT:
+            newState = {...state}
+            newState.sent = {...action.transaction}
             return newState
         case USER_PAYMENTS:
             newState = {...state}
@@ -216,6 +266,9 @@ const transactionsReducer = (state = initialState, action) => {
             console.log('This is the declined altered state reflecting the changed status', declinedState)
             // We want to find our transaction and replace it.
             return {...state, sendTransactions: {'transactions':declinedState}}
+        case CLEAR_TRANSACTION:
+            newState = initialState;
+            return newState
         default:
             return state
     }
