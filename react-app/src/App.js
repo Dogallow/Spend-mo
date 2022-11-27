@@ -10,6 +10,9 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import RequestForm from './components/RequestForm';
 import UserTransactions from './components/Transactions/UserTransactions';
+import Incomplete from './components/Incomplete';
+import Posts from './components/Posts';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,11 +45,17 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <Route path='/' exact={true} >
+        <Route path='/form' exact={true} >
           <RequestForm />
+        </Route>
+        <Route path='/' exact={true} >
+          <Posts />
         </Route>
         <Route path='/user-transactions' exact={true} >
           <UserTransactions />
+        </Route>
+        <Route path='/incomplete' exact={true} >
+          <Incomplete />
         </Route>
       </Switch>
     </BrowserRouter>

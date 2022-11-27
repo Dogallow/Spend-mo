@@ -31,11 +31,21 @@ class Transaction(db.Model):
         }
 
     def username_to_dict(self):
+        sender = User.query.get(self.sender_id)
+        print(sender)
+        print(sender.username)
+        sender = sender.username
+        receiver = User.query.get(self.receiver_id)
+        print(receiver)
+        print(receiver.username)
+        receiver = receiver.username
+
+        
         return {
             
             'id': self.id,
-            'sender_id': User.query.get(self.sender_id).username,
-            'receiver_id': User.query.get(self.receiver_id).username,
+            'sender_id': sender,
+            'receiver_id': receiver,
             'request_amount': self.request_amount,
             'is_Pending': self.is_Pending
         
