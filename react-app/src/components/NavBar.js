@@ -37,6 +37,11 @@ const NavBar = () => {
             Incomplete
           </NavLink>
         </li>
+        <li>
+          <NavLink to='/form' exact={true} activeClassName='active'>
+            Form
+          </NavLink>
+        </li>
         
         <li>
           <LogoutButton />
