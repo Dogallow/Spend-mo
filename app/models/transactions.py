@@ -14,6 +14,7 @@ class Transaction(db.Model):
     request_amount = db.Column(db.Integer)
     pay_amount = db.Column(db.Integer)
     is_Pending = db.Column(db.Boolean)
+    transaction_state = db.Column(db.String()) #pending, approved, declined, cancelled, request
 
     # May need to add a decline Column(boolean) to take into account if a user wants to deny the request or the payment
 
