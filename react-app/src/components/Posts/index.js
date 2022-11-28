@@ -1,6 +1,7 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { getAllUserTransactions } from '../../store/transactions'
+import { getBalanceThunk } from '../../store/wallet'
 import './Posts.css'
 
 function Posts () {
@@ -10,6 +11,7 @@ function Posts () {
     
     console.log(posts)
     useEffect(() => {
+        dispatch(getBalanceThunk())
         dispatch(getAllUserTransactions())
     },[dispatch])
     

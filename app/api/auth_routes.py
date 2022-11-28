@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Wallet
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -60,14 +60,26 @@ def sign_up():
     Creates a new user and logs them in
     """
     form = SignUpForm()
+    print('///////////////////',form.data)
+    print('///////////////////',form.data['username'])
+    print('///////////////////',form.data['first_name'])
+    # print('///////////////////',form.data('username'))
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        print(form.data['first_name'])
         user = User(
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password']
         )
+        wallet = Wallet(
+            user_id=user.id,
+            balance=0
+        )
         db.session.add(user)
+        db.session.add(wallet)
         db.session.commit()
         login_user(user)
         return user.to_dict()
