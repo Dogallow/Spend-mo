@@ -3,6 +3,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from flask_login import UserMixin
 
+
 class Wallet(db.Model, UserMixin):
     __tablename__ = 'wallets'
     if environment == "production":

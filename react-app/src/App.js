@@ -13,6 +13,7 @@ import UserTransactions from './components/Transactions/UserTransactions';
 import Incomplete from './components/Incomplete';
 import Posts from './components/Posts';
 import './app.css'
+import {Deposit, Withdraw} from './components/Transfer';
 
 
 function App() {
@@ -57,6 +58,12 @@ function App() {
         </Route>
         <Route path='/incomplete' exact={true} >
           <Incomplete />
+        </Route>
+        <Route path='/transfer/deposit' exact={true} >
+          <Deposit />
+        </Route>
+        <Route path='/transfer/withdraw' exact={true} >
+          <Withdraw />
         </Route>
       </Switch>
     </BrowserRouter>

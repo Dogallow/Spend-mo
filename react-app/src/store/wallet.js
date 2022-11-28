@@ -25,6 +25,21 @@ export const getBalanceThunk = () => async dispatch => {
     }
 }
 
+export const editBalance = (obj, action) => async dispatch => {
+    const response = await fetch(`/api/wallet/${action}`, {
+        'method': 'PUT',
+        'headers': {'Content-Type': 'application/json'},
+        'body': JSON.stringify(obj)
+    })
+
+    if (response.ok){
+        const wallet = await response.json()
+        console.log('Response from wallet route backend', wallet)
+        dispatch(balanceActionCreator(wallet))
+        return wallet
+    }
+}
+
 const walletReducer = (state = {}, action) => {
     let newState = {}
     switch(action.type){

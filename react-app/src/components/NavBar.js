@@ -1,10 +1,42 @@
 
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux'
 import { NavLink } from 'react-router-dom';
+import { deleteUser, deleteUserThunk } from '../store/session';
+import { clearTransaction } from '../store/transactions';
+import { clearWallet, getBalanceThunk } from '../store/wallet';
 import LogoutButton from './auth/LogoutButton';
 import './Navbar.css'
 
 const NavBar = () => {
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.session.user)
+  const wallet = useSelector(state => state.wallet)
+
+  console.log(user)
+  console.log(wallet)
+
+  const walletInfo = wallet.wallet ?( 
+    <div>
+      <p>Wallet Balance: ${wallet.wallet.balance}</p>
+      <NavLink to={'/transfer/deposit'}>
+        <p>Transfer Money</p>
+      </NavLink>
+    </div>
+  ) : (
+    null
+  )
+
+  const deleteUser = async () => {
+    await dispatch(deleteUserThunk())
+    await dispatch(clearTransaction())
+    await dispatch(clearWallet())
+  }
+  
+  useEffect(() => {
+    dispatch(getBalanceThunk())
+  },[])
+  
   return (
     <nav>
     <div className='nav-container'>
@@ -19,6 +51,9 @@ const NavBar = () => {
         <div>
           <button className='pay-request-button'>Pay or Request</button>
         </div>
+        
+          {walletInfo}
+        
         <ul>
           <li>
             <NavLink to='/' exact={true} activeClassName='active'>
@@ -58,6 +93,9 @@ const NavBar = () => {
           
           <li>
             <LogoutButton />
+          </li>
+          <li>
+            <button onClick={(e) => deleteUser()}>Delete User</button>
           </li>
         </ul>
       </div>
