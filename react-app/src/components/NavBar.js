@@ -2,7 +2,9 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import { NavLink } from 'react-router-dom';
-import { getBalanceThunk } from '../store/wallet';
+import { deleteUser, deleteUserThunk } from '../store/session';
+import { clearTransaction } from '../store/transactions';
+import { clearWallet, getBalanceThunk } from '../store/wallet';
 import LogoutButton from './auth/LogoutButton';
 import './Navbar.css'
 
@@ -24,6 +26,12 @@ const NavBar = () => {
   ) : (
     null
   )
+
+  const deleteUser = async () => {
+    await dispatch(deleteUserThunk())
+    await dispatch(clearTransaction())
+    await dispatch(clearWallet())
+  }
   
   useEffect(() => {
     dispatch(getBalanceThunk())
@@ -85,6 +93,9 @@ const NavBar = () => {
           
           <li>
             <LogoutButton />
+          </li>
+          <li>
+            <button onClick={(e) => deleteUser()}>Delete User</button>
           </li>
         </ul>
       </div>

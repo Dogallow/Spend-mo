@@ -1,3 +1,5 @@
+import { getBalanceThunk } from "./wallet";
+
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
@@ -24,7 +26,7 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
+
     dispatch(setUser(data));
   }
 }
@@ -40,8 +42,8 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-  
-  
+
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -78,10 +80,11 @@ export const signUp = (obj) => async (dispatch) => {
     },
     body: JSON.stringify(obj),
   });
-  
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
+    // dispatch(getBalanceThunk())
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
@@ -93,12 +96,27 @@ export const signUp = (obj) => async (dispatch) => {
   }
 }
 
+export const deleteUserThunk = () => async dispatch => {
+  const response = await fetch(`/api/auth/delete`,{
+    method: 'DELETE'
+  })
+
+  if (response.ok) {
+    const success = await response.json()
+    console.log(success)
+    dispatch(removeUser())
+    
+    return null
+  }
+}
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }
     case REMOVE_USER:
-      return { user: null }
+      let newState = {...state, user: null}
+      return newState
     default:
       return state;
   }

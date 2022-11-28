@@ -18,8 +18,8 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password === repeatPassword) {
       const obj = {
-        firstName,
-        lastName,
+        'first_name':firstName,
+        'last_name':lastName,
         username,
         email,
         password
