@@ -12,6 +12,7 @@ import RequestForm from './components/RequestForm';
 import UserTransactions from './components/Transactions/UserTransactions';
 import Incomplete from './components/Incomplete';
 import Posts from './components/Posts';
+import './app.css'
 
 
 function App() {
