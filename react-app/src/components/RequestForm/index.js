@@ -19,7 +19,10 @@ function RequestForm () {
 
         setErrors([])
         let validate = []
-
+        if (username === '') {
+            setErrors(['Must Enter a Username'])
+            return
+        }
         if (requestAmount < 1 || requestAmount > 10000) {
             setErrors(['Amount must be between $1 and $10,000'])
             return
@@ -47,7 +50,10 @@ function RequestForm () {
 
         setErrors([])
         let validate = []
-
+        if (username === ''){
+            setErrors(['Must Enter a Username'])
+            return
+        }
        if (requestAmount < 1 || requestAmount > 9999){
         setErrors(['Amount must be between $1 and $10,000'])
         return
