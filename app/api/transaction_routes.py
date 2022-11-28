@@ -83,7 +83,7 @@ def initiate_request_transaction():
     Post a request transaction
     """
     form = RequestTransactionForm()
-
+    print('-------', form.data['request_amount'])
     if form.data['request_amount'] is None:
         print('we entered this code block')
         return {'errors': 'Must Enter an amount'}
@@ -112,7 +112,7 @@ def initiate_request_transaction():
             "sender_id": user_to_pay.id,
             "receiver_id": current_user.id,
             "is_Pending": True,
-            "request_amount": int(form.data['request_amount']),
+            "request_amount": float(form.data['request_amount']),
             "transaction_state": transaction_status[4]
             
         }
@@ -143,6 +143,7 @@ def initiate_and_send_payment():
     form = SendTransactionForm()
 
     user_to_receive_payment = User.query.filter(User.username == form.data['receiver_username']).first()
+    print('-------', form.data['request_amount'])
     if user_to_receive_payment is None:
         return {'errors': "User not Found"}
 
