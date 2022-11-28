@@ -139,6 +139,7 @@ export const initiateTransactionAndSendPaymentThunk = (obj) => async dispatch =>
 
     if (response.ok) {
         const sendDetails = await response.json()
+        console.log(sendDetails)
         if (sendDetails.errors) {
             console.log('there was an error', sendDetails)
             return sendDetails
