@@ -84,6 +84,9 @@ def initiate_request_transaction():
     """
     form = RequestTransactionForm()
 
+    if form.data['request_amount'] is None:
+        print('we entered this code block')
+        return {'errors': 'Must Enter an amount'}
     # Find the user that we are requesting the payment from.
     user_to_pay = User.query.filter(User.username == form.data['sender_username'] ).first()
     print('!!!!!',user_to_pay)
@@ -98,7 +101,6 @@ def initiate_request_transaction():
     # form.data['sender_id'] = user_to_pay.id
     # form.data['receiver_id'] = current_user.id
 
-    
 
     form['csrf_token'].data = request.cookies['csrf_token']
     print('++++++++++++++++++',form.validate_on_submit())
@@ -135,8 +137,9 @@ def initiate_request_transaction():
 
 
 @transaction_routes.route('/sendPayment', methods=['POST'])
-@login_required
+# @login_required
 def initiate_and_send_payment():
+    print('WE ENTERED THE CODE BLOCK')
     form = SendTransactionForm()
 
     user_to_receive_payment = User.query.filter(User.username == form.data['receiver_username']).first()
@@ -179,8 +182,14 @@ def initiate_and_send_payment():
 
     form['csrf_token'].data = request.cookies['csrf_token']
     print('++++++++++++++++++',form.validate_on_submit())
-    if form.validate_on_submit():
 
+    print('-------', form.data['request_amount'] is None)
+    if form.data['request_amount'] is None:
+        print('we entered this code block')
+        return {'errors': 'Must Enter an amount'}
+    if form.validate_on_submit():
+        # if (form.data['request_amount'] is None):
+        #     return {'errors': 'Must Enter an amount'}
 
 
 
@@ -190,7 +199,7 @@ def initiate_and_send_payment():
             "sender_id": current_user.id,
             "receiver_id": user_to_receive_payment.id,
             "is_Pending": False,
-            "request_amount": int(form.data['request_amount']),
+            "request_amount": float(form.data['request_amount']),
             "transaction_state": transaction_status[1]
             
         }
@@ -202,16 +211,16 @@ def initiate_and_send_payment():
 
 
 
-# Get the sender and receivers wallet
-    # Possible error handle validation spot. Make sure both sender and receiver are registered users
+        # Get the sender and receivers wallet
+        # Possible error handle validation spot. Make sure both sender and receiver are registered users
         send_payment_wallet = Wallet.query.get(transaction.sender_id)
         receive_payment_wallet = Wallet.query.get(transaction.receiver_id)
         print('********** Wallet of user Who is sending the money', send_payment_wallet.to_dict())
         print('********** Wallet of user Who is receiving the money', receive_payment_wallet.to_dict())
 
 
-    # A great place to check if the sender has enough in their wallet balance to go through with the transaction.
-    # Handle different conditions for if the transaction is a success or failure.
+        # A great place to check if the sender has enough in their wallet balance to go through with the    transaction.
+        # Handle different conditions for if the transaction is a success or failure.
         if send_payment_wallet.balance < transaction.request_amount:
             return {'errors': 'You currently do not have enough funds to execute this transaction'}
         send_payment_wallet.balance = send_payment_wallet.balance - transaction.request_amount
@@ -221,12 +230,12 @@ def initiate_and_send_payment():
 
         print('$$$$$$$$$$$$$$$ transaction', transaction.username_to_dict())
 
-    # print('!!!!!!!!!!!!! Wallet of user Who is sending the money', send_payment_wallet.to_dict())
-    # print('!!!!!!!!!!!!! Wallet of user Who is receiving the money', receive_payment_wallet.to_dict())
+        # print('!!!!!!!!!!!!! Wallet of user Who is sending the money', send_payment_wallet.to_dict())
+        # print('!!!!!!!!!!!!! Wallet of user Who is receiving the money', receive_payment_wallet.to_dict())
 
-        
-    # Reminder: What you return will have an effect on your state
-    # Here we return the refined transaction object
+            
+        # Reminder: What you return will have an effect on your state
+        # Here we return the refined transaction object
 
 
 

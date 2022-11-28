@@ -20,14 +20,19 @@ function RequestForm () {
         setErrors([])
         let validate = []
 
+        if (requestAmount < 1 || requestAmount > 10000) {
+            setErrors(['Amount must be between $1 and $10,000'])
+            return
+        }
         const obj = {
             'sender_username': username,
             // 'receiver_id': 2,
-            'request_amount': parseInt(requestAmount)
+            'request_amount': requestAmount
         }
 
         let request = await dispatch(requestPaymentTransaction(obj)) 
         await dispatch(getBalanceThunk())
+        console.log(request)
         if (request.errors){
             validate = [request.errors]
         }
@@ -43,13 +48,18 @@ function RequestForm () {
         setErrors([])
         let validate = []
 
+       if (requestAmount < 1 || requestAmount > 9999){
+        setErrors(['Amount must be between $1 and $10,000'])
+        return
+       }
+
         const obj = {
             'receiver_username': username,
-            'request_amount': parseInt(requestAmount)
+            'request_amount': requestAmount
         }
 
         let sendTransaction = await dispatch(initiateTransactionAndSendPaymentThunk(obj))
-
+        console.log('Frontend Send Payment Form', sendTransaction)
         if (sendTransaction.errors) {
             validate = [sendTransaction.errors]
         }
@@ -74,14 +84,14 @@ function RequestForm () {
             <form >
                 <div>
                     <label>Username</label>
-                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                    <input required type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
                 </div>
                 <div>
                     <label>Request Amount</label>
                     <input required min={1} max={9999} type="number" value={requestAmount} onChange={(e) => setRequestAmount(e.target.value)}/>
                 </div>
                 
-                <button type="submit" onClick={(e) => handleRequest(e)}>Request</button>
+                <button type="submit" onClick = {(e)  => handleRequest(e) }>Request</button>
                 <button type="submit" onClick={(e) => handleSendPayment(e)}>Pay</button>
             </form>
         </div>
@@ -89,3 +99,7 @@ function RequestForm () {
 }
 
 export default RequestForm
+
+
+    // < button type = "submit" onClick = { handleRequest } > Request</button >
+    //     <button type="submit" onClick={(e) => handleSendPayment(e)}>Pay</button>
