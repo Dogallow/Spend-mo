@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux'
 import { initiateTransactionAndSendPaymentThunk, requestPaymentTransaction } from "../../store/transactions";
 import { getBalanceThunk } from "../../store/wallet";
+import './PayRequestForm.css'
 
 function RequestForm () {
     const user = useSelector(state => state.session.user)
@@ -75,8 +76,8 @@ function RequestForm () {
     }
     
     return (
-        <div>
-            {user && <h1>Hello {user.username}</h1>}
+        <div className="pay-request-form-container">
+            {user && <h1>Pay & Request</h1>}
             <ul>
                 {!!errors.length && errors.map(error => {
 
@@ -87,18 +88,26 @@ function RequestForm () {
                     )
                 })}
             </ul>
-            <form >
-                <div>
-                    <label>Username</label>
-                    <input required type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
+            <form className="pay-request-form">
+                <div className="amount-container">
+                    <label>$</label>
+                    <input  placeholder="0" required min={1} max={9999} type="number" value={requestAmount} onChange={(e) => setRequestAmount(e.target.value)}/>
                 </div>
-                <div>
-                    <label>Request Amount</label>
-                    <input required min={1} max={9999} type="number" value={requestAmount} onChange={(e) => setRequestAmount(e.target.value)}/>
+                <div className="username-container">
+                    <label>To</label>
+                    <input required type="text" value={username} placeholder='@username' onChange={(e) => setUsername(e.target.value)}/>
+                </div>
+
+                <div className="textarea-container">
+                    
+                    <textarea placeholder="Note"  rows={'5'}/>
                 </div>
                 
-                <button type="submit" onClick = {(e)  => handleRequest(e) }>Request</button>
-                <button type="submit" onClick={(e) => handleSendPayment(e)}>Pay</button>
+                <div className="pay-req-button-container">
+                
+                    <button type="submit" onClick = {(e)  => handleRequest(e) }>Request</button>
+                    <button type="submit" onClick={(e) => handleSendPayment(e)}>Pay</button>
+                </div>
             </form>
         </div>
     )

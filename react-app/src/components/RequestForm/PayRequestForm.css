@@ -1,0 +1,162 @@
+.pay-request-form-container{
+    padding-top: 3.26rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.pay-request-form{
+    margin: 0 auto;
+    padding-bottom: 40px;
+    max-width: 443px;
+    font-size: 1.125rem;
+    font-family: "Scto Grotesk A", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    line-height: 1.33;
+}
+
+.amount-container{
+
+            width: 100%;
+                border: 1px solid transparent;
+                    display: flex;
+                    padding-left: 12px;
+                    border-radius: 8px;
+                    padding-right: 12px;
+}
+
+.amount-container label{
+        display: inline-block;
+            font-size: 1.5rem;
+            font-style: normal;
+            margin-top: 8px;
+            font-family: Athletics Medium;
+            font-weight: 500;
+            margin-right: 8px;
+            vertical-align: top;
+            line-height: 1.25;
+}
+
+.amount-container input {
+        font: inherit;
+            color: currentColor;
+            width: 100%;
+            border: 0;
+            height: 1.1876em;
+            margin: 0;
+            display: block;
+            padding: 6px 0 7px;
+            min-width: 0;
+            background: none;
+                width: inherit;
+                    padding: 0;
+                    font-size: 3.25rem;
+                    font-style: normal;
+                    font-family: Athletics Medium;
+                    font-weight: 500;
+                    letter-spacing: inherit;
+                        box-sizing: content-box;
+                        -webkit-tap-highlight-color: transparent;
+}
+
+.username-container{
+    
+border: 0.5px solid;
+   width: 100%;
+    border-color: #888C94;
+    border-radius: 8px;
+    padding-right: 0;
+    background-color: #fff;
+    padding: 0px 12px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.username-container input{
+    color: #2F3033;
+        margin: 0;
+        font-size: 1.125rem;
+        font-family: "Scto Grotesk A", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 400;
+        line-height: 1.33;
+    border: 0;
+        height: 1.1876em;
+        margin: 0;
+        display: block;
+        outline: none;
+            background: none;
+                box-sizing: content-box;
+                    flex-grow: 1;
+                        padding: 9px 4px;
+}
+
+.username-container label{
+        color: #888c94;
+            font-family: Scto Grotesk A;
+            font-size: 16px;
+            margin-right: 16px;
+}
+
+.pay-req-button-container{
+        margin-top: 32px;
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+}
+
+.pay-req-button-container button{
+    color: #fff;
+    background-color: #0074DE;
+    padding: 12px 24px;
+        font-size: 1.125rem;
+        line-height: 1.333333333333333;
+            border-radius: 2em;
+            min-width: 64px;
+                border: 0;
+                    cursor: pointer;
+                    margin: 0;
+                    display: inline-flex;
+                    outline: 0;
+                box-sizing: border-box;
+                    position: relative;
+                        align-items: center;
+                        user-select: none;
+                        vertical-align: middle;
+                        justify-content: center;
+                            text-decoration: none;
+                            font-weight: 900;
+}
+
+.textarea-container{
+    border: 0.5px solid;
+        overflow: hidden;
+            border-color: #6B6E76;
+                border-radius: 8px;
+                background-color: #fff;
+                    padding: 10px 12px 10px;
+                    width: 100%;
+                    margin-top: 15px;
+}
+
+.textarea-container textarea{
+        font: inherit;
+            color: currentColor;
+            width: 100%;
+            border: 0;
+            height: 1.1876em;
+            margin: 0;
+            display: block;
+            
+            min-width: 0;
+            background: none;
+            box-sizing: content-box;
+            animation-name: mui-auto-fill-cancel;
+            letter-spacing: inherit;
+            animation-duration: 10ms;
+            -webkit-tap-highlight-color: transparent;
+            height: auto;
+                resize: none;
+}

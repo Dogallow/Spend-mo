@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import './Auth.css'
 
@@ -33,14 +33,16 @@ const LoginForm = () => {
 
   return (
     <div className='form-container'>
-      <form onSubmit={onLogin}>
+      <h3>Sign in to Spend-mo</h3>
+      <form onSubmit={onLogin} className="login-form">
         <div>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
         </div>
-        <div className='email'>
+        <div className='input-section'>
           <label htmlFor='email'>Email</label>
+          <br/>
           <input
             name='email'
             type='text'
@@ -49,8 +51,9 @@ const LoginForm = () => {
             onChange={updateEmail}
           />
         </div>
-        <div>
+        <div className='input-section'>
           <label htmlFor='password'>Password</label>
+          <br/>
           <input
             name='password'
             type='password'
@@ -58,9 +61,14 @@ const LoginForm = () => {
             value={password}
             onChange={updatePassword}
           />
-          <button type='submit'>Login</button>
-        </div>
+          </div>
+          <button className='sign-in-button' type='submit'>Sign In</button>
       </form>
+      <div className='login-footer'>
+            <NavLink to={'/signup'}>
+            Sign Up
+            </NavLink>
+      </div>
     </div>
   );
 };
