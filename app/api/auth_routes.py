@@ -100,14 +100,14 @@ def delete_user():
     print('----------------------this is the user',user)
     print('+++++++++++++++++++++this is the alternate user',alternate_user)
     ############### wallet= Wallet.query.filter(Wallet.user_id == user.id).first()
-    logout_user()
     db.session.delete(alternate_user)
     db.session.commit()
+    # logout_user()
+    
     
     # print('!!!!!!!!!!!this is the wallet', wallet) 
-    ########### db.session.delete(wallet)
     ############## db.session.commit()
-    return {'deleted': alternate_user.to_dict()}
+    return {'deleted': 'alternate_user.to_dict()'}
 
 
 @auth_routes.route('/unauthorized')
