@@ -101,7 +101,7 @@ def delete_user():
     print('+++++++++++++++++++++this is the alternate user',alternate_user)
     ############### wallet= Wallet.query.filter(Wallet.user_id == user.id).first()
     logout_user()
-    # db.session.delete()
+    db.session.delete(alternate_user)
     db.session.commit()
     
     # print('!!!!!!!!!!!this is the wallet', wallet) 
