@@ -90,10 +90,11 @@ def sign_up():
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@auth_routes.route('/delete',methods=['DELETE'])
     # @login_required
-def delete_user():
-    user = User.query.get(current_user.id)
+@auth_routes.route('/delete/<username>',methods=['DELETE'])
+def delete_user(username):
+    
+    user = User.query.filter(User.username == username).first()
     print('this is the user',user)
     wallet= Wallet.query.filter(Wallet.user_id == user.id).first()
     print('!!!!!!!!!!!this is the wallet', wallet) 

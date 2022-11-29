@@ -28,7 +28,7 @@ const NavBar = () => {
   )
 
   const deleteUser = async () => {
-    await dispatch(deleteUserThunk())
+    await dispatch(deleteUserThunk(user.username))
     await dispatch(clearTransaction())
     await dispatch(clearWallet())
   }
@@ -36,20 +36,30 @@ const NavBar = () => {
   useEffect(() => {
     dispatch(getBalanceThunk())
   },[])
+
+  let userInfo = user !== null ? (
+    <>
+      <button className='avatar-container'>DG</button>
+      <div className='user-info'>
+        <h3>Hi, {user.username}</h3>
+        <span>@{user.username}-{Math.floor(Math.random() *10)}</span>
+      </div>
+    </>
+      ) : (
+    null
+  )
   
   return (
     <nav>
     <div className='nav-container'>
         <img src='https://account.venmo.com/static/images/logo.svg' alt='logo' />
         <div className='user-container'>
-          <button className='avatar-container'>DG</button>
-          <div className='user-info'>
-            <h3>Hi, User</h3>
-            <span>@User-6</span>
-          </div>
+          {userInfo}
         </div>
         <div>
-          <button className='pay-request-button'>Pay or Request</button>
+          <NavLink to='/form' exact={true} activeClassName='active'>
+            <button className='pay-request-button'>Pay or Request</button>
+          </NavLink>
         </div>
         
           {walletInfo}
@@ -85,17 +95,14 @@ const NavBar = () => {
               Incomplete
             </NavLink>
           </li>
-          <li>
-            <NavLink to='/form' exact={true} activeClassName='active'>
-              Form
-            </NavLink>
-          </li>
+          
+          
           
           <li>
             <LogoutButton />
           </li>
           <li>
-            <button onClick={(e) => deleteUser()}>Delete User</button>
+            {user !== null && <button onClick={deleteUser}>Delete User</button>}
           </li>
         </ul>
       </div>
