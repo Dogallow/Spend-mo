@@ -101,7 +101,7 @@ def delete_user(username):
     db.session.delete(wallet)
     db.session.delete(user)
     db.session.commit()
-    return {'Deleted': user.username}
+    return {'Deleted': 'user'}
 
 
 @auth_routes.route('/unauthorized')
