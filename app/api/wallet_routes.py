@@ -6,7 +6,7 @@ from app.forms import WalletTransfer
 wallet_routes = Blueprint('wallet', __name__)
 
 @wallet_routes.route('/')
-@login_required
+# @login_required
 def check_balance():
 
     wallet = Wallet.query.filter(Wallet.user_id == current_user.id).first()
