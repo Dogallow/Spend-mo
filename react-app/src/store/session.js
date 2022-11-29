@@ -98,7 +98,11 @@ export const signUp = (obj) => async (dispatch) => {
 }
 
 export const deleteUserThunk = (username) => async dispatch => {
-  const response = await fetch(`/api/auth/delete/${username}`)
+  const response = await fetch(`/api/auth/delete/${username}`, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
   
   if (response.ok) {
     const success = await response.json()

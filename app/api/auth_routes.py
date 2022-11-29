@@ -99,6 +99,7 @@ def delete_user(username):
     wallet= Wallet.query.filter(Wallet.user_id == user.id).first()
     print('!!!!!!!!!!!this is the wallet', wallet) 
     db.session.delete(wallet)
+    db.session.commit()
     db.session.delete(user)
     db.session.commit()
     return {'Deleted': 'user'}
