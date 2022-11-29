@@ -107,7 +107,7 @@ export const deleteUserThunk = (username) => async dispatch => {
   
   if (response.ok) {
     const success = await response.json()
-    console.log(success)
+    console.log('*********** This is returned from the delete route backend',success)
     dispatch(removeUser())
     
     return null
