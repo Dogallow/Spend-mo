@@ -91,7 +91,7 @@ def sign_up():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
     # @login_required
-@auth_routes.route('/delete/<username>',methods=['DELETE'])
+@auth_routes.route('/delete/<username>')
 def delete_user(username):
     
     user = User.query.filter(User.username == username).first()
