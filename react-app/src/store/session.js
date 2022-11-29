@@ -84,8 +84,9 @@ export const signUp = (obj) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
+    console.log('@@@@@@@@@@@@@@@ this returned from the signup backend', data )
     dispatch(setUser(data))
-    // dispatch(getBalanceThunk())
+    dispatch(getBalanceThunk())
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
@@ -97,8 +98,8 @@ export const signUp = (obj) => async (dispatch) => {
   }
 }
 
-export const deleteUserThunk = () => async dispatch => {
-  const response = await fetch(`/api/auth/delete`, {
+export const deleteUserThunk = (username) => async dispatch => {
+  const response = await fetch(`/api/auth/delete/${username}`, {
     headers: {
       'Content-Type': 'application/json'
     }
