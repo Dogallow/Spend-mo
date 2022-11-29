@@ -95,8 +95,10 @@ def sign_up():
 def delete_user():
     
     users = User.query.all()
-    # user = User.query.filter(User.username == username).first()
-    # print('this is the user',user)
+    user = User.query.filter(User.id == current_user.id).first()
+    alternate_user = User.query.get(current_user.id)
+    print('----------------------this is the user',user)
+    print('+++++++++++++++++++++this is the alternate user',alternate_user)
     ############### wallet= Wallet.query.filter(Wallet.user_id == user.id).first()
     logout_user()
     # db.session.delete()
@@ -105,7 +107,7 @@ def delete_user():
     # print('!!!!!!!!!!!this is the wallet', wallet) 
     ########### db.session.delete(wallet)
     ############## db.session.commit()
-    return {'deleted': [x.to_dict() for x in users]}
+    return {'deleted': alternate_user.to_dict()}
 
 
 @auth_routes.route('/unauthorized')
