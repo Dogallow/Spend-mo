@@ -98,8 +98,8 @@ export const signUp = (obj) => async (dispatch) => {
   }
 }
 
-export const deleteUserThunk = (username) => async dispatch => {
-  const response = await fetch(`/api/auth/delete/${username}`, {
+export const deleteUserThunk = () => async dispatch => {
+  const response = await fetch(`/api/auth/delete`, {
     headers: {
       'Content-Type': 'application/json'
     }

@@ -91,20 +91,21 @@ def sign_up():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
     # @login_required
-@auth_routes.route('/delete/<username>')
-def delete_user(username):
+@auth_routes.route('/delete')
+def delete_user():
     
-    user = User.query.filter(User.username == username).first()
+    users = User.query.all()
+    # user = User.query.filter(User.username == username).first()
     # print('this is the user',user)
     ############### wallet= Wallet.query.filter(Wallet.user_id == user.id).first()
     logout_user()
-    db.session.delete(user)
+    # db.session.delete()
     db.session.commit()
     
     # print('!!!!!!!!!!!this is the wallet', wallet) 
     ########### db.session.delete(wallet)
     ############## db.session.commit()
-    return {'deleted': 'success'}
+    return {'deleted': [x.to_dict() for x in users]}
 
 
 @auth_routes.route('/unauthorized')
