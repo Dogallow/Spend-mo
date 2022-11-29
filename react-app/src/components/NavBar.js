@@ -28,7 +28,7 @@ const NavBar = () => {
   )
 
   const deleteUser = async () => {
-    await dispatch(deleteUserThunk(user.username))
+    await dispatch(deleteUserThunk())
     await dispatch(clearTransaction())
     await dispatch(clearWallet())
   }
