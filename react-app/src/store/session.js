@@ -13,6 +13,7 @@ const removeUser = () => ({
   type: REMOVE_USER,
 })
 
+// const initialState = { user: {} };
 const initialState = { user: null };
 
 export const authenticate = () => async (dispatch) => {
@@ -96,8 +97,8 @@ export const signUp = (obj) => async (dispatch) => {
   }
 }
 
-export const deleteUserThunk = () => async dispatch => {
-  const response = await fetch(`/api/auth/delete`,{
+export const deleteUserThunk = (username) => async dispatch => {
+  const response = await fetch(`/api/auth/delete/${username}`,{
     method: 'DELETE'
   })
 

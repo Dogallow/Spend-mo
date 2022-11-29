@@ -65,7 +65,7 @@ const LoginForm = () => {
           <button className='sign-in-button' type='submit'>Sign In</button>
       </form>
       <div className='login-footer'>
-            <NavLink to={'/signup'}>
+            <NavLink to={'/sign-up'}>
             Sign Up
             </NavLink>
       </div>
