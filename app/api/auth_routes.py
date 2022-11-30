@@ -100,12 +100,12 @@ def delete_user():
     print('----------------------this is the user',user)
     print('+++++++++++++++++++++this is the alternate user',alternate_user)
     ############### wallet= Wallet.query.filter(Wallet.user_id == user.id).first()
-    if environment == "production":
-        db.session.execute(f"DELETE FROM {SCHEMA}.users WHERE id = {alternate_user.id}")
-        db.session.commit()
-    else:
-        db.session.delete(alternate_user)
-        db.session.commit()
+    # if environment == "production":
+    #     db.session.execute(f"DELETE FROM {SCHEMA}.users WHERE id = {alternate_user.id}")
+    #     db.session.commit()
+    # else:
+    db.session.delete(alternate_user)
+    db.session.commit()
     # logout_user()
     
     
