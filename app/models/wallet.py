@@ -23,5 +23,7 @@ class Wallet(db.Model, UserMixin):
         }
 
     ####### transaction = db.relationship("Transaction", back_populates="wallet_transaction", cascade='all, delete-orphan')
-    # transaction = db.relationship("Transaction", back_populates="sender", cascade='all, delete-orphan')
-    # transaction = db.relationship("Transaction", back_populates="receiver", cascade='all, delete-orphan')
+    # transaction = db.relationship("Transaction", back_populates=['sender', 'receiver'], cascade='all, delete-orphan')
+    sender_wallet = db.relationship('Transaction', foreign_keys='Transaction.sender_id', cascade='all, delete-orphan')
+    receiver_wallet = db.relationship('Transaction', foreign_keys='Transaction.receiver_id', cascade='all, delete-orphan')
+    

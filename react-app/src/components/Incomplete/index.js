@@ -31,6 +31,7 @@ function Incomplete(){
                     <div>
                         
                         <p>{request.receiver_id} requested ${request.request_amount} from {request.sender_id}</p>
+                        <p>{request.note}</p>
                         {status && <p>status: {status}</p>}
                         {request.is_Pending && <button onClick={() => cancelRequest(request)}>Cancel Request</button>}
                     </div>

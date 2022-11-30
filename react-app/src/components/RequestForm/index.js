@@ -32,7 +32,8 @@ function RequestForm () {
         const obj = {
             'sender_username': username,
             // 'receiver_id': 2,
-            'request_amount': Number(requestAmount).toFixed(2)
+            'request_amount': Number(requestAmount).toFixed(2),
+            note
         }
 
         let request = await dispatch(requestPaymentTransaction(obj)) 
