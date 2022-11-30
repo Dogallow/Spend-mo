@@ -1,12 +1,14 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux'
+import { useHistory } from "react-router-dom";
 import { initiateTransactionAndSendPaymentThunk, requestPaymentTransaction } from "../../store/transactions";
 import { getBalanceThunk } from "../../store/wallet";
+import NavBar from "../NavBar";
 import './PayRequestForm.css'
 
 function RequestForm () {
     const user = useSelector(state => state.session.user)
-    
+    const history = useHistory()
     const [requestAmount, setRequestAmount] = useState('')
     const [username, setUsername] = useState('')
     const [note, setNote] = useState('')
@@ -45,7 +47,13 @@ function RequestForm () {
         console.log('Frontend RequestForm Component', request)
         // Redirect to Incomplete page , CONDITIONALLY
         console.log('Sent a request:', obj)
-        setErrors([...validate])
+        
+        if (!!validate.length) {
+            setErrors([...validate])
+            return
+        } else {
+            history.push('/incomplete')
+        }
     }
 
     const handleSendPayment = async (e) => {
@@ -75,10 +83,17 @@ function RequestForm () {
         }
         await dispatch(getBalanceThunk())
         // Redirect to posts page, CONDITIONALLY
-        setErrors([...validate])
+        if (!!validate.length){
+            setErrors([...validate])
+            return
+        } else {
+            history.push('/')
+        }
     }
     
     return (
+        <>
+        <NavBar />
         <div className="pay-request-form-container">
             {user && <h1>Pay & Request</h1>}
             <ul>
@@ -113,6 +128,7 @@ function RequestForm () {
                 </div>
             </form>
         </div>
+        </>
     )
 }
 

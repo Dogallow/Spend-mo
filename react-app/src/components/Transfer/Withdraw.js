@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { NavLink } from 'react-router-dom'
 import { editBalance, getBalanceThunk } from "../../store/wallet"
+import NavBar from "../NavBar"
 import './Transfer.css'
 
 function Withdraw () {
@@ -23,18 +24,34 @@ function Withdraw () {
         }
 
         let validate = []
+
+        if (amount > 5000) {
+            setErrors(['Cannot withdraw more than $5000 in a single transaction.'])
+            return
+        }else if (amount < 1) {
+            setErrors(['Minimum withdraw amount is $1'])
+            return
+        }
         
         const result = await dispatch(editBalance(obj, 'withdraw'))
         if(result.errors){
             validate = [result.errors]
         }
         setErrors([...validate])
+
+        if (validate.length === 0){
+            alert('Withdraw Successful')
+            // Opportunity to add a modal
+            setAmount('')
+        }
     }
     return (
+        <>
+        <NavBar />
         <div>
             <div>
                 <NavLink to={'/transfer/deposit'} active exact ><span>Deposit</span></NavLink>
-                <NavLink active exact to={'/transfer/withdraw'} ><span>Transfer</span></NavLink>
+                <NavLink active exact to={'/transfer/withdraw'} ><span>Withdraw</span></NavLink>
             </div>
             Withdraw Funds
             <form onSubmit={handleWithdraw}>
@@ -48,11 +65,12 @@ function Withdraw () {
                 </ul>
                 <div>
                     <label>Amount</label>
-                    <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
+                    <input type="number" min={1} required value={amount} onChange={(e) => setAmount(e.target.value)} />
                 </div>
-                <button type="submit">Deposit</button>
+                <button type="submit">Withdraw</button>
             </form>
         </div>
+        </>
     )
 }
 

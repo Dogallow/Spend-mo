@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import NavBar from './NavBar';
 
 function UsersList() {
   const [users, setUsers] = useState([]);
@@ -24,6 +25,7 @@ function UsersList() {
 
   return (
     <>
+      <NavBar />
       <h1>User List: </h1>
       <ul>{userComponents}</ul>
     </>
