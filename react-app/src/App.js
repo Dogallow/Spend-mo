@@ -14,6 +14,7 @@ import Incomplete from './components/Incomplete';
 import Posts from './components/Posts';
 import './app.css'
 import {Deposit, Withdraw} from './components/Transfer';
+import SinglePost from './components/Posts/SinglePost'
 
 
 function App() {
@@ -64,6 +65,9 @@ function App() {
         </Route>
         <Route path='/transfer/withdraw' exact={true} >
           <Withdraw />
+        </Route>
+        <Route path='/singlePost' exact={true} >
+          <SinglePost/>
         </Route>
       </Switch>
     </BrowserRouter>

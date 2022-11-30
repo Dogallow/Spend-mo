@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: acfb54cc0bf2
+Revision ID: 109b0159de8a
 Revises: 
-Create Date: 2022-11-29 16:36:26.724559
+Create Date: 2022-11-29 19:42:55.634242
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'acfb54cc0bf2'
+revision = '109b0159de8a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -47,7 +47,7 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
-    
+
     op.create_table('wallets',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
@@ -59,7 +59,7 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE wallets SET SCHEMA {SCHEMA};")
-    
+
     op.create_table('likes',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
@@ -77,9 +77,10 @@ def upgrade():
     sa.Column('sender_id', sa.Integer(), nullable=True),
     sa.Column('receiver_id', sa.Integer(), nullable=True),
     sa.Column('request_amount', sa.Integer(), nullable=True),
-    sa.Column('pay_amount', sa.Integer(), nullable=True),
+    sa.Column('note', sa.String(), nullable=True),
     sa.Column('is_Pending', sa.Boolean(), nullable=True),
     sa.Column('transaction_state', sa.String(), nullable=True),
+    sa.Column('author', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['receiver_id'], ['wallets.user_id'], ),
     sa.ForeignKeyConstraint(['sender_id'], ['wallets.user_id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -87,6 +88,7 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE transactions SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 

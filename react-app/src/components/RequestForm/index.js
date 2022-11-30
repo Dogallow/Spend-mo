@@ -9,6 +9,7 @@ function RequestForm () {
     
     const [requestAmount, setRequestAmount] = useState('')
     const [username, setUsername] = useState('')
+    const [note, setNote] = useState('')
     const [errors, setErrors] = useState([])
 
     
@@ -62,7 +63,8 @@ function RequestForm () {
 
         const obj = {
             'receiver_username': username,
-            'request_amount': Number(requestAmount).toFixed(2)
+            'request_amount': Number(requestAmount).toFixed(2),
+            'note': note
         }
 
         let sendTransaction = await dispatch(initiateTransactionAndSendPaymentThunk(obj))
@@ -100,7 +102,7 @@ function RequestForm () {
 
                 <div className="textarea-container">
                     
-                    <textarea placeholder="Note"  rows={'5'}/>
+                    <textarea placeholder="Note"  value={note} onChange={(e) => setNote(e.target.value)} rows={'5'}/>
                 </div>
                 
                 <div className="pay-req-button-container">

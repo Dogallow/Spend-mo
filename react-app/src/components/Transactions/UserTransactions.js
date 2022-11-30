@@ -78,8 +78,8 @@ function UserTransactions () {
                 
                 return <div key={index}>
                     <p>{transaction.sender_id} sent ${transaction.request_amount} to {transaction.receiver_id}</p> 
+                    <p>{transaction.note}</p>
                     <p>Transaction Status: {status}</p>
-                    
                     {button1}
                     {button2}
                     --------------------------

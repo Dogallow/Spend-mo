@@ -20,6 +20,21 @@ def nameify(obj):
     }
 
 
+@transaction_routes.route('/editTransaction', methods=['POST'])
+def edit_transaction():
+    data = request.get_json()
+    id = data['id']
+    note = data['note']
+    print('?????????????????????',id)
+    print('?????????????????????',note)
+    transaction = Transaction.query.get(id)
+    print('?????????????????????',transaction)
+    print('?????????????????????',transaction.note)
+    transaction.note = note
+    print('?????????????????????',transaction.note)
+    db.session.commit()
+    return transaction.username_to_dict()
+
 @transaction_routes.route('/')
 @login_required
 def get_sender_transactions():
@@ -65,7 +80,9 @@ def get_all_request_transactions():
             'sender_id': User.query.get(x['sender_id']).username,
             'receiver_id': User.query.get(x['receiver_id']).username,
             'request_amount': x['request_amount'],
-            'is_Pending': x['is_Pending']
+            'is_Pending': x['is_Pending'],
+            'note': x['note'],
+            'author': x['author']
         
         })
     
@@ -113,7 +130,9 @@ def initiate_request_transaction():
             "receiver_id": current_user.id,
             "is_Pending": True,
             "request_amount": float(form.data['request_amount']),
-            "transaction_state": transaction_status[4]
+            "transaction_state": transaction_status[4],
+            'note': form.data['note'],
+            'author': current_user.id
             
         }
         print('--------------', params)
@@ -201,7 +220,9 @@ def initiate_and_send_payment():
             "receiver_id": user_to_receive_payment.id,
             "is_Pending": False,
             "request_amount": float(form.data['request_amount']),
-            "transaction_state": transaction_status[1]
+            "transaction_state": transaction_status[1],
+            'note': form.data['note'],
+            'author': current_user.id
             
         }
 
@@ -363,3 +384,16 @@ def cancel_transaction(id):
 
     # Here we return the refined transaction object
     return {'transaction': transaction.username_to_dict()}
+
+
+@transaction_routes.route('/deleteTransaction', methods=['POST'])
+def delete_transaction():
+    data = request.get_json()
+    print('....',data)
+    id = data['id']
+    print('....',id)
+    transaction = Transaction.query.get(id)
+    print('....',transaction)
+    db.session.delete(transaction)
+    db.session.commit()
+    return {'id': transaction.id}
