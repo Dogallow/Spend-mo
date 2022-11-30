@@ -35,7 +35,7 @@ def edit_balance(action):
             return {'wallet': wallet.to_dict()}
         elif action == 'withdraw':
             if form.data['amount'] > wallet.balance:
-                return {'errors': 'Withdraw amount exceeded bank balance'}
+                return {'errors': 'Withdraw amount exceeded wallet balance'}
             wallet.balance = wallet.balance - form.data['amount']
             db.session.commit()
             return {'wallet': wallet.to_dict()}

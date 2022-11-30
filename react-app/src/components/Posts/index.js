@@ -5,6 +5,7 @@ import { getBalanceThunk } from '../../store/wallet'
 import { useHistory } from 'react-router-dom'
 import './Posts.css'
 import SinglePost from './SinglePost'
+import NavBar from '../NavBar'
 
 function Posts () {
     const dispatch = useDispatch()
@@ -45,6 +46,8 @@ function Posts () {
     
     if (!posts) return <h1>Loading...</h1>
     return (
+        <>
+        <NavBar />
         <div className='posts-container'>
             
             {posts && !!posts.length && posts.filter((post) => post.is_Pending == false && post.transaction_state == 'approved').map((post,index) => {
@@ -81,6 +84,7 @@ function Posts () {
                 )
             })}
         </div>
+        </>
     )
 }
 

@@ -28,6 +28,8 @@ const SignUpForm = () => {
       if (data) {
         setErrors(data)
       }
+    }else {
+      setErrors(['Password and Repeat Password must match'])
     }
   };
 
@@ -65,6 +67,7 @@ const SignUpForm = () => {
           <input
             type='text'
             name='first_name'
+            required
             onChange={(e) => setFirstName(e.target.value)}
             value={firstName}
           ></input>
@@ -74,6 +77,7 @@ const SignUpForm = () => {
           <input
             type='text'
             name='lastName'
+            required
             onChange={(e) => setLastName(e.target.value)}
             value={lastName}
           ></input>
@@ -84,6 +88,7 @@ const SignUpForm = () => {
           <input
             type='text'
             name='username'
+            required
             onChange={updateUsername}
             value={username}
           ></input>
@@ -93,6 +98,7 @@ const SignUpForm = () => {
           <input
             type='text'
             name='email'
+            required
             onChange={updateEmail}
             value={email}
           ></input>
@@ -102,6 +108,7 @@ const SignUpForm = () => {
           <input
             type='password'
             name='password'
+            required
             onChange={updatePassword}
             value={password}
           ></input>

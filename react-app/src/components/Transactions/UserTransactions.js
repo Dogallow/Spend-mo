@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { Redirect } from "react-router-dom"
 import { approveTransactionThunk, declineTransactionThunk, getAllSenderTransactions, getAllUserTransactions } from "../../store/transactions"
 import { getBalanceThunk } from "../../store/wallet"
+import NavBar from "../NavBar"
 
 function UserTransactions () {
     const dispatch = useDispatch()
@@ -53,6 +54,8 @@ function UserTransactions () {
     }
     
     return (
+        <>
+        <NavBar />
         <div>
             <p>Transaction List</p>
             {balance && <h1>Your balance is: ${balance.balance}</h1>}
@@ -88,6 +91,7 @@ function UserTransactions () {
             }
             )}
         </div>
+        </>
     )
 }
 

@@ -34,7 +34,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -66,9 +66,7 @@ function App() {
         <Route path='/transfer/withdraw' exact={true} >
           <Withdraw />
         </Route>
-        <Route path='/singlePost' exact={true} >
-          <SinglePost/>
-        </Route>
+        
       </Switch>
     </BrowserRouter>
   );

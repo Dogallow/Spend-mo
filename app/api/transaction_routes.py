@@ -113,7 +113,7 @@ def initiate_request_transaction():
         return {'errors': "User not Found"}
 
     if user_to_pay.id == current_user.id:
-        return {'errors': "Cannot send money to yourself"}
+        return {'errors': "Cannot request money from yourself"}
 
     # form.data['sender_id'] = user_to_pay.id
     # form.data['receiver_id'] = current_user.id
