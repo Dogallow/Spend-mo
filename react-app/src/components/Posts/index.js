@@ -2,7 +2,7 @@ import {useEffect,useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { getAllUserTransactions, deleteTransactionThunk } from '../../store/transactions'
 import { getBalanceThunk } from '../../store/wallet'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Redirect } from 'react-router-dom'
 import './Posts.css'
 import SinglePost from './SinglePost'
 import NavBar from '../NavBar'
@@ -43,7 +43,7 @@ function Posts () {
         dispatch(getBalanceThunk())
         dispatch(getAllUserTransactions())
     },[dispatch])
-    
+    if (user === null) return <Redirect to={'/login'}/>
     if (!posts) return <h1>Loading...</h1>
     return (
         <>

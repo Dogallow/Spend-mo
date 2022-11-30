@@ -1,7 +1,7 @@
 
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { deleteUser, deleteUserThunk } from '../store/session';
 import { clearTransaction } from '../store/transactions';
 import { clearWallet, getBalanceThunk } from '../store/wallet';
@@ -12,7 +12,7 @@ const NavBar = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)
   const wallet = useSelector(state => state.wallet)
-
+  const history = useHistory()
   console.log(user)
   console.log(wallet)
 
@@ -31,6 +31,7 @@ const NavBar = () => {
     await dispatch(deleteUserThunk())
     await dispatch(clearTransaction())
     await dispatch(clearWallet())
+    history.push('/sign-up')
   }
   
   useEffect(() => {
