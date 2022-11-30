@@ -5,12 +5,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
-follows = db.Table(
-    "follows", 
-    db.Model.metadata,
-    db.Column("follower_id", db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")),primary_key=True ),
-    db.Column("followed_id", db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")),primary_key=True )
-)
+# follows = db.Table(
+#     "follows", 
+#     db.Model.metadata,
+#     db.Column("follower_id", db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")),primary_key=True ),
+#     db.Column("followed_id", db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")),primary_key=True )
+# )
 
 class User(db.Model, UserMixin):
     __tablename__ = "users"
@@ -30,14 +30,14 @@ class User(db.Model, UserMixin):
 
     
 
-    followers = db.relationship(
-        "User", 
-        secondary=follows,
-        primaryjoin=(follows.c.follower_id == id),
-        secondaryjoin=(follows.c.followed_id == id),
-        backref=db.backref("following", lazy="dynamic"),
-        lazy="dynamic"
-    )
+    # followers = db.relationship(
+    #     "User", 
+    #     secondary=follows,
+    #     primaryjoin=(follows.c.follower_id == id),
+    #     secondaryjoin=(follows.c.followed_id == id),
+    #     backref=db.backref("following", lazy="dynamic"),
+    #     lazy="dynamic"
+    # )
     
 
     post = db.relationship("Post", back_populates="user", cascade="all, delete-orphan")
