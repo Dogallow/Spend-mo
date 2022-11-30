@@ -1,0 +1,49 @@
+import {useEffect,useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import { getAllUserTransactions } from '../../store/transactions'
+import { getBalanceThunk } from '../../store/wallet'
+import './Posts.css'
+
+function Posts () {
+    const dispatch = useDispatch()
+    const posts = useSelector(state => state.transactions.allTransactions.transactions)
+    const user = useSelector(state => state.session.user)
+
+    const [showForm, setShowForm] = useState(false)
+    const [note, setNote] = useState('')
+
+
+    const editNote = async (e, post) => {
+        e.preventDefault()
+        
+            console.log(post)
+        let obj = {
+            note,
+            post
+        }
+    }
+    
+    const noteForm = (
+        <form onSubmit={editNote}>
+            <textarea value={note} onChange={setNote}/>
+            
+            <button type='submit'>Submit</button>
+        </form>
+    )
+
+    
+    console.log(posts)
+    useEffect(() => {
+        dispatch(getBalanceThunk())
+        dispatch(getAllUserTransactions())
+    },[dispatch])
+   
+                            <p>{post.note}</p>
+                            
+                            {user?.id == post.author && (
+                                <div>
+                                    <button onClick={() => setShowForm(!showForm)}>{showForm ?'Cancel Edit': 'Edit Note'}</button>
+                                    <button>Delete Transaction</button>
+                                </div>
+                            )}
+    }

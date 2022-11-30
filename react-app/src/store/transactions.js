@@ -11,6 +11,8 @@ const APPROVE_TRANSACTION = 'transactions/APPROVE_TRANSACTION'
 const DECLINE_TRANSACTION = 'transactions/DECLINE_TRANSACTION'
 const CANCEL_TRANSACTION = 'transactions/CANCEL_TRANSACTION'
 const CLEAR_TRANSACTION = 'transactions/CLEAR_TRANSACTION'
+const EDIT_TRANSACTION = 'transactions/EDIT_TRANSACTION'
+const DELETE_TRANSACTION = 'transactions/DELETE_TRANSACTION'
 
 export const clearTransaction = () => {
     return {
@@ -74,6 +76,20 @@ const cancelTransactionActionCreator = (transaction) => {
     }
 }
 
+const editTransactionActionCreator = (transaction) => {
+    return {
+        type: EDIT_TRANSACTION,
+        transaction
+    }
+}
+
+const deleteTransactionActionCreator = (transaction) => {
+    return {
+        type: DELETE_TRANSACTION,
+        transaction
+    }
+}
+
 export const getAllUserTransactions = () => async dispatch => {
     const response = await fetch(`/api/transaction/`)
 
@@ -87,6 +103,36 @@ export const getAllUserTransactions = () => async dispatch => {
         return allTransactions
     }
 }
+
+export const deleteTransactionThunk = (obj) => async dispatch => {
+    const response = await fetch(`/api/transaction/deleteTransaction`,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(obj)
+    })
+
+    if (response.ok){
+        const result = await response.json()
+        console.log('deletetransactionthunk returned from backend',result)
+        dispatch(deleteTransactionActionCreator(result))
+    }
+}
+
+export const editTransactionThunk = (obj) => async dispatch => {
+    const response = await fetch(`/api/transaction/editTransaction`,{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(obj)
+    })
+
+    if (response.ok){
+        const editedTransaction = await response.json()
+        console.log('!!!!! Returned from backend to editTransactionThunk', editedTransaction)
+        dispatch(editTransactionActionCreator(editedTransaction))
+        return editedTransaction
+    }
+}
+
 export const getAllSenderTransactions = () => async dispatch => {
     const response = await fetch(`/api/transaction/`)
 
@@ -267,6 +313,21 @@ const transactionsReducer = (state = initialState, action) => {
             console.log('This is the declined altered state reflecting the changed status', declinedState)
             // We want to find our transaction and replace it.
             return {...state, sendTransactions: {'transactions':declinedState}}
+        case EDIT_TRANSACTION:
+            newState = {...state}
+            console.log('NEW STATE IN THE EDIT_TRANSACTION CASE IN THE REDUCER',newState)
+            let replacementIndex = newState.allTransactions.transactions.findIndex((element) => element.id === action.transaction.id)
+            console.log('!!!!!!!replacement index', newState.allTransactions.transactions[replacementIndex])
+            console.log('!!!!!!!replacement index', action.transaction)
+            let arr = newState.allTransactions.transactions
+            arr[replacementIndex] = action.transaction
+            console.log('updated new State',newState)
+            return {...state, allTransactions:{'transactions': arr}}
+        case DELETE_TRANSACTION:
+            newState = {...state}
+            console.log('action.id---->',action.transaction.id)
+            let arrMinusOne = newState.allTransactions.transactions.filter(transaction => transaction.id !== action.transaction.id)
+            return {...state,allTransactions:{'transactions': arrMinusOne}}
         case CLEAR_TRANSACTION:
             newState = initialState;
             return newState

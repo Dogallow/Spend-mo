@@ -22,4 +22,6 @@ class Wallet(db.Model, UserMixin):
         'balance': self.balance
         }
 
-    # transaction = db.relationship("Transaction", back_populates="wallet_transaction", cascade='all, delete-orphan')
+    ####### transaction = db.relationship("Transaction", back_populates="wallet_transaction", cascade='all, delete-orphan')
+    # transaction = db.relationship("Transaction", back_populates="sender", cascade='all, delete-orphan')
+    # transaction = db.relationship("Transaction", back_populates="receiver", cascade='all, delete-orphan')

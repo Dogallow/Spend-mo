@@ -7,7 +7,7 @@ class RequestTransactionForm(FlaskForm):
     sender_username = StringField("sender", validators=[DataRequired()])
     sender_id = StringField("sender")
     receiver_id = StringField("receiver")
-    
+    note = StringField("note")
     request_amount = DecimalField("Request Amount")
     pay_amount = DecimalField("Pay Amount")
     is_Pending = BooleanField("Pending")
@@ -20,3 +20,4 @@ class SendTransactionForm(FlaskForm):
     request_amount = DecimalField("Request Amount")
     pay_amount = DecimalField("Pay Amount")
     is_Pending = BooleanField("Pending")
+    note = StringField("note")

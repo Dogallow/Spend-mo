@@ -12,9 +12,10 @@ class Transaction(db.Model):
     sender_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('wallets.user_id')))
     receiver_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('wallets.user_id')))
     request_amount = db.Column(db.Integer)
-    pay_amount = db.Column(db.Integer)
+    note = db.Column(db.String())
     is_Pending = db.Column(db.Boolean)
     transaction_state = db.Column(db.String()) #pending, approved, declined, cancelled, request
+    author = db.Column(db.Integer, nullable=False)
 
     # May need to add a decline Column(boolean) to take into account if a user wants to deny the request or the payment
 
@@ -29,7 +30,9 @@ class Transaction(db.Model):
             'receiver_id': self.receiver_id,
             'request_amount': self.request_amount,
             'is_Pending': self.is_Pending,
-            'transaction_state': self.transaction_state
+            'transaction_state': self.transaction_state,
+            'note': self.note,
+            'author': self.author
         }
 
     def username_to_dict(self):
@@ -44,11 +47,12 @@ class Transaction(db.Model):
 
         
         return {
-            
             'id': self.id,
             'sender_id': sender,
             'receiver_id': receiver,
             'request_amount': self.request_amount,
             'is_Pending': self.is_Pending,
-            'transaction_state': self.transaction_state
+            'transaction_state': self.transaction_state,
+            'note' : self.note,
+            'author': self.author
         }
