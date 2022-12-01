@@ -43,26 +43,26 @@ function Deposit() {
     return (
         <>
         <NavBar />
-        <div>
-            <div>
+        <div className="depositWithdrawContainer">
+            <div className="depositWithdrawLinks">
                 <NavLink to={'/transfer/deposit'} active exact ><span>Deposit</span></NavLink>
                 <NavLink active exact to={'/transfer/withdraw'} ><span>Withdraw</span></NavLink>
             </div>
-            Deposit Funds
+                <h2>Deposit Funds</h2>
             <form onSubmit={handleDeposit}>
-                <ul>
+                <ul className="errors-container">
                     {!!errors.length && errors.map((error, index) => {
 
                         return (
-                            <li key={index}>{error}</li>
+                            <li className="error-li" key={index}>{error}</li>
                         )
                     })}
                 </ul>
-                <div>
-                    <label>Amount</label>
-                    <input required type="number" min={1} value={amount} onChange={(e) => setAmount(e.target.value)}/>
+                    <div className="depositWithdraw-amount-container">
+                    <label>$</label>
+                        <input placeholder="Amount" className="depositWithdraw-amount-input" required type="number" min={1} value={amount} onChange={(e) => setAmount(e.target.value)}/>
                 </div>
-                <button type="submit">Deposit</button>
+                    <button className="depositWithdrawButton"  type="submit">Deposit</button>
             </form>
         </div>
         </>

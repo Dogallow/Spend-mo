@@ -1,5 +1,91 @@
-.active{
-    border-bottom: 1px solid blue;
+.depositWithdrawContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:27.2px;
+    height:100%;
 }
 
+.depositWithdrawContainer h2{
+    font-family: "Scto Grotesk A", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 15px 0 0 0;
+    font-weight: 550;
+}
 
+.depositWithdrawLinks{
+width: 200px;
+display: flex;
+justify-content: space-evenly;
+}
+
+.depositWithdrawLinks .active{
+    border-bottom: 3px solid #0074DE;
+}
+
+.depositWithdrawContainer form {
+    max-width: 40%;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height:600px;
+    
+    box-sizing: border-box;
+}
+
+.depositWithdraw-amount-container{
+    max-width: 200px;
+    width: 40%;
+    border-color: #888C94;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.5px solid;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.depositWithdraw-amount-container label{
+    color: #888c94;
+    font-size: 1.75rem;
+    margin: 0px;
+    padding-left: 10px;
+}
+
+/* interesting why this overbears .amount-input 
+    **ANSWER: be careful of other naming conventions
+*/
+.depositWithdraw-amount-container input{
+    font-size: 1.75rem;
+    padding-left: 10px;
+    width: 80%;
+}
+
+.depositWithdraw-amount-input{
+    color: #2F3033;
+    line-height: .8;
+    
+    font-weight: 400;
+    border: 0;
+    padding: 9px 4px;
+    height: 50%;
+    outline: none;
+    --webkit-appearance: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.depositWithdrawButton{
+    color: #fff;
+    background-color: #0074DE;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-weight: 750;
+    border-radius: 2em;
+    margin-top: 12px;
+    border: 0;
+}

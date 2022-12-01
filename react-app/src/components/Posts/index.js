@@ -51,7 +51,7 @@ function Posts () {
         <div className='posts-container'>
             
             {posts && !!posts.length && posts.filter((post) => post.is_Pending == false && post.transaction_state == 'approved').map((post,index) => {
-                    
+                    // ${ post.request_amount }
                 return(
                     <div key={index} className='individual-post-container'>
                         <div className='user-avatar-container'>
@@ -62,19 +62,21 @@ function Posts () {
                         <div></div>
                         <div></div>
                         <div></div>
-                        <div></div>
-                            <p><strong>{post.sender_id}</strong> paid ${post.request_amount} to <strong>{post.receiver_id}</strong></p>
-
+                        <div className='individual-transaction-info'>
+                            <p><strong>{user.username === post.sender_id ? 'You' : post.sender_id}</strong> paid <strong>{user.username === post.receiver_id ? 'You' : post.receiver_id}</strong></p>
+                            <p className='individual-transaction-amount'>- ${post.request_amount}</p>
+                        </div>
+                        <div className='individual-note-info'>
                             {showForm && currentPost == post.id ? <SinglePost setShowForm={setShowForm} post={post}/> : <p>{post.note}</p>}
-                            
+                        </div>    
                             {user?.id == post.author && (
-                                <div>
+                                <div className='individual-post-author-button-container'>
                                     
                                     <button  onClick={(e) => {
                                         setShowForm(!showForm)
                                         setCurrentPost(post.id)
                                     }}>{showForm && currentPost == post.id ? 'Cancel Edit': 'Edit'}</button>
-                                    <button onClick={async (e) => {
+                                    <button style={{marginLeft:'10px'}} onClick={async (e) => {
                                         await dispatch(deleteTransactionThunk({'id':post.id}))
                                     }}>Delete Transaction</button>
                                 </div>

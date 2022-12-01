@@ -1,10 +1,16 @@
 .pay-request-form-container{
     padding-top: 3.26rem;
-    width: 100%;
+    width: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin: auto;
+}
+
+.pay-request-error-container{
+    width: 312px;
+    
 }
 
 .pay-request-form{
@@ -15,10 +21,11 @@
     font-family: "Scto Grotesk A", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 400;
     line-height: 1.33;
+    width: 70%;
 }
 
 .amount-container{
-
+    box-sizing: border-box;
             width: 100%;
                 border: 1px solid transparent;
                     display: flex;
@@ -59,10 +66,11 @@
                     letter-spacing: inherit;
                         box-sizing: content-box;
                         -webkit-tap-highlight-color: transparent;
+                        outline: 0;
 }
 
 .username-container{
-    
+    box-sizing: border-box;
 border: 0.5px solid;
    width: 100%;
     border-color: #888C94;
@@ -139,9 +147,11 @@ border: 0.5px solid;
                     padding: 10px 12px 10px;
                     width: 100%;
                     margin-top: 15px;
+                    box-sizing: border-box;
 }
 
 .textarea-container textarea{
+    
         font: inherit;
             color: currentColor;
             width: 100%;
@@ -149,7 +159,7 @@ border: 0.5px solid;
             height: 1.1876em;
             margin: 0;
             display: block;
-            
+            outline: 0;
             min-width: 0;
             background: none;
             box-sizing: content-box;

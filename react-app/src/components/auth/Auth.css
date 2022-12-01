@@ -1,5 +1,6 @@
 .form-container{
     width: 100%;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,6 +49,7 @@
     display: block;
     margin-bottom: 36px;
     max-width: 500px;
+    width: 95%;
 }
 
 .input-section input{
@@ -101,6 +103,7 @@
     box-shadow: 0 1px 2px rgb(38 38 38 / 15%);
     border: none;
     float: right;
+    cursor: pointer;
 }
 
 .login-footer a{
@@ -110,4 +113,14 @@
     margin: 0 auto;
     text-align: center;
     color: #3d95ce;
+}
+
+.login-page-buttons-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-page-buttons-container button{
+    cursor: pointer;
 }
