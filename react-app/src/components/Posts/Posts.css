@@ -35,9 +35,13 @@
 
 .individual-transaction-info p{
     margin: 0px;
+    font-size: 20px;
+    font-family: Athletics Medium;
 }
 .individual-note-info p {
     margin: 0px;
+    font-size: 18px;
+        font-family: Athletics Medium;
 }
 
 .single-post-form {

@@ -7,6 +7,7 @@ import { clearTransaction } from '../store/transactions';
 import { clearWallet, getBalanceThunk } from '../store/wallet';
 import LogoutButton from './auth/LogoutButton';
 import './Navbar.css'
+import logo from './logo-png.png'
 
 const NavBar = () => {
   const dispatch = useDispatch()
@@ -74,11 +75,19 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink to='/instructions' exact={true} activeClassName='active'>
+            Instructions
+          </NavLink>
+        </li>
+        <li>
           <LogoutButton />
         </li>
+        {user.username === 'Demo' || user.username === 'Test' ? null :
+      
         <li>
           <button className="delete-user-button-style" onClick={deleteUser}>Delete User</button>
         </li>
+      }
       
     </>
   ) : (
@@ -101,7 +110,7 @@ const NavBar = () => {
     <nav>
     <div className='nav-container'>
       <NavLink to={'/'}>
-        <img src='https://account.venmo.com/static/images/logo.svg' alt='logo' />
+        <img src={logo} alt='logo' style={{height: '40px'}}/>
       </NavLink>
         <div className='user-container'>
           {userInfo}
@@ -117,6 +126,15 @@ const NavBar = () => {
         <ul>
           {userButtons}
         </ul>
+      </div>
+      <div className={'contact-footer-container'}>
+        <div className='contact-footer-text'>Created By Donovan Galloway: </div>
+        <div className='contact-footer-buttons'>
+          <a target="_blank" href='https://github.com/Dogallow' >
+            <i class="fa-brands fa-github fa-2xl" ></i>
+        </a>
+          <a target="_blank" href='https://www.linkedin.com/in/donovan-galloway-927190233/'  ><i class="fa-brands fa-linkedin fa-2xl"></i></a>
+        </div>
       </div>
     </nav>
   );

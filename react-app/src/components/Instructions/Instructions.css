@@ -1,0 +1,55 @@
+.instructions-wrapper{
+    width: 100%;
+}
+
+.instructions-container{
+    width: 55%;
+    margin: 0 auto;
+
+}
+
+.instructions-container h1{
+    text-align: center;
+    font-family: Athletics Medium;
+}
+
+.instructions-form-container{
+    width: 100%;
+    background-color: #f7f7f7;
+}
+
+.instructions-form-container h2{
+    text-align: center;
+}
+
+.instructions-form-main{
+    width: 70%;
+    margin: auto;
+    text-align: center;
+}
+
+.instructions-form-main p{
+    font-size: 20px;
+    font-family: Athletics Medium;
+}
+
+.instructions-ul{
+    padding: 0px 40px 0px 40px;
+}
+
+.instructions-ul li{
+    font-size: 18px;
+    font-family: Athletics Medium;
+    
+}
+
+.instructions-li{
+    list-style-type: decimal;
+}
+
+.instructions
+
+.instructions-link{
+    color: #3d95ce;
+    line-height: 1;
+}

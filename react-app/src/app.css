@@ -15,5 +15,5 @@ padding: 0px;
 
 .error-li {
     color: red;
-    list-style-type: disc;
+    list-style-type: none;
 }

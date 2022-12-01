@@ -15,6 +15,7 @@ import Posts from './components/Posts';
 import './app.css'
 import {Deposit, Withdraw} from './components/Transfer';
 import SinglePost from './components/Posts/SinglePost'
+import Instructions from './components/Instructions/Instructions';
 
 
 function App() {
@@ -66,7 +67,12 @@ function App() {
         <ProtectedRoute path='/transfer/withdraw' exact={true} >
           <Withdraw />
         </ProtectedRoute>
-        
+        <ProtectedRoute path='/instructions' exact={true} >
+          <Instructions />
+        </ProtectedRoute>
+        <Route>
+          404 Page Not Found
+        </Route>
       </Switch>
     </BrowserRouter>
   );

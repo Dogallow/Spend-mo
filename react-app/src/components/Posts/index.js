@@ -55,7 +55,7 @@ function Posts () {
                 return(
                     <div key={index} className='individual-post-container'>
                         <div className='user-avatar-container'>
-                            <button className='avatar-button'>DG</button>
+                            <button style={{ cursor: 'default' }} className='avatar-button'>{post.author[0]}</button>
                         </div>
                         
                         <div className='post-user-info-container'>
@@ -69,7 +69,7 @@ function Posts () {
                         <div className='individual-note-info'>
                             {showForm && currentPost == post.id ? <SinglePost setShowForm={setShowForm} post={post}/> : <p>{post.note}</p>}
                         </div>    
-                            {user?.id == post.author && (
+                            {user?.username == post.author && (
                                 <div className='individual-post-author-button-container'>
                                     
                                     <button  onClick={(e) => {

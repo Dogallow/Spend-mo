@@ -81,21 +81,23 @@ function UserTransactions () {
                 } else {
                     status = 'Closed'
                 }
+
+                if (transaction.transaction_state === 'cancelled') return
                 
                 return (
                     <>
                     <div className="userTransactions-individual-post-container" key={index}>
-                        <div className='user-avatar-container'>
-                            <button className='avatar-button'>DG</button>
+                        <div >
+                                <button style={{ cursor: 'default' }} className='avatar-button'>{transaction.sender_id[0]}</button>
                         </div>
                         <div className="userTransactions-individual-post-info">
                             <div className="userTransactions-individual-payment-info">
-                                    {status === 'Closed' ? <p><strong>{user.username === transaction.sender_id ? 'You' : transaction.sender_id}</strong> sent a payment to <strong>{transaction.receiver_id}</strong></p> :
+                                    {status === 'Closed' ? <p><strong>{user.username === transaction.sender_id ? 'You' : transaction.sender_id}</strong> {transaction.transaction_state} a payment to <strong>{transaction.receiver_id}</strong></p> :
                                         <p><strong>{transaction.receiver_id}</strong> requested a payment from <strong>You</strong></p>
                                 }
-                                <p className={transaction.transaction_state === 'approved'?"userTransactions-payment-amount": ""}>${transaction.request_amount}</p>
+                                <p  className={transaction.transaction_state === 'approved'?"userTransactions-payment-amount": ""}>${transaction.request_amount}</p>
                             </div>
-                            <p>{transaction.note}</p>
+                            <p style={{fontSize: '18px'}}>{transaction.note}</p>
                                 <p>Transaction Status: <strong>{status}</strong></p>
                                 {button1}
                                 {button2}

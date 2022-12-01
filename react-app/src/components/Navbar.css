@@ -4,6 +4,7 @@ nav {
             width: 317px;
             min-width: 317px;
             overflow-y: auto;
+            position: relative;
 }
 
 .nav-container{
@@ -78,6 +79,7 @@ img {
     font-weight: bold;
     color: white;
     cursor: pointer;
+    border: 0;
 }
 
 a{
@@ -130,4 +132,25 @@ li{
 
 .delete-user-button-style:hover{
     color: #0074de
+}
+
+.contact-footer-container{
+    position: absolute;
+    bottom: 0;
+    height: 3rem;
+    width: 100%;
+
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+
+.contact-footer-text{
+    font-family: Athletics Medium;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.contact-footer-buttons a{
+    height: 100%;
 }
