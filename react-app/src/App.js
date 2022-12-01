@@ -48,24 +48,24 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <Route path='/form' exact={true} >
+        <ProtectedRoute path='/form' exact={true} >
           <RequestForm />
-        </Route>
-        <Route path='/' exact={true} >
+        </ProtectedRoute>
+        <ProtectedRoute path='/' exact={true} >
           <Posts />
-        </Route>
-        <Route path='/notifications' exact={true} >
+        </ProtectedRoute>
+        <ProtectedRoute path='/notifications' exact={true} >
           <UserTransactions />
-        </Route>
-        <Route path='/incomplete' exact={true} >
+        </ProtectedRoute>
+        <ProtectedRoute path='/incomplete' exact={true} >
           <Incomplete />
-        </Route>
-        <Route path='/transfer/deposit' exact={true} >
+        </ProtectedRoute>
+        <ProtectedRoute path='/transfer/deposit' exact={true} >
           <Deposit />
-        </Route>
-        <Route path='/transfer/withdraw' exact={true} >
+        </ProtectedRoute>
+        <ProtectedRoute path='/transfer/withdraw' exact={true} >
           <Withdraw />
-        </Route>
+        </ProtectedRoute>
         
       </Switch>
     </BrowserRouter>

@@ -19,7 +19,7 @@ function Incomplete(){
         dispatch(cancelTransactionThunk(request.id)).then(() => dispatch(getAllRequestedTransactions()))
     }
     
-    if (!user) return <Redirect to={'/login'} />
+    if (user === null) return <Redirect to={'/login'} />
     if (requests == undefined) return <p>Loading...</p>
     return (
         <>
