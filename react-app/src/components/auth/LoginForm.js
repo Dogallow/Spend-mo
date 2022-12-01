@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import './Auth.css'
+import logo from '../logo-png.png'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -13,6 +14,15 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
+
+    setErrors([])
+    let validateEmail = email.split('@')[1].includes('.')
+
+    if (!validateEmail){
+      setErrors(['Email must have a valid \' . \' such as ".com or .io"'])
+      return
+    }
+    
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
@@ -47,13 +57,36 @@ const LoginForm = () => {
   }
 
   return (
+    <>
     <div className='form-container'>
+    <div className='login-signup-container'>
+      <nav className='login-signup-navbar'>
+        <div className='login-signup-logo'>
+            <NavLink className={'logo-link'} to={'/'}>
+                <img style={{ height: '40px' }} src={logo} alt='logo' />
+            </NavLink>
+        </div>
+        <ul className='login-signup-ul'>
+            <li>
+              <NavLink className={'login-signup-links'} to='/login' exact={true} activeClassName='active'>
+                Login
+              </NavLink>
+            </li>
+            <li>
+                <NavLink className={'login-signup-links'} to='/sign-up' exact={true} activeClassName='active'>
+                Sign Up
+              </NavLink>
+            </li>
+        </ul>
+      </nav>
+        </div>
       <h3>Sign in to Spend-mo</h3>
       <form onSubmit={onLogin} className="login-form">
         <ul className='errors-container' style={{marginLeft:'28px'}}>
-          {errors.map((error, ind) => (
-            <li className='error-li'  key={ind}>{error}</li>
-          ))}
+          {errors.map((error, ind) => {
+            if (ind === 0) return <li className='error-li' key={ind}>{error}</li>
+            return
+          })}
         </ul>
         <div className='input-section'>
           <label htmlFor='email'>Email</label>
@@ -91,6 +124,7 @@ const LoginForm = () => {
             </NavLink>
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux'
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import { initiateTransactionAndSendPaymentThunk, requestPaymentTransaction } from "../../store/transactions";
 import { getBalanceThunk } from "../../store/wallet";
 import NavBar from "../NavBar";
@@ -126,7 +126,10 @@ function RequestForm () {
                 </div>
                 <div className="username-container">
                     <label>To</label>
-                    <input required type="text" value={username} placeholder='@username' onChange={(e) => setUsername(e.target.value)}/>
+                    <input required type="text" value={username} placeholder='Enter Username' onChange={(e) => setUsername(e.target.value)}/>
+                </div>
+                <div>
+                        <p style={{ fontSize: '14px' }}>If you need a reminder of the usernames available, visit <NavLink style={{ fontSize: '14px' }} to='/users'>Users</NavLink>.</p>
                 </div>
 
                 <div className="textarea-container">

@@ -19,12 +19,23 @@
 }
 
 .userTransactions-individual-post-info p{
+    font-family: Athletics Medium;
+    margin: 0px;
+}
+
+.userTransactions-individual-post-info p{
     margin: 4px 0px 0px 0px;
 }
 
 .userTransactions-individual-payment-info{
     display: flex;
     justify-content: space-between;
+}
+
+.userTransactions-individual-payment-info p{
+    font-size: 20px;
+    font-family: Athletics Medium;
+    margin:0px;
 }
 
 .userTransactions-individual-post-info button{
@@ -35,6 +46,7 @@
     padding: 5px 12px;
     cursor: pointer;
     transition: linear .25s;
+    margin-top: 4px;
 }
 
 .userTransactions-individual-post-info button:hover{
@@ -56,4 +68,12 @@
 
 .userTransactions-Links .active{
     border-bottom: 3px solid #0074DE;
+}
+
+.avatar-container{
+    
+}
+
+.avatar-button{
+    
 }

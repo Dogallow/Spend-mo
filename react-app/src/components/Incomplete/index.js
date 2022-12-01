@@ -37,16 +37,16 @@ function Incomplete(){
                 return (
                     <div key={index} className="userTransactions-individual-post-container">
                         <div className='user-avatar-container'>
-                            <button className='avatar-button'>{request.receiver_id[0]}</button>
+                            <button style={{ cursor: 'default' }} className='avatar-button'>{request.receiver_id[0]}</button>
                         </div>
                         <div className="userTransactions-individual-post-info">
                             <div className="userTransactions-individual-payment-info">
                                 <p><strong>{user.username === request.receiver_id ? 'You' : request.receiver_id}</strong> requested  from <strong>{request.sender_id}</strong></p>
                                 <p>${request.request_amount}</p>
                             </div>
-                            <p>{request.note}</p>
-                            {status && <p>status: {status}</p>}
-                            {request.is_Pending && <button onClick={() => cancelRequest(request)}>Cancel Request</button>}
+                            <p style={{fontSize:'18px'}}>{request.note}</p>
+                            {status && <p>Status: {status}</p>}
+                            {request.is_Pending && <button style={{marginTop: '4px'}} onClick={() => cancelRequest(request)}>Cancel Request</button>}
                         </div>
                     </div>
                     

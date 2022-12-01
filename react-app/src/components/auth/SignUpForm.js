@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, NavLink } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import logo from '../logo-png.png'
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -16,6 +17,14 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+
+    let validateEmail = email.split('@')[1].includes('.')
+
+    if (!validateEmail) {
+      setErrors(['Email must have a valid \' . \' such as ".com or .io"'])
+      return
+    }
+    
     if (password === repeatPassword) {
       const obj = {
         'first_name':firstName,
@@ -50,11 +59,32 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to='/instructions' />;
   }
 
   return (
     <div className='form-container'>
+      <div className='login-signup-container'>
+        <nav className='login-signup-navbar'>
+          <div className='login-signup-logo'>
+            <NavLink className={'logo-link'} to={'/'}>
+              <img style={{ height: '40px' }} src={logo} alt='logo' />
+            </NavLink>
+          </div>
+          <ul className='login-signup-ul'>
+            <li>
+              <NavLink className={'login-signup-links'} to='/login' exact={true} activeClassName='active'>
+                Login
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className={'login-signup-links'} to='/sign-up' exact={true} activeClassName='active'>
+                Sign Up
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      </div>
     <h3>Sign Up Form</h3>
       <form className='signup-form' onSubmit={onSignUp}>
         <ul className='errors-container' style={{ marginLeft: '28px' }}>
@@ -96,7 +126,7 @@ const SignUpForm = () => {
         <div className='input-section'>
           <label>Email</label>
           <input
-            type='text'
+            type='email'
             name='email'
             required
             onChange={updateEmail}

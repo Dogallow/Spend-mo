@@ -37,6 +37,7 @@ class Transaction(db.Model):
 
     def username_to_dict(self):
         sender = User.query.get(self.sender_id)
+        author = User.query.get(self.author)
         print(sender)
         print(sender.username)
         sender = sender.username
@@ -54,5 +55,5 @@ class Transaction(db.Model):
             'is_Pending': self.is_Pending,
             'transaction_state': self.transaction_state,
             'note' : self.note,
-            'author': self.author
+            'author': author.username
         }
