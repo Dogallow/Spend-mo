@@ -54,7 +54,7 @@ function App() {
         <Route path='/' exact={true} >
           <Posts />
         </Route>
-        <Route path='/user-transactions' exact={true} >
+        <Route path='/notifications' exact={true} >
           <UserTransactions />
         </Route>
         <Route path='/incomplete' exact={true} >

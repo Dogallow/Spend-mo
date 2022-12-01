@@ -1,6 +1,6 @@
 import React, {useEffect} from "react"
 import {useDispatch, useSelector} from 'react-redux'
-import { Redirect } from "react-router-dom"
+import { Redirect, NavLink } from "react-router-dom"
 import { cancelTransactionThunk, getAllRequestedTransactions } from "../../store/transactions"
 import NavBar from "../NavBar"
 
@@ -24,19 +24,30 @@ function Incomplete(){
     return (
         <>
         <NavBar />
-        <div>
+            <div className="userTransactions-container">
+                <div className="userTransactions-Links">
+                    <NavLink to={'/Incomplete'} active exact ><span>Incomplete</span></NavLink>
+                    <NavLink active exact to={'/notifications'} ><span>Notifications</span></NavLink>
+                </div>
             {!!requests.length && requests.map((request, index) => {
                 let status = null
                 if (request.is_Pending == true) {
-                    status = 'open'
+                    status = 'Open'
                 }
                 return (
-                    <div key={index}>
-                        
-                        <p>{request.receiver_id} requested ${request.request_amount} from {request.sender_id}</p>
-                        <p>{request.note}</p>
-                        {status && <p>status: {status}</p>}
-                        {request.is_Pending && <button onClick={() => cancelRequest(request)}>Cancel Request</button>}
+                    <div key={index} className="userTransactions-individual-post-container">
+                        <div className='user-avatar-container'>
+                            <button className='avatar-button'>{request.receiver_id[0]}</button>
+                        </div>
+                        <div className="userTransactions-individual-post-info">
+                            <div className="userTransactions-individual-payment-info">
+                                <p><strong>{user.username === request.receiver_id ? 'You' : request.receiver_id}</strong> requested  from <strong>{request.sender_id}</strong></p>
+                                <p>${request.request_amount}</p>
+                            </div>
+                            <p>{request.note}</p>
+                            {status && <p>status: {status}</p>}
+                            {request.is_Pending && <button onClick={() => cancelRequest(request)}>Cancel Request</button>}
+                        </div>
                     </div>
                     
                     )

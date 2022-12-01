@@ -23,6 +23,12 @@ function RequestForm () {
 
         setErrors([])
         let validate = []
+
+        if (note.length > 240){
+            setErrors(['Note can only be a maximum of 240 characters'])
+            return
+        }
+        
         if (username === '') {
             setErrors(['Must Enter a Username'])
             return
@@ -70,6 +76,11 @@ function RequestForm () {
         return
        }
 
+        if (note.length > 240) {
+            setErrors(['Note can only be a maximum of 240 characters'])
+            return
+        }
+
         const obj = {
             'receiver_username': username,
             'request_amount': Number(requestAmount).toFixed(2),
@@ -96,16 +107,18 @@ function RequestForm () {
         <NavBar />
         <div className="pay-request-form-container">
             {user && <h1>Pay & Request</h1>}
-            <ul>
-                {!!errors.length && errors.map(error => {
+            <div className="pay-request-error-container">
+                <ul className="errors-container" >
+                    {!!errors.length && errors.map(error => {
 
-                    return (
-                        <div key={error}>
-                            <li>{error}</li>
-                        </div>
-                    )
-                })}
-            </ul>
+                        return (
+                            
+                                <li key={error} className='error-li' >{error}</li>
+                            
+                        )
+                    })}
+                </ul>
+            </div>
             <form className="pay-request-form">
                 <div className="amount-container">
                     <label>$</label>

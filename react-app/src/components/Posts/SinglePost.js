@@ -24,8 +24,8 @@ function SinglePost({post,setShowForm}){
     }
     
     return (
-        <form onSubmit={editNote}>
-            <textarea onChange={(e) => setNote(e.target.value)} value={note}/>
+        <form className='single-post-form' onSubmit={editNote}>
+            <textarea className='single-post-note-container' onChange={(e) => setNote(e.target.value)} value={note}/>
             <button type='submit'>Submit</button>
         </form>
     )

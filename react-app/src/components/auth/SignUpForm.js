@@ -57,11 +57,11 @@ const SignUpForm = () => {
     <div className='form-container'>
     <h3>Sign Up Form</h3>
       <form className='signup-form' onSubmit={onSignUp}>
-        <div>
+        <ul className='errors-container' style={{ marginLeft: '28px' }}>
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <li className='error-li' key={ind}>{error}</li>
           ))}
-        </div>
+        </ul>
         <div className='input-section'>
           <label>First Name</label>
           <input

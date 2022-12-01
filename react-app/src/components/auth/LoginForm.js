@@ -19,6 +19,21 @@ const LoginForm = () => {
     }
   };
 
+  const demo1Login = async(e) => {
+    e.preventDefault()
+    const data = await dispatch(login('demo@aa.io', 'password'));
+    if (data) {
+      setErrors(data);
+    }
+  }
+  const demo2Login = async(e) => {
+    e.preventDefault()
+    const data = await dispatch(login('test@aa.io', 'password'));
+    if (data) {
+      setErrors(data);
+    }
+  }
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -35,11 +50,11 @@ const LoginForm = () => {
     <div className='form-container'>
       <h3>Sign in to Spend-mo</h3>
       <form onSubmit={onLogin} className="login-form">
-        <div>
+        <ul className='errors-container' style={{marginLeft:'28px'}}>
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <li className='error-li'  key={ind}>{error}</li>
           ))}
-        </div>
+        </ul>
         <div className='input-section'>
           <label htmlFor='email'>Email</label>
           <br/>
@@ -64,7 +79,11 @@ const LoginForm = () => {
             onChange={updatePassword}
           />
           </div>
+          <div className='login-page-buttons-container'>
+          <button onClick={demo1Login} className='sign-in-button' type='submit'>Demo User 1</button>
+          <button onClick={demo2Login} className='sign-in-button' type='submit'>Demo User 2</button>
           <button className='sign-in-button' type='submit'>Sign In</button>
+          </div>
       </form>
       <div className='login-footer'>
             <NavLink to={'/sign-up'}>

@@ -18,9 +18,9 @@ const NavBar = () => {
 
   const walletInfo = wallet.wallet ?( 
     <div>
-      <p>Wallet Balance: ${wallet.wallet.balance}</p>
+      <p style={{marginBottom:'0px'}}>${wallet.wallet.balance} in Spend-mo</p>
       <NavLink to={'/transfer/deposit'}>
-        <p>Transfer Money</p>
+        <p style={{marginTop:'0px'}}>Transfer Money</p>
       </NavLink>
     </div>
   ) : (
@@ -40,7 +40,7 @@ const NavBar = () => {
 
   let userInfo = user !== null ? (
     <>
-      <button className='avatar-container'>DG</button>
+      <button className='avatar-container'>{user.username[0]}</button>
       <div className='user-info'>
         <h3>Hi, {user.username}</h3>
         <span>@{user.username}-{Math.floor(Math.random() *10)}</span>
@@ -49,11 +49,60 @@ const NavBar = () => {
       ) : (
     null
   )
+
+  let userButtons = user !== null ? (
+    <>
+      
+        <li>
+          <NavLink to='/' exact={true} activeClassName='active'>
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to='/users' exact={true} activeClassName='active'>
+            Users
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to='/notifications' exact={true} activeClassName='active'>
+            Notifications
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to='/incomplete' exact={true} activeClassName='active'>
+            Incomplete
+          </NavLink>
+        </li>
+        <li>
+          <LogoutButton />
+        </li>
+        <li>
+          <button className="delete-user-button-style" onClick={deleteUser}>Delete User</button>
+        </li>
+      
+    </>
+  ) : (
+    <>
+        <li>
+          <NavLink to='/login' exact={true} activeClassName='active'>
+            Login
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to='/sign-up' exact={true} activeClassName='active'>
+            Sign Up
+          </NavLink>
+        </li>
+        
+    </>
+  )
   
   return (
     <nav>
     <div className='nav-container'>
+      <NavLink to={'/'}>
         <img src='https://account.venmo.com/static/images/logo.svg' alt='logo' />
+      </NavLink>
         <div className='user-container'>
           {userInfo}
         </div>
@@ -66,45 +115,7 @@ const NavBar = () => {
           {walletInfo}
         
         <ul>
-          <li>
-            <NavLink to='/' exact={true} activeClassName='active'>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/login' exact={true} activeClassName='active'>
-              Login
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/sign-up' exact={true} activeClassName='active'>
-              Sign Up
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/users' exact={true} activeClassName='active'>
-              Users
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/user-transactions' exact={true} activeClassName='active'>
-              User Transactions
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/incomplete' exact={true} activeClassName='active'>
-              Incomplete
-            </NavLink>
-          </li>
-          
-          
-          
-          <li>
-            <LogoutButton />
-          </li>
-          <li>
-            {user !== null && <button onClick={deleteUser}>Delete User</button>}
-          </li>
+          {userButtons}
         </ul>
       </div>
     </nav>

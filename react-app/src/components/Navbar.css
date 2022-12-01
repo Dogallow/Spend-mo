@@ -57,6 +57,7 @@ img {
     border: 1px solid #888C94;
     background-color: #fff;
     border-radius: 50%;
+    
 }
 
 .nav-container ul{
@@ -76,6 +77,7 @@ img {
     font-size: 18px;
     font-weight: bold;
     color: white;
+    cursor: pointer;
 }
 
 a{
@@ -95,4 +97,37 @@ li{
     list-style-type: none;
     margin: 3px 0px 3px 0px;
     font-family: Scto Grotesk A Bold;
+}
+
+
+.logout-button-style{
+    color: #2F3033;
+    background-color: transparent;
+    border:0;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Scto Grotesk A Bold;
+    padding: 0px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.logout-button-style:hover{
+    color: #0074de
+}
+
+.delete-user-button-style{
+    color: #2F3033;
+    background-color: transparent;
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Scto Grotesk A Bold;
+    padding: 0px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.delete-user-button-style:hover{
+    color: #0074de
 }
