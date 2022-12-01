@@ -29,7 +29,7 @@ function UserTransactions () {
         dispatch(getBalanceThunk())
     },[dispatch])
     if (!transactions) return <h1>...Loading</h1>
-    if (!user) return <Redirect to={'/login'} />
+    if (user === null) return <Redirect to={'/login'} />
 
     let validate = []
 
