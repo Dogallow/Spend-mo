@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { Redirect, NavLink } from "react-router-dom"
 import { approveTransactionThunk, declineTransactionThunk, getAllSenderTransactions, getAllUserTransactions } from "../../store/transactions"
 import { getBalanceThunk } from "../../store/wallet"
+import EmptyPage from "../EmptyPage"
 import NavBar from "../NavBar"
 import './UserTransactions.css'
 
@@ -97,10 +98,12 @@ function UserTransactions () {
                                 }
                                 <p  className={transaction.transaction_state === 'approved'?"userTransactions-payment-amount": ""}>${transaction.request_amount}</p>
                             </div>
-                            <p style={{fontSize: '18px'}}>{transaction.note}</p>
-                                <p>Transaction Status: <strong>{status}</strong></p>
-                                {button1}
-                                {button2}
+                                <p className="userTransactions-individual-payment-info-note" style={{fontSize: '18px'}}>{transaction.note}</p>
+                                <p className="userTransactions-individual-payment-info-status">Transaction Status: <strong>{status}</strong></p>
+                                <div className=" userTransactions-individual-payment-info-status">
+                                    {button1}
+                                    {button2}
+                                </div>
                             
                         </div>
                             
@@ -109,6 +112,7 @@ function UserTransactions () {
                     )
             }
             )}
+            {transactions && transactions.length === 0 && <EmptyPage page="request"/>}
         </div>
         </>
     )

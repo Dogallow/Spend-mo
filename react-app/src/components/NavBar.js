@@ -59,11 +59,7 @@ const NavBar = () => {
             Home
           </NavLink>
         </li>
-        <li>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
-          </NavLink>
-        </li>
+        
         <li>
           <NavLink to='/notifications' exact={true} activeClassName='active'>
             Notifications

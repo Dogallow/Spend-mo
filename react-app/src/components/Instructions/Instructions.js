@@ -27,17 +27,12 @@ function Instructions () {
                                 <li className="instructions-li"><NavLink style={{
                                     color: "#3d95ce",
                                     lineHeight: "1"
-                                }} className={'instructions-link'} to='/transfer/deposit'>Transfer Money</NavLink> link is where as a user. You will be able to deposit or withdraw funds.</li>
+                                }} className={'instructions-link'} to='/transfer/deposit'>Transfer Money</NavLink> link is where as a user, you will be able to deposit or withdraw funds.</li>
                                 <li className="instructions-li"><NavLink style={{
                                     color: "#3d95ce",
                                     lineHeight: "1"
                                 }} className={'instructions-link'} to={'/'}>Home</NavLink> link is where all successful transactions are displayed as posts. </li>
-                                <li className="instructions-li">
-                                    If you are not sure who you want to send money to or can't remember the username of the user. You can navigate to the <NavLink className={'instructions-link'} style={{
-                                        color: "#3d95ce",
-                                        lineHeight: "1"
-                                    }} to={'/users'}>Users</NavLink> link.
-                                </li>
+                                
                                 <li className="instructions-li">
                                     The <NavLink style={{
                                         color: "#3d95ce",

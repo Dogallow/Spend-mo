@@ -4,6 +4,7 @@ import { useHistory, NavLink } from "react-router-dom";
 import { initiateTransactionAndSendPaymentThunk, requestPaymentTransaction } from "../../store/transactions";
 import { getBalanceThunk } from "../../store/wallet";
 import NavBar from "../NavBar";
+import UsersList from "../UsersList";
 import './PayRequestForm.css'
 
 function RequestForm () {
@@ -13,6 +14,7 @@ function RequestForm () {
     const [username, setUsername] = useState('')
     const [note, setNote] = useState('')
     const [errors, setErrors] = useState([])
+    const [showDropdown, setShowDropdown] = useState(false)
 
     
     
@@ -105,7 +107,7 @@ function RequestForm () {
     return (
         <>
         <NavBar />
-        <div className="pay-request-form-container">
+        <div className="pay-request-form-container" >
             {user && <h1>Pay & Request</h1>}
             <div className="pay-request-error-container">
                 <ul className="errors-container" >
@@ -128,8 +130,9 @@ function RequestForm () {
                     <label>To</label>
                     <input required type="text" value={username} placeholder='Enter Username' onChange={(e) => setUsername(e.target.value)}/>
                 </div>
-                <div>
-                        <p style={{ fontSize: '14px' }}>If you need a reminder of the usernames available, visit <NavLink style={{ fontSize: '14px' }} to='/users'>Users</NavLink>.</p>
+                <div className="drop-down-container">
+                        <p style={{ fontSize: '14px' }}>If you need a reminder of the usernames available, visit <button className="drop-down-container-button" onClick={() => setShowDropdown(!showDropdown)} style={{ fontSize: '14px' }} to='/users'>Users</button>.</p>
+                        {showDropdown && <UsersList setShowDropdown={setShowDropdown}/>}
                 </div>
 
                 <div className="textarea-container">
