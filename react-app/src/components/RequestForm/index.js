@@ -132,7 +132,7 @@ function RequestForm () {
                 </div>
                 <div className="drop-down-container">
                         <p style={{ fontSize: '14px' }}>If you need a reminder of the usernames available, visit <button className="drop-down-container-button" onClick={() => setShowDropdown(!showDropdown)} style={{ fontSize: '14px' }} to='/users'>Users</button>.</p>
-                        {showDropdown && <UsersList setShowDropdown={setShowDropdown}/>}
+                        {showDropdown && <UsersList setUsername={setUsername} setShowDropdown={setShowDropdown}/>}
                 </div>
 
                 <div className="textarea-container">

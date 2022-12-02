@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import NavBar from './NavBar';
 import './UserList.css'
-function UsersList({setShowDropdown}) {
+function UsersList({setShowDropdown, setUsername}) {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -17,7 +17,10 @@ function UsersList({setShowDropdown}) {
 
   const userComponents = users.map((user) => {
     return (
-      <li className='user-list-li' key={user.id}>
+      <li className='user-list-li' key={user.id} onClick={() => {
+        setUsername(user.username)
+        setShowDropdown(false)
+      }}>
         {user.username}
       </li>
     );
