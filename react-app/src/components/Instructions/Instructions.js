@@ -17,7 +17,7 @@ function Instructions () {
                                 color: "#3d95ce",
                                 lineHeight: "1"}} to={'/'}>Home Page.</NavLink></p>
                             <p>The goal of this page is to get a quick introduction of how the site works and how to navigate it.</p>
-                            <p style={{ borderBottom: '1px solid #ccc'}}>The Navigation Bar to the far left will act as your main HUD. <br/>
+                            <p style={{paddingBottom:'20px', borderBottom: '1px solid #ccc'}}>The Navigation Bar to the far left will act as your main HUD. <br/>
                                 In the Navigation Bar, you will find links to all the pages you will need as a user.
                             </p>
                             <ul className="instructions-ul">
@@ -33,7 +33,7 @@ function Instructions () {
                                     lineHeight: "1"
                                 }} className={'instructions-link'} to={'/'}>Home</NavLink> link is where all successful transactions are displayed as posts. </li>
                                 <li className="instructions-li">
-                                    If you are not sure who you want to send money to or can't remember the username of the person. You can navigate to the <NavLink className={'instructions-link'} style={{
+                                    If you are not sure who you want to send money to or can't remember the username of the user. You can navigate to the <NavLink className={'instructions-link'} style={{
                                         color: "#3d95ce",
                                         lineHeight: "1"
                                     }} to={'/users'}>Users</NavLink> link.
