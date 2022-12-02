@@ -51,3 +51,24 @@ flask seed all
 cd react-app
 npm start
  ```
+ 
+ # Usage
+ 
+ ## Sign In or Sign Up
+ Users can sign in to their existing account or create a new account. 
+ 
+ ## Instructions
+ If you are confused or don't know where to start the instructions page is a great place to get a better understanding of how to navigate the application.
+ 
+ ## Landing Page
+ Here are all the successful transactions that now are displayed to all users in the form of a post.
+ 
+ ## Pay or Request
+ Here users can initiate payment requests or automatically send payments.
+ 
+ ## Deposit or Withdraw
+ Here users can deposit funds or withdraw funds to/from their wallet.
+ 
+ ## Incomplete / Notifications
+  * Incomplete tab is where you can view all of your transactions that you have requested that are still in a pending state.
+  * Notifications tab is where you can view all transactions that have been sent by you or transactions that need to be accepted or declined by you.
