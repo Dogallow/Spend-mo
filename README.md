@@ -3,6 +3,8 @@
 
 Spend-mo is an application inspired by [Venmo](https://venmo.com/). Spend-mo, much like venmo, is a creative platform that solves the issue of convenient money transferring services and adds a fun twist of a social media landscape that helps users display their transactions and connect with other users in a fun and transparent manner.
 
+[Link to live site](https://spend-mo.onrender.com/)
+
 
 ## Built using:
 
