@@ -2,6 +2,7 @@ import React, {useEffect} from "react"
 import {useDispatch, useSelector} from 'react-redux'
 import { Redirect, NavLink } from "react-router-dom"
 import { cancelTransactionThunk, getAllRequestedTransactions } from "../../store/transactions"
+import EmptyPage from "../EmptyPage"
 import NavBar from "../NavBar"
 
 function Incomplete(){
@@ -44,14 +45,19 @@ function Incomplete(){
                                 <p><strong>{user.username === request.receiver_id ? 'You' : request.receiver_id}</strong> requested  from <strong>{request.sender_id}</strong></p>
                                 <p>${request.request_amount}</p>
                             </div>
-                            <p style={{fontSize:'18px'}}>{request.note}</p>
-                            {status && <p>Status: {status}</p>}
-                            {request.is_Pending && <button style={{marginTop: '4px'}} onClick={() => cancelRequest(request)}>Cancel Request</button>}
+                            <p className="userTransactions-individual-payment-info-note">{request.note}</p>
+                            {status && <p className="userTransactions-individual-payment-info-status">Status: {status}</p>}
+                            {request.is_Pending && (
+                                <div className=" userTransactions-individual-payment-info-status">
+                                    <button style={{marginTop: '4px'}} onClick={() => cancelRequest(request)}>Cancel Request</button>
+                                </div>
+                )}
                         </div>
                     </div>
                     
                     )
             })}
+            {requests && requests.length === 0 && <EmptyPage page="request"/>}
         </div>
         </>
     )

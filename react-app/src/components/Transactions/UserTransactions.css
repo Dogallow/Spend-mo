@@ -10,7 +10,7 @@
         align-items: center;
         border-bottom: 1px solid #ccc;
         padding-bottom: 16px;
-        margin-top: 10px;
+        margin-top: 20px;
 }
 
 .userTransactions-individual-post-info{
@@ -33,9 +33,21 @@
 }
 
 .userTransactions-individual-payment-info p{
-    font-size: 20px;
+    font-size: 25px;
     font-family: Athletics Medium;
     margin:0px;
+    padding-left: 25px;
+}
+
+.userTransactions-individual-payment-info-note{
+    font-size: 25px;
+    padding-left: 25px;
+}
+
+.userTransactions-individual-payment-info-status{
+    font-size: 20px;
+    padding-left: 25px;
+    padding-bottom: 10px;
 }
 
 .userTransactions-individual-post-info button{

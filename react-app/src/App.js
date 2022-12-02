@@ -16,6 +16,7 @@ import './app.css'
 import {Deposit, Withdraw} from './components/Transfer';
 import SinglePost from './components/Posts/SinglePost'
 import Instructions from './components/Instructions/Instructions';
+import EmptyPage from './components/EmptyPage';
 
 
 function App() {
@@ -43,9 +44,7 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
+        
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
@@ -71,7 +70,7 @@ function App() {
           <Instructions />
         </ProtectedRoute>
         <Route>
-          404 Page Not Found
+          <EmptyPage/>
         </Route>
       </Switch>
     </BrowserRouter>

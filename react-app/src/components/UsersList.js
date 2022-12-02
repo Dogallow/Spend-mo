@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import NavBar from './NavBar';
 import './UserList.css'
-function UsersList() {
+function UsersList({setShowDropdown}) {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -22,6 +22,15 @@ function UsersList() {
       </li>
     );
   });
+  
+  return (
+    <div className='user-list-dropdown-container'>
+    <ul>{userComponents}</ul>
+    <div className='user-list-dropdown-button-container'>
+      {!!users.length && <button onClick={() => setShowDropdown(false)}><i class="fa-solid fa-square-xmark fa-xl"></i></button>}
+    </div>
+    </div>
+  )
 
   return (
     <>
