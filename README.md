@@ -3,6 +3,14 @@
 
 Spend-mo is an application inspired by [Venmo](https://venmo.com/). Spend-mo, much like venmo, is a creative platform that solves the issue of convenient money transferring services and adds a fun twist of a social media landscape that helps users display their transactions and connect with other users in a fun and transparent manner.
 
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
+
 ## Built using:
 
   * <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
@@ -72,3 +80,16 @@ npm start
  ## Incomplete / Notifications
   * Incomplete tab is where you can view all of your transactions that you have requested that are still in a pending state.
   * Notifications tab is where you can view all transactions that have been sent by you or transactions that need to be accepted or declined by you.
+
+## Roadmap
+
+- [x] Create CRUD features for Wallet
+- [x] CRUD features for Posts
+- [ ] CRUD features for Likes
+- [ ] CRUD features for Comments
+- [ ] CRUD features for Follows
+- [ ] Implement AWS
+
+Created By Donovan Galloway: [<img color="white" src='https://user-images.githubusercontent.com/95613961/205353832-83632c8d-1016-4263-ac50-16436e246fd8.svg' target='_blank' alt='Github Logo' width=30px height=27px />](https://github.com/Dogallow)[<img src='https://user-images.githubusercontent.com/95613961/205356256-82238182-71a7-4726-b470-52df7a52c87b.svg' target='_blank' alt='' width=30px height=30px/>](https://www.linkedin.com/in/donovan-galloway-927190233/)
+
+
