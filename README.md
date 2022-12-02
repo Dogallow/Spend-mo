@@ -62,22 +62,30 @@ npm start
  
  ## Sign In or Sign Up
  Users can sign in to their existing account or create a new account. 
- 
+ ![login-page](https://user-images.githubusercontent.com/95613961/205397544-9d63bee5-64cc-4d6d-a780-46e412ac8049.jpg)
+![signup-page](https://user-images.githubusercontent.com/95613961/205397588-96f0abe7-bead-4a14-baa7-490887a49d59.jpg)
+
  ## Instructions
  If you are confused or don't know where to start the instructions page is a great place to get a better understanding of how to navigate the application.
- 
+ ![Instructions-page](https://user-images.githubusercontent.com/95613961/205397610-674a4841-28c1-4d02-92bf-dbb33bd3e358.jpg)
+
  ## Landing Page
  Here are all the successful transactions that now are displayed to all users in the form of a post.
- 
+ ![splash-page](https://user-images.githubusercontent.com/95613961/205397614-bb426276-768d-4613-8fa3-f9bb37f76be4.jpg)
+
  ## Pay or Request
  Here users can initiate payment requests or automatically send payments.
- 
+ ![pay-request-page](https://user-images.githubusercontent.com/95613961/205397622-c561acd0-95e2-477c-9d3e-c57209ca0384.jpg)
+
  ## Deposit or Withdraw
  Here users can deposit funds or withdraw funds to/from their wallet.
- 
+ ![withdraw-deposit-page](https://user-images.githubusercontent.com/95613961/205397633-5f8604b0-a2d3-47bc-bf63-a95dd42aaab1.jpg)
+
  ## Incomplete / Notifications
   * Incomplete tab is where you can view all of your transactions that you have requested that are still in a pending state.
   * Notifications tab is where you can view all transactions that have been sent by you or transactions that need to be accepted or declined by you.
+![incomplete-page](https://user-images.githubusercontent.com/95613961/205397646-05a56ea8-c1b7-45cc-8551-99b84f688325.jpg)
+![notifications-page](https://user-images.githubusercontent.com/95613961/205397653-3114067f-368f-4608-b673-be1d92cb9899.jpg)
 
 ## Roadmap
 
