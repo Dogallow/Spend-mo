@@ -41,12 +41,12 @@ let logo
                     <h2 style={{color: 'black'}}>404 Error: Page Not Found</h2>
                     
                 </div>
+                <NavLink style={{ height: 'auto', fontSize: '40px', color:'#3d95ce', textDecoration:'underline'}} className={"empty-page-link-img"} to={'/'}>
+                Go Home
+                </NavLink>
                 <div style={{ width: '100 %' }} className="empty-page-image-wrapper">
                 <img style={{ objectFit: 'cover', height: '100%' }} src={errorImage} />
                 </div>
-                <NavLink style={{height: 'auto'}} className={"empty-page-link-img"} to={'/'}>
-                Go Home
-                </NavLink>
             </>
         )
 

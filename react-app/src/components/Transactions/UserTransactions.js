@@ -98,7 +98,7 @@ function UserTransactions () {
                                 }
                                 <p  className={transaction.transaction_state === 'approved'?"userTransactions-payment-amount": ""}>${transaction.request_amount}</p>
                             </div>
-                                <p className="userTransactions-individual-payment-info-note" style={{fontSize: '18px'}}>{transaction.note}</p>
+                                <p className="userTransactions-individual-payment-info-note" >{transaction.note}</p>
                                 <p className="userTransactions-individual-payment-info-status">Transaction Status: <strong>{status}</strong></p>
                                 <div className=" userTransactions-individual-payment-info-status">
                                     {button1}
