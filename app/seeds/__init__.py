@@ -1,7 +1,7 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .wallet import seed_wallets, undo_wallets
-from .transactions import undo_transactions
+from .transactions import undo_transactions, seed_transactions
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -19,8 +19,10 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_users()
         undo_wallets()
+        undo_transactions()
     seed_users()
     seed_wallets()
+    seed_transactions()
     # Add other seed functions here
 
 

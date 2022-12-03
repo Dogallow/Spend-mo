@@ -103,7 +103,7 @@ const NavBar = () => {
   )
   
   return (
-    <nav>
+    <nav className='side-navbar-wrapper'>
     <div className='nav-container'>
       <NavLink to={'/'}>
         <img src={logo} alt='logo' style={{height: '40px'}}/>
