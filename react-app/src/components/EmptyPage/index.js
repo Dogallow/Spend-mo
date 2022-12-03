@@ -1,6 +1,7 @@
 import {NavLink} from 'react-router-dom'
 import emptyPageLogoSanta from '../images/alternate-empty-page-img-santa.jpg'
 import emptyPageLogoScrooge from '../images/alternate-empty-page-img-scrooge.jpg'
+import emptyPageGif from '../images/200w.webp'
 import errorImage from '../images/404-image.jpg'
 import './EmptyPage.css'
 
@@ -24,12 +25,12 @@ let logo
         logo = (
             <>
                 <div className='empty-page-title'>
-                    <h2>Let's Initiate a transaction</h2>
-                    <NavLink to={'/form'}>Pay or Request</NavLink>
+                    <h2>You currently have no transactions to view</h2>
+                    <NavLink style={{textDecoration: 'underline'}} to={'/form'}>Pay or Request</NavLink>
                 </div>
                 <div style={{ width: '100 %'}} className="empty-page-image-wrapper">
                     <NavLink style={{ maxWidth: '100 %' }}  className={"empty-page-link-img"} to={'/form'}>
-                        <img style={{ objectFit: 'cover',height: '100%' }} src={emptyPageLogoScrooge} />
+                        <img style={{ objectFit: 'cover', height: '100%' }} src={emptyPageGif} />
                     </NavLink>
                 </div>
             </>

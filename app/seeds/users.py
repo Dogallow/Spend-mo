@@ -8,9 +8,13 @@ def seed_users():
     demo2 = User(
         username='Test', first_name='Test', last_name='User', email='test@aa.io', password='password', profile_img_url='https://i.etsystatic.com/35513472/r/il/c291aa/4133067317/il_340x270.4133067317_3zrj.jpg'
     )
+    demo3 = User(
+        username='Newb', first_name='Newb', last_name='B', email='newb@aa.io', password='password', profile_img_url='https://i.etsystatic.com/35513472/r/il/c291aa/4133067317/il_340x270.4133067317_3zrj.jpg'
+    )
 
     db.session.add(demo)
     db.session.add(demo2)
+    db.session.add(demo3)
     db.session.commit()
 
 

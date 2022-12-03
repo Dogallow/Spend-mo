@@ -1,10 +1,10 @@
-nav {
+.side-navbar-wrapper {
         height: 100%;
             border-right: 1px solid #ccc;
             width: 317px;
             min-width: 317px;
             overflow-y: auto;
-            position: relative;
+            position: sticky;
 }
 
 .nav-container{
