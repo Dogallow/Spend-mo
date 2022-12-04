@@ -112,7 +112,7 @@ function UserTransactions () {
                     )
             }
             )}
-            {transactions && transactions.length === 0 && <EmptyPage page="request"/>}
+            {transactions && transactions.filter(transaction => transaction.sender_id == user.username || transaction.receiver_id == user.username).length === 0 && <EmptyPage page="request"/>}
         </div>
         </>
     )

@@ -18,6 +18,8 @@ const LoginForm = () => {
     setErrors([])
     let validateEmail = email.split('@')[1].includes('.')
 
+    
+    
     if (!validateEmail){
       setErrors(['Email must have a valid \' . \' such as ".com or .io"'])
       return
