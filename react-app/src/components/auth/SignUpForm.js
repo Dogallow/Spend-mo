@@ -18,10 +18,32 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
 
+    setErrors([])
+
+    if (firstName.length < 2 || firstName.length > 15){
+      setErrors(["First Name must be between 2 and 15 characters."])
+      return
+    }
+
+    if (lastName.length < 2 || lastName.length > 15){
+      setErrors(["Last Name must be between 2 and 15 characters."])
+      return
+    }
+
+    if (username.length > 20){
+      setErrors(['Username must be less than 20 characters'])
+      return
+    }
+
     let validateEmail = email.split('@')[1].includes('.')
 
     if (!validateEmail) {
       setErrors(['Email must have a valid \' . \' such as ".com or .io"'])
+      return
+    }
+
+    if (password.length < 6 || password.length > 20) {
+      setErrors(['Password must be between 6 and 20 characters'])
       return
     }
     
