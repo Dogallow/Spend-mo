@@ -7,6 +7,7 @@ import './Posts.css'
 import SinglePost from './SinglePost'
 import NavBar from '../NavBar'
 import EmptyPage from '../EmptyPage'
+import Like from '../Likes'
 
 function Posts() {
     const dispatch = useDispatch()
@@ -86,6 +87,7 @@ function Posts() {
                                 <div className='individual-note-info'>
                                     {showForm && currentPost == post.id ? <SinglePost setShowForm={setShowForm} post={post} /> : <p>{post.note}</p>}
                                 </div>
+                                <Like username={user.username} postId={post.id}/>
                                 {user?.username == post.author && (
                                     <div className='individual-post-author-button-container'>
 
