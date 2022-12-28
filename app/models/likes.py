@@ -2,6 +2,7 @@
 
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from app.models import User
+from flask_login import current_user
  
 
 class Like(db.Model):
@@ -16,6 +17,7 @@ class Like(db.Model):
     user = db.relationship("User", back_populates="liked")
 
     def to_dict(self):
+        print('----------USER ID', self.user_id)
         user = User.query.get(self.user_id)
         user = user.username
 

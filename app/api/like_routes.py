@@ -5,6 +5,7 @@ from app.models import db, Like, Transaction, User
 like_routes = Blueprint('like', __name__)
 
 @like_routes.route('/', methods=['POST'])
+@login_required
 def like_post():
     print('================= request_method', request.method)
     
@@ -12,7 +13,9 @@ def like_post():
     print('------- data', data)
     id = data['id']
     print('------- id', id)
-    like = Like.query.filter(Like.post_id == id  and Like.user_id == current_user.id).first()
+    print('------- current_user', current_user.id)
+    like = Like.query.filter(Like.post_id == id, Like.user_id == current_user.id ).first()
+    
     print('--------like', like)
 
     # Check if the like exists
@@ -26,24 +29,28 @@ def like_post():
         db.session.add(new_like)
         db.session.commit()
         
-    # If a like does exist then we want to delete that like
-    else :
+    
         
-        db.session.delete(like)
-        db.session.commit()
-        
-    likes = Like.query.all()
-    values = [x.to_dict() for x in likes]
-    return {'likes': values}
+        likes = Like.query.all()
+        values = [x.to_dict() for x in likes]
+        return {'likes': values}
+    
+    print('--------like', like)
+    # print('--------like', like.post_id)
+    # print('--------like', like.user_id)
+    print('--------boolean value between user id of the post and the current user', like.user_id == current_user.id)
+    
+    return {'error': 'User already liked post'}
 
 @like_routes.route('/delete', methods=['POST'])
+@login_required
 def unlike_post():
     data = request.get_json()
     print('------- data', data)
     id = data['id']
     print('------- id', id)
     
-    like = Like.query.get(id)
+    like = Like.query.filter(Like.post_id == id  ,Like.user_id == current_user.id).first()
     print('--------like', like)
 
     db.session.delete(like)
@@ -51,13 +58,9 @@ def unlike_post():
 
     return like.to_dict()
 
-@like_routes.route('/get/<id>', methods=['GET'])
+@like_routes.route('/get')
 def get_like():
-    if request.method == 'GET':
 
-        like = Like.query.filter(Like.user_id == current_user.id and Like.post_id == id).first()
-
-        if like is None:
-            return {'boolean':False}
-        else:
-            return {'boolean':True}
+    likes = Like.query.all()
+    values = [x.to_dict() for x in likes]
+    return {'likes': values}

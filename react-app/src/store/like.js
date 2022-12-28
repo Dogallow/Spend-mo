@@ -17,12 +17,12 @@ const unlikePostActionCreator = (post) => {
 
 
 
-export const getLike = (postId) => async dispatch => {
-    const response = await fetch(`/api/like/get/${postId}`)
+export const getLikes = (postId) => async dispatch => {
+    const response = await fetch(`/api/like/get`)
 
     if (response.ok) {
-        const bool = await response.json()
-        return bool
+        const values = await response.json()
+        dispatch(changeLikesActionCreator(values))
     }
 }
 
@@ -60,22 +60,26 @@ const likeReducer = (state = {}, action) => {
     switch (action.type) {
         case GET_LIKES:
             let obj = {}
-
+            console.log('####### THIS IS THE ARRAY RETURNED FROM THE BACKEND', action.likes.likes)
             action.likes.likes.forEach(like => {
-                if (state[like.post] === undefined) {
+                console.log('&&&& THIS IS THE OBJ', obj)
+                console.log('&&&& THIS IS THE LIKE IN THE LOOP', like)
+                if (obj[like.post] === undefined) {
                     obj[like.post] = [like.user]
                 } else {
 
-                    obj[like.post] = [...state[like.post], like.user]
+                    obj[like.post] = [...obj[like.post], like.user]
                 }
             })
-            console.log('HERE WE GO', state)
-            return { ...state, ...obj }
+            console.log('HERE WE GO', obj)
+            return {...obj}
         case DELETE_LIKE:
+            console.log('**************POST DATA FROM BACKEND', action.post)
             let index = state[action.post.post].indexOf(action.post.user)
 
-            let newState = state[action.post.post].splice(index, 1)
-            return newState
+            state[action.post.post].splice(index, 1)
+            console.log('**************STATE AFTER DELETION', state)
+            return {...state}
         default:
             return { ...state }
     }

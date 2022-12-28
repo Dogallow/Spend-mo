@@ -8,6 +8,7 @@ import SinglePost from './SinglePost'
 import NavBar from '../NavBar'
 import EmptyPage from '../EmptyPage'
 import Like from '../Likes'
+import { getLikes } from '../../store/like'
 
 function Posts() {
     const dispatch = useDispatch()
@@ -44,6 +45,7 @@ function Posts() {
     useEffect(() => {
         dispatch(getBalanceThunk())
         dispatch(getAllUserTransactions())
+        dispatch(getLikes())
     }, [dispatch])
     if (user === null) return <Redirect to={'/login'} />
     if (!posts) return <h1>Loading...</h1>
@@ -87,7 +89,7 @@ function Posts() {
                                 <div className='individual-note-info'>
                                     {showForm && currentPost == post.id ? <SinglePost setShowForm={setShowForm} post={post} /> : <p>{post.note}</p>}
                                 </div>
-                                <Like username={user.username} postId={post.id}/>
+                                {user.username && <Like username={user.username} postId={post.id}/>}
                                 {user?.username == post.author && (
                                     <div className='individual-post-author-button-container'>
 
