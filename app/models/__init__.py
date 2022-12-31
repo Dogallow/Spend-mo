@@ -5,3 +5,4 @@ from .likes import Like
 from .posts import Post
 from .transactions import Transaction
 from .wallet import Wallet
+from .comments import Comment

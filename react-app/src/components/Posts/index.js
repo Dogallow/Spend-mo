@@ -7,6 +7,9 @@ import './Posts.css'
 import SinglePost from './SinglePost'
 import NavBar from '../NavBar'
 import EmptyPage from '../EmptyPage'
+import Like from '../Likes'
+import { getLikes } from '../../store/like'
+import Comments from '../Comments'
 
 function Posts() {
     const dispatch = useDispatch()
@@ -43,6 +46,7 @@ function Posts() {
     useEffect(() => {
         dispatch(getBalanceThunk())
         dispatch(getAllUserTransactions())
+        dispatch(getLikes())
     }, [dispatch])
     if (user === null) return <Redirect to={'/login'} />
     if (!posts) return <h1>Loading...</h1>
@@ -86,6 +90,9 @@ function Posts() {
                                 <div className='individual-note-info'>
                                     {showForm && currentPost == post.id ? <SinglePost setShowForm={setShowForm} post={post} /> : <p>{post.note}</p>}
                                 </div>
+                                {user.username && <Like username={user.username} postId={post.id}/>}
+                                <button onClick={() => history.push(`/comments/${post.id}`)} style={{ border: '0', backgroundColor: 'transparent', cursor: 'pointer' }}><i class="fa-solid fa-comment"></i></button>
+                                
                                 {user?.username == post.author && (
                                     <div className='individual-post-author-button-container'>
 

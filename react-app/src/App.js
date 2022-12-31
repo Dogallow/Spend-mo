@@ -17,6 +17,7 @@ import {Deposit, Withdraw} from './components/Transfer';
 import SinglePost from './components/Posts/SinglePost'
 import Instructions from './components/Instructions/Instructions';
 import EmptyPage from './components/EmptyPage';
+import Comments from './components/Comments';
 
 
 function App() {
@@ -68,6 +69,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/instructions' exact={true} >
           <Instructions />
+        </ProtectedRoute>
+        <ProtectedRoute path='/comments/:postId' exact={true} >
+          <Comments />
         </ProtectedRoute>
         <Route>
           <EmptyPage/>
