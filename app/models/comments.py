@@ -11,7 +11,7 @@ class Comment(db.Model):
     post = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('transactions.id')))
     comment = db.Column(db.String())
 
-    def to_dict():
+    def to_dict(self):
         return {
             'id': self.id,
             'commenter': self.commenter,

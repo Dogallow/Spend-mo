@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getPostCommentsThunk, newCommentThunk } from '../../store/comment'
 import { getAllUserTransactions } from '../../store/transactions'
+import EmptyPage from '../EmptyPage'
 import Like from '../Likes'
 
 
@@ -13,7 +14,12 @@ function Comments () {
     const {postId} = useParams()
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
+    const comments = useSelector(state => state.comments.postComments)
     const [comment, setComment] = useState('')
+
+    
+
+    console.log('COMMENTS FROM THE USESELECTOR', comments)
     
     useEffect(()=> {
         dispatch(getAllUserTransactions())
@@ -34,6 +40,7 @@ function Comments () {
     
     if (posts){ 
         const post = posts?.find(post => post.id == postId)
+        if (!post) return <EmptyPage />
         let amountStyling
         let plusMinusDefault
         if (post.receiver_id === user.username) {
@@ -76,6 +83,13 @@ function Comments () {
 
                     
                 </div>
+            </div>
+            <div>
+                {!!comments.length && comments.map((comment, index) => {
+                    return (
+                        <p>{comment.comment}</p>
+                    )
+                })}
             </div>
             <div>
                 <form onSubmit={handleNewComment}>

@@ -10,12 +10,14 @@ import EmptyPage from '../EmptyPage'
 import Like from '../Likes'
 import { getLikes } from '../../store/like'
 import Comments from '../Comments'
+import { defaultComments, getAllCommentsThunk } from '../../store/comment'
 
 function Posts() {
     const dispatch = useDispatch()
     const history = useHistory()
     const posts = useSelector(state => state.transactions.allTransactions.transactions)
     const user = useSelector(state => state.session.user)
+    const comments = useSelector(state => state.comments.allComments)
 
     const [showForm, setShowForm] = useState(false)
     const [currentPost, setCurrentPost] = useState(null)
@@ -47,6 +49,8 @@ function Posts() {
         dispatch(getBalanceThunk())
         dispatch(getAllUserTransactions())
         dispatch(getLikes())
+        dispatch(getAllCommentsThunk()).then(()=> dispatch(defaultComments()))
+        
     }, [dispatch])
     if (user === null) return <Redirect to={'/login'} />
     if (!posts) return <h1>Loading...</h1>
@@ -90,13 +94,15 @@ function Posts() {
                                 <div className='individual-note-info'>
                                     {showForm && currentPost == post.id ? <SinglePost setShowForm={setShowForm} post={post} /> : <p>{post.note}</p>}
                                 </div>
-                                {user.username && <Like username={user.username} postId={post.id}/>}
-                                <button onClick={() => history.push(`/comments/${post.id}`)} style={{ border: '0', backgroundColor: 'transparent', cursor: 'pointer' }}><i class="fa-solid fa-comment"></i></button>
                                 
+                                {user.username && <Like username={user.username} postId={post.id}/>}
+
+                                <button  onClick={() => history.push(`/comments/${post.id}`)} style={{ border: '0', backgroundColor: 'transparent', cursor: 'pointer' }}><i class="fa-solid fa-comment"></i></button>
+                                {comments.filter(comment => comment.post === post.id).length}
                                 {user?.username == post.author && (
                                     <div className='individual-post-author-button-container'>
 
-                                        <button onClick={(e) => {
+                                        <button  onClick={(e) => {
                                             setShowForm(!showForm)
                                             setCurrentPost(post.id)
                                         }}>{showForm && currentPost == post.id ? 'Cancel Edit' : 'Edit'}</button>

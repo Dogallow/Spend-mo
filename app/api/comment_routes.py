@@ -15,10 +15,11 @@ def all_comments():
 
 
 @comment_routes.route('/<int:id>')
-def get_post_comments():
+def get_post_comments(id):
     post_comments = Comment.query.filter(Comment.post == id).all()
-    
+    print('----- post comments', post_comments)
     post_comments_dict = [x.to_dict() for x in post_comments]
+    print('----- post comments', post_comments_dict)
 
     return {'comments': post_comments_dict}
 
@@ -37,8 +38,8 @@ def create_comment():
         }
 
         new_comment = Comment(**params)
-
+        print('===== new comment', new_comment.to_dict())
         db.session.add(new_comment)
         db.session.commit()
 
-        return {'comment': new_comment.to_dict()}
+        return new_comment.to_dict()
