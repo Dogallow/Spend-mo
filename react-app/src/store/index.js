@@ -4,12 +4,14 @@ import session from './session'
 import transactionsReducer from './transactions';
 import walletReducer from './wallet';
 import likeReducer from './like';
+import commentReducer from './comment'
 
 const rootReducer = combineReducers({
   session,
   'transactions' : transactionsReducer,
   'wallet': walletReducer,
-  'like': likeReducer
+  'like': likeReducer,
+  'comments': commentReducer
 });
 
 

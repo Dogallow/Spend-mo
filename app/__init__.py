@@ -10,6 +10,7 @@ from .api.auth_routes import auth_routes
 from .api.wallet_routes import wallet_routes
 from .api.transaction_routes import transaction_routes
 from .api.like_routes import like_routes
+from .api.comment_routes import comment_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -34,6 +35,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(transaction_routes, url_prefix='/api/transaction')
 app.register_blueprint(wallet_routes, url_prefix='/api/wallet')
 app.register_blueprint(like_routes, url_prefix='/api/like')
+app.register_blueprint(comment_routes, url_prefix='/api/comments')
 db.init_app(app)
 Migrate(app, db)
 

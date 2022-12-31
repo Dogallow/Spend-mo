@@ -9,6 +9,7 @@ import NavBar from '../NavBar'
 import EmptyPage from '../EmptyPage'
 import Like from '../Likes'
 import { getLikes } from '../../store/like'
+import Comments from '../Comments'
 
 function Posts() {
     const dispatch = useDispatch()
@@ -90,6 +91,8 @@ function Posts() {
                                     {showForm && currentPost == post.id ? <SinglePost setShowForm={setShowForm} post={post} /> : <p>{post.note}</p>}
                                 </div>
                                 {user.username && <Like username={user.username} postId={post.id}/>}
+                                <button onClick={() => history.push(`/comments/${post.id}`)} style={{ border: '0', backgroundColor: 'transparent', cursor: 'pointer' }}><i class="fa-solid fa-comment"></i></button>
+                                
                                 {user?.username == post.author && (
                                     <div className='individual-post-author-button-container'>
 
