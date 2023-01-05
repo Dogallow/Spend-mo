@@ -32,7 +32,7 @@ function Like({ postId, username }) {
     
     
     return(
-        <button style={{ border: '0', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={handleLike}><i class="fa-sharp fa-solid fa-heart"></i></button>
+        <button style={{ border: '0', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={handleLike}><i class="fa-sharp fa-solid fa-heart fa-lg"></i></button>
     )
 }
 

@@ -1,0 +1,48 @@
+.comment-like-icon-container{
+    padding-left: 25px;
+}
+
+.all-posts-comments-container {
+    margin-left: 73px;
+}
+
+.comment-container{
+    display: flex;
+    font-size: 1rem;
+    align-items: center;
+    margin-top: 10px;
+    
+}
+
+.individual-comment-section {
+    margin-left: 12px;
+    width: 100%;
+    font-family: Athletics Medium;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    line-height: 2;
+}
+
+
+
+.individual-comment-button-section{
+    height: 100%;
+}
+
+.individual-comment-button-section button {
+    background-color: transparent;
+    border: 0;
+    color: #0074DE;
+    font-family: Athletics Medium;
+    font-weight: 600;
+    font-size: 1.25rem;
+    padding: 10px 16px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.comment-section-text p{
+    margin: 0;
+    font-size: 1.125rem;
+}

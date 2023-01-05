@@ -97,7 +97,7 @@ function Posts() {
                                 
                                 {user.username && <Like username={user.username} postId={post.id}/>}
 
-                                <button  onClick={() => history.push(`/comments/${post.id}`)} style={{ border: '0', backgroundColor: 'transparent', cursor: 'pointer' }}><i class="fa-solid fa-comment"></i></button>
+                                <button  onClick={() => history.push(`/comments/${post.id}`)} style={{ border: '0', backgroundColor: 'transparent', cursor: 'pointer' }}><i class="fa-solid fa-comment fa-lg"></i></button>
                                 {comments.filter(comment => comment.post === post.id).length}
                                 {user?.username == post.author && (
                                     <div className='individual-post-author-button-container'>
