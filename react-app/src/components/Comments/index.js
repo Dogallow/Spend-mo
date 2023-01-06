@@ -39,6 +39,7 @@ function Comments() {
         }
         console.log(obj)
         await dispatch(newCommentThunk(obj))
+        setComment('')
     }
 
     const editComment = async (e, commentId) => {
@@ -99,6 +100,7 @@ function Comments() {
                             <div className='comment-like-icon-container'>
                                 {user.username && <Like username={user.username} postId={post.id} />}
                                 <button style={{ border: '0', backgroundColor: 'transparent', marginLeft:'16px' }}><i class="fa-solid fa-comment fa-lg"></i></button>
+                                {comments.length}
                             </div>
 
 
@@ -106,6 +108,9 @@ function Comments() {
                     </div>
                     <div className='all-posts-comments-container'>
                         {!!comments.length && comments.map((comment, index) => {
+
+                            let lastComment = (comments.length - 1) === index 
+                            
                             return (
                                 <>
 
@@ -118,37 +123,36 @@ function Comments() {
                                             <div className='user-avatar-container'>
                                                 <button style={{ cursor: 'default' }} className='avatar-button'>{comment.commenter[0]}</button>
                                             </div>
-                                            <div className='individual-comment-section'>
+                                            <div className={lastComment ?'individual-comment-section-null' : 'individual-comment-section'}>
                                                 <div className='comment-section-text'>
                                                     <p><strong>{comment.commenter}</strong></p>
                                                     <p style={{paddingBottom: '10px'}}>{comment.comment}</p>
                                                 </div>
                                                 <div className='individual-comment-button-section'>
-                                                    <button>Delete</button>
+                                                    {user.username === comment.commenter && <button onClick={(e) => deleteComment(e, comment.id)}>Delete</button>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
                                     }
-                                    {user.id === comment.commenter && (
-                                        <div>
-                                            <button onClick={() => {
-                                                setShowForm(!showForm)
-                                                setCurrentPost(comment.id)
-                                                setRevisedComment(comment.comment)
-                                            }}>Edit</button>
-                                            <button onClick={(e) => deleteComment(e,comment.id)}>Delete</button>
-                                        </div>
-                                    )}
+                                    
                                 </>
                             )
                         })}
-                    </div>
-                    <div>
-                        <form onSubmit={handleNewComment}>
-                            <input value={comment} onChange={(e) => setComment(e.target.value)} />
-                            <button type='submit'>Submit</button>
-                        </form>
-                    </div>
+                        <div className='comment-input-container'>
+                            <div className='comment-input-avatar-container'>
+                                <div className='comment-input-avatar-text'>             {user.username[0]}
+                                </div>
+                            </div>
+                            <form className='comment-form-container' onSubmit={handleNewComment}>
+                                <input style={{ margin: '0px' }} className='comment-form-input' value={comment} onChange={(e) => setComment(e.target.value)} placeholder='Write a comment...' />
+                                
+                            </form>
+                            <div className='comment-delete-button-container'>
+                                {comment.length > 0 && <div onClick={(e) => setComment('')} className='comment-delete-button' ><i  class="fa-solid fa-circle-xmark"></i></div>}
+                            </div>
+                        </div>
+                        </div>
                 </div>
             </>
         )
@@ -159,3 +163,9 @@ function Comments() {
 }
 
 export default Comments
+
+// <button onClick={() => {
+// setShowForm(!showForm)
+// setCurrentPost(comment.id)
+// setRevisedComment(comment.comment)
+//                                             }}> Edit</button >
