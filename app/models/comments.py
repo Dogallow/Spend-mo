@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from app.models import User
 
 
 class Comment(db.Model):
@@ -12,9 +13,11 @@ class Comment(db.Model):
     comment = db.Column(db.String())
 
     def to_dict(self):
+        user = User.query.get(self.commenter)
+        user = user.username
         return {
             'id': self.id,
-            'commenter': self.commenter,
+            'commenter': user,
             'post': self.post,
             'comment': self.comment
         }

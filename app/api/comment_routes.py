@@ -43,3 +43,23 @@ def create_comment():
         db.session.commit()
 
         return new_comment.to_dict()
+
+@comment_routes.route('/editComment', methods=['POST'])
+def edit_comment():
+    data = request.get_json()
+    id = data['id']
+    new_comment = data['comment']
+    comment = Comment.query.get(id)
+
+    comment.comment = new_comment
+
+    db.session.commit()
+    return comment.to_dict()
+
+
+@comment_routes.route('/<int:id>', methods=['DELETE'])
+def delete_comment(id):
+    comment = Comment.query.get(id)
+    db.session.delete(comment)
+    db.session.commit()
+    return comment.to_dict()

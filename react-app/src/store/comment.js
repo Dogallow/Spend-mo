@@ -2,6 +2,8 @@ const ALL_COMMENTS = 'comments/ALL_COMMENTS'
 const POST_COMMENTS = 'comments/POST_COMMENTS'
 const NEW_COMMENT = 'comments/NEW_COMMENT'
 const CLEAR_POST_COMMENTS = 'comments/CLEAR_POST_COMMENTS'
+const EDIT_COMMENT = 'comments/EDIT_COMMENT'
+const DELETE_COMMENT = 'comments/DELETE_COMMENT'
 
 export const defaultComments = () => {
     return {
@@ -23,9 +25,23 @@ const postCommentsActionCreator = (payload) => {
     }
 }
 
+const editCommentActionCreator = (payload) => {
+    return {
+        type: EDIT_COMMENT,
+        payload
+    }
+}
+
 const newCommentActionCreator = (payload) => {
     return {
         type: NEW_COMMENT,
+        payload
+    }
+}
+
+const deleteCommentActionCreator = (payload) => {
+    return {
+        type: DELETE_COMMENT,
         payload
     }
 }
@@ -66,6 +82,32 @@ export const newCommentThunk = (obj) => async dispatch => {
     }
 }
 
+export const editCommentThunk = (obj) => async dispatch => {
+    const response = await fetch(`/api/comments/editComment`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(obj)
+    })
+
+    if (response.ok){
+        const comment = await response.json()
+        dispatch(editCommentActionCreator(comment))
+
+    }
+}
+
+export const deleteCommentThunk = (commentId) => async dispatch => {
+    const response = await fetch(`/api/comments/${commentId}`, {
+        method: 'DELETE'
+    })
+    
+
+    if (response.ok){
+        const deletedComment = await response.json()
+        dispatch(deleteCommentActionCreator(deletedComment))
+    }
+}
+
 
 const initialState = {
     allComments: [],
@@ -73,6 +115,7 @@ const initialState = {
 }
 
 const commentReducer = (state = initialState, action) => {
+    let newState = {}
     switch(action.type){
         case ALL_COMMENTS:
             let allComments = {...state}
@@ -84,7 +127,7 @@ const commentReducer = (state = initialState, action) => {
             let postState = {...state, postComments: [...action.payload]}
             return postState
         case NEW_COMMENT:
-            let newState = {...state}
+            newState = {...state}
             console.log('NEW_COMMENT REDUCER', action.payload)
             newState.postComments = [...state.postComments, action.payload]
             return newState
@@ -92,6 +135,19 @@ const commentReducer = (state = initialState, action) => {
             let clear = {...state}
             clear.postComments= []
             return clear
+        case EDIT_COMMENT:
+            newState = {...state}
+            let changedComments = newState.postComments.map(comment => {
+                if (comment.id === action.payload.id) return action.payload
+                return comment
+            })
+            return {...state, postComments: changedComments}
+        case DELETE_COMMENT:
+            newState = [...state.postComments]
+            let index = newState.findIndex((element) => element.id === action.payload.id)
+            newState.splice(index, 1)
+
+            return {...state, postComments: newState}
         default:
             return state
     }
