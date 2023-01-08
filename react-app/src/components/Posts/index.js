@@ -80,7 +80,7 @@ function Posts() {
                     return (
                         <div key={index} className='individual-post-container'>
                             <div className='user-avatar-container'>
-                                <button style={{ cursor: 'default' }} className='avatar-button'>{post.author[0]}</button>
+                                <button style={{ cursor: 'default', backgroundColor: post.author_color}} className='avatar-button'>{post.author[0]}</button>
                             </div>
 
                             <div className='post-user-info-container'>

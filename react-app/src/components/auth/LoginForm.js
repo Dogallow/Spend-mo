@@ -14,30 +14,54 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-
+    console.log(errors)
     setErrors([])
-    let validateEmail = email.split('@')[1].includes('.')
+    let validate = []
+    if (email === '') {
+      validate.push('Email is required')
+    }
 
-    
+    if (password === '') {
+      validate.push('Password is required')
+      
+    }else if (password.length < 6){
+      validate.push('Password must be at least 6 characters')
+    }
+    setErrors(validate)
+    if (validate.length > 0) return
+    let validateEmail
+    if (email) {
+
+      validateEmail = email.split('@')[1].includes('.')
+    }
+
     
     if (!validateEmail){
-      setErrors(['Email must have a valid \' . \' such as ".com or .io"'])
-      return
+      validate.push( 'Email must have a valid \' . \' such as ".com or .io"')
+      
     }
-    
+
+    setErrors(validate)
+    if (validate.length > 0) return
+
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
     }
   };
 
+  
+
   const demo1Login = async(e) => {
     e.preventDefault()
     const data = await dispatch(login('demo@aa.io', 'password'));
+    console.log(data)
     if (data) {
       setErrors(data);
     }
   }
+
+
   const demo2Login = async(e) => {
     e.preventDefault()
     const data = await dispatch(login('test@aa.io', 'password'));
@@ -57,7 +81,7 @@ const LoginForm = () => {
   if (user) {
     return <Redirect to='/' />;
   }
-
+  console.log(errors)
   return (
     <>
     <div className='form-container'>
@@ -86,8 +110,9 @@ const LoginForm = () => {
       <form onSubmit={onLogin} className="login-form">
         <ul className='errors-container' style={{marginLeft:'28px'}}>
           {errors.map((error, ind) => {
-            if (ind === 0) return <li className='error-li' key={ind}>{error}</li>
-            return
+            console.log(error)
+            return <li className='error-li' key={ind}>{error}</li>
+            
           })}
         </ul>
         <div className='input-section'>
@@ -97,7 +122,7 @@ const LoginForm = () => {
             name='email'
             type='email'
             placeholder='Email'
-            required
+            
             value={email}
             onChange={updateEmail}
           />
@@ -109,14 +134,14 @@ const LoginForm = () => {
             name='password'
             type='password'
             placeholder='Password'
-            required
+            
             value={password}
             onChange={updatePassword}
           />
           </div>
           <div className='login-page-buttons-container'>
-          <button onClick={demo1Login} className='sign-in-button' type='submit'>Demo User 1</button>
-          <button onClick={demo2Login} className='sign-in-button' type='submit'>Demo User 2</button>
+          <button onClick={demo1Login} className='sign-in-button' type='submit'>Sign In Demo</button>
+          <button onClick={demo2Login} className='sign-in-button' type='submit'>Sign In Test</button>
           <button className='sign-in-button' type='submit'>Sign In</button>
           </div>
       </form>

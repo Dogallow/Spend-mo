@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: eefe49720f93
+Revision ID: 26b833eefb10
 Revises: 
-Create Date: 2022-12-30 20:26:05.810470
+Create Date: 2023-01-08 00:38:24.395780
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'eefe49720f93'
+revision = '26b833eefb10'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,14 +30,15 @@ def upgrade():
     sa.Column('first_name', sa.String(length=100), nullable=False),
     sa.Column('last_name', sa.String(length=100), nullable=False),
     sa.Column('profile_img_url', sa.String(), nullable=True),
+    sa.Column('color', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
-    ) 
+    )
 
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-    
+
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
@@ -48,7 +49,6 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
-
 
     op.create_table('wallets',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -74,7 +74,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['receiver_id'], ['wallets.user_id'], ),
     sa.ForeignKeyConstraint(['sender_id'], ['wallets.user_id'], ),
     sa.PrimaryKeyConstraint('id')
-    )
+    )    
 
     if environment == "production":
         op.execute(f"ALTER TABLE transactions SET SCHEMA {SCHEMA};")
@@ -92,7 +92,6 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
 
-    
     op.create_table('likes',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
@@ -104,6 +103,7 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 

@@ -55,5 +55,6 @@ class Transaction(db.Model):
             'is_Pending': self.is_Pending,
             'transaction_state': self.transaction_state,
             'note' : self.note,
-            'author': author.username
+            'author': author.username,
+            'author_color': author.color
         }

@@ -17,35 +17,44 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-
+    let validate = []
     setErrors([])
-
+    
     if (firstName.length < 2 || firstName.length > 15){
-      setErrors(["First Name must be between 2 and 15 characters."])
-      return
+      
+      validate.push("First Name must be between 2 and 15 characters.")
+      
     }
 
     if (lastName.length < 2 || lastName.length > 15){
-      setErrors(["Last Name must be between 2 and 15 characters."])
-      return
+      validate.push("Last Name must be between 2 and 15 characters.")
     }
 
-    if (username.length > 20){
-      setErrors(['Username must be less than 20 characters'])
-      return
+    if (username.length > 20 || username.length < 3){
+      validate.push('Username must be between 3 and 20 characters')
     }
+
+    if (password.length < 6 || password.length > 20) {
+      
+      validate.push('Password must be between 6 and 20 characters')
+    }
+
+    if (repeatPassword === ''){
+      validate.push('Must confirm a valid password')
+    } else if (repeatPassword !== password){
+      validate.push('Repeat password must match Password')
+    }
+    
+    setErrors(validate)
+    console.log(errors)
+    if (validate.length > 0 ) return 
 
     let validateEmail = email.split('@')[1].includes('.')
 
     if (!validateEmail) {
-      setErrors(['Email must have a valid \' . \' such as ".com or .io"'])
-      return
+      validate.push('Email must have a valid \' . \' such as ".com or .io"')
     }
 
-    if (password.length < 6 || password.length > 20) {
-      setErrors(['Password must be between 6 and 20 characters'])
-      return
-    }
     
     if (password === repeatPassword) {
       const obj = {
@@ -60,9 +69,10 @@ const SignUpForm = () => {
         setErrors(data)
       }
     }else {
-      setErrors(['Password and Repeat Password must match'])
+      setErrors([...errors, 'Password and Repeat Password must match'])
     }
   };
+
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -107,76 +117,79 @@ const SignUpForm = () => {
           </ul>
         </nav>
       </div>
-    <h3>Sign Up Form</h3>
-      <form className='signup-form' onSubmit={onSignUp}>
-        <ul className='errors-container' style={{ marginLeft: '28px' }}>
-          {errors.map((error, ind) => (
-            <li className='error-li' key={ind}>{error}</li>
-          ))}
-        </ul>
-        <div className='input-section'>
-          <label>First Name</label>
-          <input
-            type='text'
-            name='first_name'
-            required
-            onChange={(e) => setFirstName(e.target.value)}
-            value={firstName}
-          ></input>
-        </div>
-        <div className='input-section'>
-          <label>Last Name</label>
-          <input
-            type='text'
-            name='lastName'
-            required
-            onChange={(e) => setLastName(e.target.value)}
-            value={lastName}
-          ></input>
-        </div>
-        
-        <div className='input-section'>
-          <label>User Name</label>
-          <input
-            type='text'
-            name='username'
-            required
-            onChange={updateUsername}
-            value={username}
-          ></input>
-        </div>
-        <div className='input-section'>
-          <label>Email</label>
-          <input
-            type='email'
-            name='email'
-            required
-            onChange={updateEmail}
-            value={email}
-          ></input>
-        </div>
-        <div className='input-section'>
-          <label>Password</label>
-          <input
-            type='password'
-            name='password'
-            required
-            onChange={updatePassword}
-            value={password}
-          ></input>
-        </div>
-        <div className='input-section'>
-          <label>Repeat Password</label>
-          <input
-            type='password'
-            name='repeat_password'
-            onChange={updateRepeatPassword}
-            value={repeatPassword}
-            required={true}
-          ></input>
-        </div>
-        <button className='sign-up-button' type='submit'>Sign Up</button>
-      </form>
+      <div className='signup-form-container'>
+
+        <h3>Sign Up Form</h3>
+          <form className='signup-form' onSubmit={onSignUp}>
+            <ul className='errors-container' style={{ marginLeft: '28px' }}>
+              {errors.map((error, ind) => (
+                <li className='error-li' key={ind}>{error}</li>
+              ))}
+            </ul>
+            <div className='input-section'>
+              <label>First Name</label>
+              <input
+                type='text'
+                name='first_name'
+                
+                onChange={(e) => setFirstName(e.target.value)}
+                value={firstName}
+              ></input>
+            </div>
+            <div className='input-section'>
+              <label>Last Name</label>
+              <input
+                type='text'
+                name='lastName'
+                
+                onChange={(e) => setLastName(e.target.value)}
+                value={lastName}
+              ></input>
+            </div>
+            
+            <div className='input-section'>
+              <label>User Name</label>
+              <input
+                type='text'
+                name='username'
+                
+                onChange={updateUsername}
+                value={username}
+              ></input>
+            </div>
+            <div className='input-section'>
+              <label>Email</label>
+              <input
+                type='email'
+                name='email'
+                required
+                onChange={updateEmail}
+                value={email}
+              ></input>
+            </div>
+            <div className='input-section'>
+              <label>Password</label>
+              <input
+                type='password'
+                name='password'
+                
+                onChange={updatePassword}
+                value={password}
+              ></input>
+            </div>
+            <div className='input-section'>
+              <label>Repeat Password</label>
+              <input
+                type='password'
+                name='repeat_password'
+                onChange={updateRepeatPassword}
+                value={repeatPassword}
+                
+              ></input>
+            </div>
+            <button className='sign-up-button' type='submit'>Sign Up</button>
+          </form>
+      </div>
       <div className='login-footer'>
         <NavLink to={'/login'}>
           Sign In
