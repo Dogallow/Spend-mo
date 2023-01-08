@@ -12,6 +12,8 @@ from flask_login import UserMixin
 #     db.Column("followed_id", db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")),primary_key=True )
 # )
 
+
+
 class User(db.Model, UserMixin):
     __tablename__ = "users"
 
@@ -25,6 +27,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
     profile_img_url = db.Column(db.String)
+    color = db.Column(db.String())
 
     wallet = db.relationship("Wallet", back_populates="user", cascade="all, delete-orphan")
 
@@ -59,5 +62,6 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'color': self.color
         }

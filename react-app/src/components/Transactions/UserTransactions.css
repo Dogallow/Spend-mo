@@ -3,6 +3,7 @@
     margin-left: 12%;
     margin-right: 12%;
     padding-top: 27.2px;
+    overflow-y: scroll;
 }
 
 .userTransactions-individual-post-container{

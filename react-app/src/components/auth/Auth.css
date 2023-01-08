@@ -1,6 +1,6 @@
 .form-container{
     width: 100%;
-    
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,7 +37,7 @@
 
 .signup-form-container{
 overflow-y: scroll;
-width: 40%;
+width: 50%;
 }
 .signup-form-container h3 {
     text-align: center;

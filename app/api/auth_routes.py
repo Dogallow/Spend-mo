@@ -3,9 +3,11 @@ from app.models import User, db, Wallet,environment, SCHEMA
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+import random
 
 auth_routes = Blueprint('auth', __name__)
 
+colors = ['#fcec03', '#b6fc03', '#b6fc03', '#03dffc', '#9f73ff', '#ff73b4']
 
 def validation_errors_to_error_messages(validation_errors):
     """
@@ -72,7 +74,8 @@ def sign_up():
             last_name=form.data['last_name'],
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            color=random.choice(colors)
         )
 
         

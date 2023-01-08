@@ -72,7 +72,7 @@ function UserTransactions () {
                     )
                 })}
             </ul>
-            {transactions && !!transactions.length && transactions.filter(transaction => transaction.sender_id == user.username).map((transaction, index) => {
+            {transactions && !!transactions.length && transactions.filter(transaction => transaction.sender_id == user.username || (transaction.receiver_id === user.username && transaction.transaction_state === 'approved')).map((transaction, index) => {
                 let button1 = null
                 let button2 = null
                 let status = 'Open'
@@ -86,14 +86,14 @@ function UserTransactions () {
                 if (transaction.transaction_state === 'cancelled') return
                 
                 return (
-                    <>
+                    
                     <div className="userTransactions-individual-post-container" key={index}>
                         <div >
-                                <button style={{ cursor: 'default' }} className='avatar-button'>{transaction.sender_id[0]}</button>
+                            <button style={{ cursor: 'default', backgroundColor: transaction.author_color }} className='avatar-button'><strong>{transaction.author[0]}</strong></button>
                         </div>
                         <div className="userTransactions-individual-post-info">
                             <div className="userTransactions-individual-payment-info">
-                                    {status === 'Closed' ? <p><strong>{user.username === transaction.sender_id ? 'You' : transaction.sender_id}</strong> {transaction.transaction_state} a payment to <strong>{transaction.receiver_id}</strong></p> :
+                                {status === 'Closed' ? <p><strong>{user.username === transaction.sender_id ? 'You' : transaction.sender_id}</strong> {user.username === transaction.sender_id ? transaction.transaction_state : 'sent'} a payment to <strong>{transaction.receiver_id === user.username ? 'You' : transaction.receiver_id}</strong></p> :
                                         <p><strong>{transaction.receiver_id}</strong> requested a payment from <strong>You</strong></p>
                                 }
                                 <p  className={transaction.transaction_state === 'approved'?"userTransactions-payment-amount": ""}>${transaction.request_amount}</p>
@@ -108,7 +108,7 @@ function UserTransactions () {
                         </div>
                             
                         </div>
-                    </>
+                    
                     )
             }
             )}

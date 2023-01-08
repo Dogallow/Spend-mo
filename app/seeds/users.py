@@ -3,13 +3,13 @@ from app.models import db, User, environment, SCHEMA
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', first_name='Demo', last_name='Lition', email='demo@aa.io', password='password', profile_img_url='https://i.etsystatic.com/34879050/c/2160/1716/0/27/il/c68327/4103130020/il_500x500.4103130020_pn4v.jpg'
+        username='Demo', first_name='Demo', last_name='Lition', email='demo@aa.io', password='password', profile_img_url='https://i.etsystatic.com/34879050/c/2160/1716/0/27/il/c68327/4103130020/il_500x500.4103130020_pn4v.jpg', color='#9f73ff'
     )
     demo2 = User(
-        username='Test', first_name='Test', last_name='User', email='test@aa.io', password='password', profile_img_url='https://i.etsystatic.com/35513472/r/il/c291aa/4133067317/il_340x270.4133067317_3zrj.jpg'
+        username='Test', first_name='Test', last_name='User', email='test@aa.io', password='password', profile_img_url='https://i.etsystatic.com/35513472/r/il/c291aa/4133067317/il_340x270.4133067317_3zrj.jpg', color='#b6fc03'
     )
     demo3 = User(
-        username='Newb', first_name='Newb', last_name='B', email='newb@aa.io', password='password', profile_img_url='https://i.etsystatic.com/35513472/r/il/c291aa/4133067317/il_340x270.4133067317_3zrj.jpg'
+        username='Newb', first_name='Newb', last_name='B', email='newb@aa.io', password='password', profile_img_url='https://i.etsystatic.com/35513472/r/il/c291aa/4133067317/il_340x270.4133067317_3zrj.jpg', color='#03dffc'
     )
 
     db.session.add(demo)
