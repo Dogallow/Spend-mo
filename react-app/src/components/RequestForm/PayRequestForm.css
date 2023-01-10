@@ -183,3 +183,9 @@ border: 0.5px solid;
     border: 0;
     cursor: pointer;
 }
+
+.auto-dropdown-container {
+    background-color: green;
+    max-height: 50px;
+    transition:  330ms ease-in-out;
+}

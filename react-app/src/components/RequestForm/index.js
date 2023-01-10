@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {useDispatch, useSelector} from 'react-redux'
 import { useHistory, NavLink } from "react-router-dom";
 import { initiateTransactionAndSendPaymentThunk, requestPaymentTransaction } from "../../store/transactions";
@@ -10,15 +10,46 @@ import './PayRequestForm.css'
 function RequestForm () {
     const user = useSelector(state => state.session.user)
     const history = useHistory()
+    const inputRef = useRef(null)
     const [requestAmount, setRequestAmount] = useState('')
     const [username, setUsername] = useState('')
     const [note, setNote] = useState('')
     const [errors, setErrors] = useState([])
     const [showDropdown, setShowDropdown] = useState(false)
+    const [users, setUsers] = useState([])
+    const [filteredUsers, setFilteredUsers] = useState([])
+    const [hideDropdown, setHideDropdown] = useState(false)
+    const [count, setCount] = useState(0)
 
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch('/api/users/');
+            const responseData = await response.json();
+            console.log('Response Data is UsersList Component', responseData)
+            setUsers(responseData.users)
+        }
+        fetchData();
+        
+    }, []);
     
+    const dispatch = useDispatch();
     
-    const dispatch = useDispatch()
+    useEffect(() => {
+        if (count === 1){
+            
+            setHideDropdown(true)
+            setCount(0)
+        }else {
+            
+            setHideDropdown(false)
+            userSearch()
+        }
+    }, [username])
+    const userSearch = () => {
+        const matches = users.filter((user) => user.username.toLowerCase().includes(username.toLowerCase())).map(user => user.username)
+        setFilteredUsers(matches)
+        
+    }
 
     const handleRequest = async (e) => {
         e.preventDefault()
@@ -103,6 +134,11 @@ function RequestForm () {
             history.push('/')
         }
     }
+
+    function handleFocus() {
+        inputRef.current.blur(); // removing focus
+    }
+    console.log('THIS IS THE INPUT REF', inputRef)
     
     return (
         <>
@@ -128,11 +164,17 @@ function RequestForm () {
                 </div>
                 <div className="username-container">
                     <label>To</label>
-                    <input required type="text" value={username} placeholder='Enter Username' onChange={(e) => setUsername(e.target.value)}/>
+                    <input ref={inputRef} required type="text" value={username} placeholder='Enter Username' onChange={(e) => setUsername(e.target.value)}/>
                 </div>
-                <div className="drop-down-container">
-                        <p style={{ fontSize: '14px' }}>If you need a reminder of the usernames available, visit <button className="drop-down-container-button" onClick={() => setShowDropdown(!showDropdown)} style={{ fontSize: '14px' }} to='/users'>Users</button>.</p>
-                        {showDropdown && <UsersList setUsername={setUsername} setShowDropdown={setShowDropdown}/>}
+                <div className="auto-dropdown-container">
+                {username.length > 0 && !hideDropdown && (
+                    filteredUsers.length > 0 ? filteredUsers.map((user, index) => {
+                        return <li key={index} onClick={() => {
+                            setUsername(user)
+                            setCount(1)
+                        }}>{user}</li>
+                    }) : <li>No Users Found</li>
+                )}
                 </div>
 
                 <div className="textarea-container">
@@ -146,6 +188,10 @@ function RequestForm () {
                     <button type="submit" onClick={(e) => handleSendPayment(e)}>Pay</button>
                 </div>
             </form>
+                <div className="drop-down-container">
+                    <p style={{ fontSize: '14px' }}>If you need a reminder of the usernames available, visit <button className="drop-down-container-button" onClick={() => setShowDropdown(!showDropdown)} style={{ fontSize: '14px' }} to='/users'>Users</button>.</p>
+                    {showDropdown && <UsersList setUsername={setUsername} setShowDropdown={setShowDropdown} />}
+                </div>
         </div>
         </>
     )
