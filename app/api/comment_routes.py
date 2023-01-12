@@ -17,9 +17,9 @@ def all_comments():
 @comment_routes.route('/<int:id>')
 def get_post_comments(id):
     post_comments = Comment.query.filter(Comment.post == id).all()
-    print('----- post comments', post_comments)
+    # print('----- post comments', post_comments)
     post_comments_dict = [x.to_dict() for x in post_comments]
-    print('----- post comments', post_comments_dict)
+    # print('----- post comments', post_comments_dict)
 
     return {'comments': post_comments_dict}
 
@@ -29,7 +29,7 @@ def create_comment():
     form = CommentForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('==== form comment', form.data['comment'])
+    # print('==== form comment', form.data['comment'])
     if form.validate_on_submit():
         params = {
             'comment': form.data['comment'],
@@ -38,7 +38,7 @@ def create_comment():
         }
 
         new_comment = Comment(**params)
-        print('===== new comment', new_comment.to_dict())
+        # print('===== new comment', new_comment.to_dict())
         db.session.add(new_comment)
         db.session.commit()
 

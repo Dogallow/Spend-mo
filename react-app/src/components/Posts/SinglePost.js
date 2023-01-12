@@ -7,7 +7,7 @@ function SinglePost({post,setShowForm}){
     const dispatch = useDispatch()
     const [note, setNote] = useState(post.note)
     const [errors, setErrors] = useState([])
-    console.log(post)
+    // console.log(post)
     const editNote =async (e) => {
         e.preventDefault()
 

@@ -21,14 +21,14 @@ function Comments() {
 
 
 
-    console.log('COMMENTS FROM THE USESELECTOR', comments)
-    console.log('COMMENTS USER', user)
+    // console.log('COMMENTS FROM THE USESELECTOR', comments)
+    // console.log('COMMENTS USER', user)
 
     useEffect(() => {
         dispatch(getAllUserTransactions())
         dispatch(getPostCommentsThunk(postId))
     }, [])
-    console.log(posts)
+    // console.log(posts)
 
     const handleNewComment = async e => {
         e.preventDefault()
@@ -37,7 +37,7 @@ function Comments() {
             comment,
 
         }
-        console.log(obj)
+        // console.log(obj)
         await dispatch(newCommentThunk(obj))
         setComment('')
     }
@@ -61,7 +61,7 @@ function Comments() {
         const post = posts?.find(post => post.id == postId)
         if (!post) return <EmptyPage />
         let userComment = comments.filter(comment => comment.post === post.id && user.username === comment.commenter)
-        console.log(userComment)
+        // console.log(userComment)
         
         let amountStyling
         let plusMinusDefault

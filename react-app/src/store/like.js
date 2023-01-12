@@ -60,10 +60,10 @@ const likeReducer = (state = {}, action) => {
     switch (action.type) {
         case GET_LIKES:
             let obj = {}
-            console.log('####### THIS IS THE ARRAY RETURNED FROM THE BACKEND', action.likes.likes)
+            // console.log('####### THIS IS THE ARRAY RETURNED FROM THE BACKEND', action.likes.likes)
             action.likes.likes.forEach(like => {
-                console.log('&&&& THIS IS THE OBJ', obj)
-                console.log('&&&& THIS IS THE LIKE IN THE LOOP', like)
+                // console.log('&&&& THIS IS THE OBJ', obj)
+                // console.log('&&&& THIS IS THE LIKE IN THE LOOP', like)
                 if (obj[like.post] === undefined) {
                     obj[like.post] = [like.user]
                 } else {
@@ -71,14 +71,14 @@ const likeReducer = (state = {}, action) => {
                     obj[like.post] = [...obj[like.post], like.user]
                 }
             })
-            console.log('HERE WE GO', obj)
+            // console.log('HERE WE GO', obj)
             return {...obj}
         case DELETE_LIKE:
-            console.log('**************POST DATA FROM BACKEND', action.post)
+            // console.log('**************POST DATA FROM BACKEND', action.post)
             let index = state[action.post.post].indexOf(action.post.user)
 
             state[action.post.post].splice(index, 1)
-            console.log('**************STATE AFTER DELETION', state)
+            // console.log('**************STATE AFTER DELETION', state)
             return {...state}
         default:
             return { ...state }

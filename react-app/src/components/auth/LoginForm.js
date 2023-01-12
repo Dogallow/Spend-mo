@@ -14,7 +14,7 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    console.log(errors)
+    // console.log(errors)
     setErrors([])
     let validate = []
     if (email === '') {
@@ -55,7 +55,7 @@ const LoginForm = () => {
   const demo1Login = async(e) => {
     e.preventDefault()
     const data = await dispatch(login('demo@aa.io', 'password'));
-    console.log(data)
+    // console.log(data)
     if (data) {
       setErrors(data);
     }
@@ -81,7 +81,7 @@ const LoginForm = () => {
   if (user) {
     return <Redirect to='/' />;
   }
-  console.log(errors)
+  // console.log(errors)
   return (
     <>
     <div className='form-container'>
@@ -110,7 +110,7 @@ const LoginForm = () => {
       <form onSubmit={onLogin} className="login-form">
         <ul className='errors-container' style={{marginLeft:'28px'}}>
           {errors.map((error, ind) => {
-            console.log(error)
+            // console.log(error)
             return <li className='error-li' key={ind}>{error}</li>
             
           })}

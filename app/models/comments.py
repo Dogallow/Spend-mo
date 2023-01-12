@@ -15,7 +15,7 @@ class Comment(db.Model):
     def to_dict(self):
         user = User.query.get(self.commenter)
         color = user.color
-        print('-----------------=============', color)
+        # print('-----------------=============', color)
         user = user.username
         return {
             'id': self.id,

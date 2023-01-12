@@ -10,7 +10,7 @@ wallet_routes = Blueprint('wallet', __name__)
 def check_balance():
 
     wallet = Wallet.query.filter(Wallet.user_id == current_user.id).first()
-    print('___________ current users wallet', wallet)
+    # print('___________ current users wallet', wallet)
     return {'wallet': wallet.to_dict()}
     # return {'wallet': [x.to_dict() for x in wallet]}
 
@@ -18,16 +18,16 @@ def check_balance():
 @wallet_routes.route('/<action>', methods=['PUT'])
 @login_required
 def edit_balance(action):
-    print('action')
+    # print('action')
 
     form = WalletTransfer()
     form['csrf_token'].data = request.cookies['csrf_token']
     
-    print('+++++++++++++++++++++++++++++++++++++++',form.validate_on_submit())
+    # print('+++++++++++++++++++++++++++++++++++++++',form.validate_on_submit())
     if form.validate_on_submit():
         wallet = Wallet.query.filter(Wallet.user_id == current_user.id).first()
 
-        print('____current user wallet', wallet)
+        # print('____current user wallet', wallet)
 
         if action == 'deposit':
             wallet.balance = wallet.balance + form.data['amount']

@@ -17,7 +17,7 @@ class Like(db.Model):
     user = db.relationship("User", back_populates="liked")
 
     def to_dict(self):
-        print('----------USER ID', self.user_id)
+        # print('----------USER ID', self.user_id)
         user = User.query.get(self.user_id)
         user = user.username
 

@@ -32,7 +32,7 @@ function Deposit() {
         await dispatch(editBalance(obj, 'deposit'))
 
         if (errors.length === 0){
-            console.log(errors)
+            // console.log(errors)
             alert('Successfully Deposited Funds')
             setAmount('')
         }

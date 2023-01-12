@@ -19,7 +19,7 @@ export const getBalanceThunk = () => async dispatch => {
 
     if (response.ok){
         const wallet = await response.json()
-        console.log('response from backend wallet', wallet)
+        // console.log('response from backend wallet', wallet)
         dispatch(balanceActionCreator(wallet))
         // return wallet
     }
@@ -34,7 +34,7 @@ export const editBalance = (obj, action) => async dispatch => {
 
     if (response.ok){
         const wallet = await response.json()
-        console.log('Response from wallet route backend', wallet)
+        // console.log('Response from wallet route backend', wallet)
         dispatch(balanceActionCreator(wallet))
         return wallet
     }

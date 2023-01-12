@@ -9,12 +9,12 @@ function UsersList({setShowDropdown, setUsername}) {
     async function fetchData() {
       const response = await fetch('/api/users/');
       const responseData = await response.json();
-      console.log('Response Data is UsersList Component', responseData)
+      // console.log('Response Data is UsersList Component', responseData)
       setUsers(responseData.users);
     }
     fetchData();
   }, []);
-  console.log(users)
+  // console.log(users)
 
   const userComponents = users.map((user) => {
     return (

@@ -46,7 +46,7 @@ const SignUpForm = () => {
     }
     
     setErrors(validate)
-    console.log(errors)
+    // console.log(errors)
     if (validate.length > 0 ) return 
 
     let validateEmail = email.split('@')[1].includes('.')
