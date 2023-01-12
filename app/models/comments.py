@@ -14,10 +14,13 @@ class Comment(db.Model):
 
     def to_dict(self):
         user = User.query.get(self.commenter)
+        color = user.color
+        print('-----------------=============', color)
         user = user.username
         return {
             'id': self.id,
             'commenter': user,
             'post': self.post,
-            'comment': self.comment
+            'comment': self.comment,
+            'commenter_color': color
         }

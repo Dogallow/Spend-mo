@@ -124,7 +124,7 @@ function Comments() {
                                         </form>
                                     ) : <div className='comment-container'>
                                             <div className='user-avatar-container'>
-                                                <button style={{ cursor: 'default' }} className='avatar-button'>{comment.commenter[0]}</button>
+                                                <button style={{ cursor: 'default', backgroundColor: comment.commenter_color}} className='avatar-button'>{comment.commenter[0]}</button>
                                             </div>
                                             <div className={lastComment ?'individual-comment-section-null' : 'individual-comment-section'}>
                                                 <div className='comment-section-text'>
