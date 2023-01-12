@@ -44,7 +44,7 @@ const NavBar = () => {
       <button style={{ backgroundColor: user.color }} className='avatar-container'><strong>{user.username[0]}</strong></button>
       <div className='user-info'>
         <h3>Hi, {user.username}</h3>
-        <span>@{user.username}-{Math.floor(Math.random() *10)}</span>
+        <span>@{user.username}</span>
       </div>
     </>
       ) : (

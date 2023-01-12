@@ -47,7 +47,7 @@ function SinglePost({post,setShowForm}){
             </ul>
         </div>
         <form className='single-post-form' onSubmit={editNote}>
-            <textarea className='single-post-note-container' onChange={(e) => setNote(e.target.value)} value={note}/>
+            <textarea className='single-post-note-container' placeholder='Note' onChange={(e) => setNote(e.target.value)} value={note} rows={5}/>
             <button type='submit'>Submit</button>
         </form>
         </>

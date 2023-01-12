@@ -1,7 +1,8 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .wallet import seed_wallets, undo_wallets
-from .likes import undo_likes
+from .likes import undo_likes, seed_likes
+from .comments import unseed_comments, seed_comments
 from .transactions import undo_transactions, seed_transactions
 from app.models.db import db, environment, SCHEMA
 
@@ -22,9 +23,12 @@ def seed():
         undo_wallets()
         undo_transactions()
         undo_likes()
+        unseed_comments()
     seed_users()
     seed_wallets()
     seed_transactions()
+    seed_likes()
+    seed_comments()
     # Add other seed functions here
 
 
@@ -35,4 +39,5 @@ def undo():
     undo_wallets()
     undo_transactions()
     undo_likes()
+    unseed_comments()
     # Add other undo functions here

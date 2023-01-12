@@ -24,6 +24,7 @@ function Posts() {
     const [note, setNote] = useState('')
 
     console.log(showForm, currentPost)
+    console.log('COMMENTS',comments)
 
     const editNote = async (e, post) => {
         e.preventDefault()
@@ -75,7 +76,10 @@ function Posts() {
                         plusMinusDefault = ''
                     }
 
+                    let commentLength = comments.filter(comment => comment.post === post.id).length
 
+                    let userComment = comments.filter(comment => comment.post === post.id && user.username === comment.commenter)
+                    console.log(userComment)
                     
                     return (
                         <div key={index} className='individual-post-container'>
@@ -94,11 +98,13 @@ function Posts() {
                                 <div className='individual-note-info'>
                                     {showForm && currentPost == post.id ? <SinglePost setShowForm={setShowForm} post={post} /> : <p>{post.note}</p>}
                                 </div>
+                                <div style={{paddingLeft: '19px'}}>
                                 
-                                {user.username && <Like username={user.username} postId={post.id}/>}
+                                    {user.username && <Like username={user.username} postId={post.id}/>}
 
-                                <button  onClick={() => history.push(`/comments/${post.id}`)} style={{ border: '0', backgroundColor: 'transparent', cursor: 'pointer' }}><i class="fa-solid fa-comment fa-lg"></i></button>
-                                {comments.filter(comment => comment.post === post.id).length}
+                                    <button  onClick={() => history.push(`/comments/${post.id}`)} className = {commentLength > 0 && userComment.length > 0 ? 'comment-count': ''} style={{ border: '0', backgroundColor: 'transparent', cursor: 'pointer' }}><i class="fa-solid fa-comment fa-lg"></i></button>
+                                    {commentLength}
+                                </div>
                                 {user?.username == post.author && (
                                     <div className='individual-post-author-button-container'>
 

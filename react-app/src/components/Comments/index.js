@@ -99,7 +99,7 @@ function Comments() {
                             </div>
                             <div className='comment-like-icon-container'>
                                 {user.username && <Like username={user.username} postId={post.id} />}
-                                <button style={{ border: '0', backgroundColor: 'transparent', marginLeft:'16px' }}><i class="fa-solid fa-comment fa-lg"></i></button>
+                                <button className={comments.length > 0 ? 'comment-count' : ''} style={{ border: '0', backgroundColor: 'transparent', marginLeft:'16px' }}><i class="fa-solid fa-comment fa-lg"></i></button>
                                 {comments.length}
                             </div>
 
