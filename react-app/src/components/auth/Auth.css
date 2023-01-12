@@ -50,10 +50,11 @@ width: 50%;
     border: 1px solid #ededed;
     padding: 28px;
     margin: 0 auto 40px;
-    width: 100%;
+    
     color: #262626;
-    max-width: 500px;
+    max-width: 520px;
     overflow-y: scroll;
+    box-sizing: border-box;
 }
 
 
@@ -64,7 +65,8 @@ width: 50%;
     display: block;
     margin-bottom: 36px;
     max-width: 500px;
-    width: 95%;
+    width: 100%;
+    margin-right: 0px;
 }
 
 .input-section input{
@@ -81,9 +83,9 @@ width: 50%;
     display: block;
     min-width: 0px;
     padding: 12px 8px 12px 4px;
-    width: 100%;
+    width: 90%;
 
-    
+    margin-right: 0px;
     
     
     padding: 12px;
