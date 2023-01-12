@@ -62,6 +62,7 @@ function Comments() {
         if (!post) return <EmptyPage />
         let userComment = comments.filter(comment => comment.post === post.id && user.username === comment.commenter)
         console.log(userComment)
+        
         let amountStyling
         let plusMinusDefault
         if (post.receiver_id === user.username) {
@@ -85,7 +86,7 @@ function Comments() {
                 <div className='posts-container'>
                     <div className='individual-post-container'>
                         <div className='user-avatar-container'>
-                            <button style={{ cursor: 'default' }} className='avatar-button'>{post.author[0]}</button>
+                            <button style={{ cursor: 'default', backgroundColor: post.author_color}} className='avatar-button'>{post.author[0]}</button>
                         </div>
 
                         <div className='post-user-info-container'>
@@ -143,7 +144,7 @@ function Comments() {
                         })}
                         <div className='comment-input-container'>
                             <div className='comment-input-avatar-container'>
-                                <div className='comment-input-avatar-text'>             {user.username[0]}
+                                <div className='comment-input-avatar-text' style={{backgroundColor: user.color}}>             {user.username[0]}
                                 </div>
                             </div>
                             <form className='comment-form-container' onSubmit={handleNewComment}>
