@@ -45,6 +45,7 @@ class Transaction(db.Model):
         print(receiver)
         print(receiver.username)
         receiver = receiver.username
+        
 
         
         return {
