@@ -13,9 +13,9 @@ function UserTransactions () {
     const wallet = useSelector(state => state.wallet)
     const user = useSelector(state => state.session.user)
     const [errors, setErrors] = useState([])
-    console.log(wallet)
-    console.log(user)
-    console.log('USE SELECTOR ', transactions)
+    // console.log(wallet)
+    // console.log(user)
+    // console.log('USE SELECTOR ', transactions)
     
 
     let balance = null
@@ -24,7 +24,7 @@ function UserTransactions () {
         balance = wallet.wallet
     }
 
-    console.log('$$ BALANCE', balance)
+    // console.log('$$ BALANCE', balance)
     useEffect(() => {
         dispatch(getAllSenderTransactions())
         dispatch(getBalanceThunk())
@@ -35,7 +35,7 @@ function UserTransactions () {
     let validate = []
 
     const approveTransaction = async (transaction) => {
-        console.log(transaction)
+        // console.log(transaction)
 
         validate = []
         // Need a thunk

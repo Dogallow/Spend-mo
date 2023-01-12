@@ -23,13 +23,13 @@ function Posts() {
     const [currentPost, setCurrentPost] = useState(null)
     const [note, setNote] = useState('')
 
-    console.log(showForm, currentPost)
-    console.log('COMMENTS',comments)
+    // console.log(showForm, currentPost)
+    // console.log('COMMENTS',comments)
 
     const editNote = async (e, post) => {
         e.preventDefault()
 
-        console.log(post)
+        // console.log(post)
         let obj = {
             note,
             post
@@ -45,7 +45,7 @@ function Posts() {
     )
 
 
-    console.log(posts)
+    // console.log(posts)
     useEffect(() => {
         dispatch(getBalanceThunk())
         dispatch(getAllUserTransactions())
@@ -79,7 +79,7 @@ function Posts() {
                     let commentLength = comments.filter(comment => comment.post === post.id).length
 
                     let userComment = comments.filter(comment => comment.post === post.id && user.username === comment.commenter)
-                    console.log(userComment)
+                    // console.log(userComment)
                     
                     return (
                         <div key={index} className='individual-post-container'>

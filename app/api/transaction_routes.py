@@ -25,27 +25,27 @@ def edit_transaction():
     data = request.get_json()
     id = data['id']
     note = data['note']
-    print('?????????????????????',id)
-    print('?????????????????????',note)
-    transaction = Transaction.query.get(id)
-    print('?????????????????????',transaction)
-    print('?????????????????????',transaction.note)
+    # print('?????????????????????',id)
+    # print('?????????????????????',note)
+    # transaction = Transaction.query.get(id)
+    # print('?????????????????????',transaction)
+    # print('?????????????????????',transaction.note)
     transaction.note = note
-    print('?????????????????????',transaction.note)
+    # print('?????????????????????',transaction.note)
     db.session.commit()
     return transaction.username_to_dict()
 
 @transaction_routes.route('/')
 @login_required
 def get_sender_transactions():
-    print('------------Current Logged in User', current_user.id)
+    # print('------------Current Logged in User', current_user.id)
 
     transaction_list = Transaction.query.all()
-    print('############# List of transactions', transaction_list)
+    # print('############# List of transactions', transaction_list)
 
     dict_transactions = [transaction.username_to_dict() for transaction in transaction_list]
     
-    print('$$$$$$$$$$$$ Dict Transactions', dict_transactions)
+    # print('$$$$$$$$$$$$ Dict Transactions', dict_transactions)
 
 
 
@@ -59,14 +59,14 @@ def get_sender_transactions():
 @transaction_routes.route('/requests')
 @login_required
 def get_all_request_transactions():
-    print('------------Current Logged in User', current_user.id)
+    # print('------------Current Logged in User', current_user.id)
 
     transaction_list = Transaction.query.filter(Transaction.receiver_id == current_user.id).all()
-    print('############# List of transactions where the current user is the one who requested the transaction', transaction_list)
+    # print('############# List of transactions where the current user is the one who requested the transaction', transaction_list)
 
     dict_transactions = [transaction.request_to_dict() for transaction in transaction_list if transaction.is_Pending == True]
     
-    print('$$$$$$$$$$$$ Dict Transactions', dict_transactions)
+    # print('$$$$$$$$$$$$ Dict Transactions', dict_transactions)
 
     
     
@@ -86,7 +86,7 @@ def get_all_request_transactions():
         
         })
     
-    print('########## new dict', new_dict)
+    # print('########## new dict', new_dict)
     
     return {'transactions': new_dict}
 
@@ -100,13 +100,13 @@ def initiate_request_transaction():
     Post a request transaction
     """
     form = RequestTransactionForm()
-    print('-------', form.data['request_amount'])
+    # print('-------', form.data['request_amount'])
     if form.data['request_amount'] is None:
-        print('we entered this code block')
+        # print('we entered this code block')
         return {'errors': 'Must Enter an amount'}
     # Find the user that we are requesting the payment from.
     user_to_pay = User.query.filter(User.username == form.data['sender_username'] ).first()
-    print('!!!!!',user_to_pay)
+    # print('!!!!!',user_to_pay)
 
     # A great spot to add validation for if user exists
     if user_to_pay is None:
@@ -120,10 +120,10 @@ def initiate_request_transaction():
 
 
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('++++++++++++++++++',form.validate_on_submit())
+    # print('++++++++++++++++++',form.validate_on_submit())
     if form.validate_on_submit():
 
-        print('@@@@@@@@@@ user to pay ', user_to_pay.id)
+        # print('@@@@@@@@@@ user to pay ', user_to_pay.id)
 
         params = {
             "sender_id": user_to_pay.id,
@@ -135,7 +135,7 @@ def initiate_request_transaction():
             'author': current_user.id
             
         }
-        print('--------------', params)
+        # print('--------------', params)
 
         # We initiate a Transaction
         req = Transaction(**params)
@@ -146,7 +146,7 @@ def initiate_request_transaction():
         
         return {'request' : req.request_to_dict()}
         # Is this ^^^^^^^^ where we want to end the initiation of a request transaction ^?
-    print('++++++++++++++++++',form.errors)
+    # print('++++++++++++++++++',form.errors)
 
     #  can add a better way to handle if the form does not submit correctly
     return {'errors': 'Form not submitting properly'}
@@ -158,17 +158,17 @@ def initiate_request_transaction():
 @transaction_routes.route('/sendPayment', methods=['POST'])
 # @login_required
 def initiate_and_send_payment():
-    print('WE ENTERED THE CODE BLOCK')
+    # print('WE ENTERED THE CODE BLOCK')
     form = SendTransactionForm()
 
     user_to_receive_payment = User.query.filter(User.username == form.data['receiver_username']).first()
-    print('-------', form.data['request_amount'])
+    # print('-------', form.data['request_amount'])
     if user_to_receive_payment is None:
         return {'errors': "User not Found"}
 
     if user_to_receive_payment.id == current_user.id:
         return {'errors': "Cannot send money to yourself"}
-    print('------------------',user_to_receive_payment.to_dict())
+    # print('------------------',user_to_receive_payment.to_dict())
 
     # # Get the sender and receivers wallet
     # # Possible error handle validation spot. Make sure both sender and receiver are registered users
@@ -201,11 +201,11 @@ def initiate_and_send_payment():
     # # Here we return the refined transaction object
 
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('++++++++++++++++++',form.validate_on_submit())
+    # print('++++++++++++++++++',form.validate_on_submit())
 
-    print('-------', form.data['request_amount'] is None)
+    # print('-------', form.data['request_amount'] is None)
     if form.data['request_amount'] is None:
-        print('we entered this code block')
+        # print('we entered this code block')
         return {'errors': 'Must Enter an amount'}
     if form.validate_on_submit():
         # if (form.data['request_amount'] is None):
@@ -228,7 +228,7 @@ def initiate_and_send_payment():
 
         # We initiate a Transaction
         transaction = Transaction(**params)
-        print('--------------', transaction)
+        # print('--------------', transaction)
 
 
 
@@ -237,8 +237,8 @@ def initiate_and_send_payment():
         # Possible error handle validation spot. Make sure both sender and receiver are registered users
         send_payment_wallet = Wallet.query.get(transaction.sender_id)
         receive_payment_wallet = Wallet.query.get(transaction.receiver_id)
-        print('********** Wallet of user Who is sending the money', send_payment_wallet.to_dict())
-        print('********** Wallet of user Who is receiving the money', receive_payment_wallet.to_dict())
+        # print('********** Wallet of user Who is sending the money', send_payment_wallet.to_dict())
+        # print('********** Wallet of user Who is receiving the money', receive_payment_wallet.to_dict())
 
 
         # A great place to check if the sender has enough in their wallet balance to go through with the    transaction.
@@ -250,7 +250,7 @@ def initiate_and_send_payment():
 
     
 
-        print('$$$$$$$$$$$$$$$ transaction', transaction.username_to_dict())
+        # print('$$$$$$$$$$$$$$$ transaction', transaction.username_to_dict())
 
         # print('!!!!!!!!!!!!! Wallet of user Who is sending the money', send_payment_wallet.to_dict())
         # print('!!!!!!!!!!!!! Wallet of user Who is receiving the money', receive_payment_wallet.to_dict())
@@ -290,7 +290,7 @@ def initiate_and_send_payment():
         
         return {'sent' : transaction.request_to_dict()}
         # Is this ^^^^^^^^ where we want to end the initiation of a request transaction ^?
-    print('++++++++++++++++++',form.errors)
+    # print('++++++++++++++++++',form.errors)
 
     #  can add a better way to handle if the form does not submit correctly
     return {'errors': 'Form not submitting properly'}
@@ -307,7 +307,7 @@ def approve_transaction(id):
     """
     #  Find a transaction
     transaction = Transaction.query.get(id)
-    print('^^^^^^^^^^^ transaction', transaction.request_to_dict())
+    # print('^^^^^^^^^^^ transaction', transaction.request_to_dict())
 
 
 
@@ -315,8 +315,8 @@ def approve_transaction(id):
     # Possible error handle validation spot. Make sure both sender and receiver are registered users
     send_payment_wallet = Wallet.query.get(transaction.sender_id)
     receive_payment_wallet = Wallet.query.get(transaction.receiver_id)
-    print('********** Wallet of user Who is sending the money', send_payment_wallet.to_dict())
-    print('********** Wallet of user Who is receiving the money', receive_payment_wallet.to_dict())
+    # print('********** Wallet of user Who is sending the money', send_payment_wallet.to_dict())
+    # print('********** Wallet of user Who is receiving the money', receive_payment_wallet.to_dict())
 
 
     # A great place to check if the sender has enough in their wallet balance to go through with the transaction.
@@ -332,7 +332,7 @@ def approve_transaction(id):
     transaction.is_Pending = False
     transaction.transaction_state = transaction_status[1] # Approved
 
-    print('$$$$$$$$$$$$$$$ transaction', transaction.username_to_dict())
+    # print('$$$$$$$$$$$$$$$ transaction', transaction.username_to_dict())
 
     # print('!!!!!!!!!!!!! Wallet of user Who is sending the money', send_payment_wallet.to_dict())
     # print('!!!!!!!!!!!!! Wallet of user Who is receiving the money', receive_payment_wallet.to_dict())
@@ -389,11 +389,11 @@ def cancel_transaction(id):
 @transaction_routes.route('/deleteTransaction', methods=['POST'])
 def delete_transaction():
     data = request.get_json()
-    print('....',data)
+    # print('....',data)
     id = data['id']
-    print('....',id)
+    # print('....',id)
     transaction = Transaction.query.get(id)
-    print('....',transaction)
+    # print('....',transaction)
     db.session.delete(transaction)
     db.session.commit()
     return {'id': transaction.id}

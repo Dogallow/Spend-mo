@@ -96,7 +96,7 @@ export const getAllUserTransactions = () => async dispatch => {
     if (response.ok){
         const allTransactions = await response.json()
         
-        console.log('All Transactions',allTransactions)
+        // console.log('All Transactions',allTransactions)
 
         dispatch(userTransactions(allTransactions))
         
@@ -113,7 +113,7 @@ export const deleteTransactionThunk = (obj) => async dispatch => {
 
     if (response.ok){
         const result = await response.json()
-        console.log('deletetransactionthunk returned from backend',result)
+        // console.log('deletetransactionthunk returned from backend',result)
         dispatch(deleteTransactionActionCreator(result))
     }
 }
@@ -127,7 +127,7 @@ export const editTransactionThunk = (obj) => async dispatch => {
 
     if (response.ok){
         const editedTransaction = await response.json()
-        console.log('!!!!! Returned from backend to editTransactionThunk', editedTransaction)
+        // console.log('!!!!! Returned from backend to editTransactionThunk', editedTransaction)
         dispatch(editTransactionActionCreator(editedTransaction))
         return editedTransaction
     }
@@ -139,7 +139,7 @@ export const getAllSenderTransactions = () => async dispatch => {
     if (response.ok){
         const allTransactions = await response.json()
         
-        console.log('All Transactions involving current user where the user is the sender of the payment',allTransactions)
+        // console.log('All Transactions involving current user where the user is the sender of the payment',allTransactions)
 
         dispatch(userSentPayments(allTransactions))
         
@@ -152,7 +152,7 @@ export const getAllRequestedTransactions = () => async dispatch => {
 
     if (response.ok){
         const requests = await response.json()
-        console.log('All Transactions involving current user where the user is the requester of the transaction', requests)
+        // console.log('All Transactions involving current user where the user is the requester of the transaction', requests)
         dispatch(userRequests(requests))
     }
 }
@@ -167,10 +167,10 @@ export const requestPaymentTransaction = (obj) => async dispatch => {
     if (response.ok){
         const requestDetails = await response.json()
         if (requestDetails.errors){
-            console.log('there was an error', requestDetails)
+            // console.log('there was an error', requestDetails)
             return requestDetails
         }
-        console.log('request Details from the backend', requestDetails)
+        // console.log('request Details from the backend', requestDetails)
         dispatch(requestSent(requestDetails))
         return requestDetails
     }
@@ -185,12 +185,12 @@ export const initiateTransactionAndSendPaymentThunk = (obj) => async dispatch =>
 
     if (response.ok) {
         const sendDetails = await response.json()
-        console.log(sendDetails)
+        // console.log(sendDetails)
         if (sendDetails.errors) {
-            console.log('there was an error', sendDetails)
+            // console.log('there was an error', sendDetails)
             return sendDetails
         }
-        console.log('send Details from the backend', sendDetails)
+        // console.log('send Details from the backend', sendDetails)
         dispatch(paymentSent(sendDetails))
         return sendDetails
     }
@@ -204,12 +204,12 @@ export const approveTransactionThunk = (id) => async dispatch => {
         const success = await response.json()
 
         if (success.errors){
-            console.log('there was an error with approving transaction',success)
+            // console.log('there was an error with approving transaction',success)
             return success
         }
         
-        console.log('Returned from the backend', success)
-        dispatch(approveTransactionActionCreator(success))
+        // console.log('Returned from the backend', success)
+        // dispatch(approveTransactionActionCreator(success))
         return success
     }
 }
@@ -219,7 +219,7 @@ export const declineTransactionThunk = (id) => async dispatch => {
 
     if (response.ok){
         const success = await response.json()
-        console.log('Declined: returned from the backend', success)
+        // console.log('Declined: returned from the backend', success)
         dispatch(declineTransactionActionCreator(success))
         return success
     }
@@ -230,7 +230,7 @@ export const cancelTransactionThunk = (id) => async dispatch => {
 
     if (response.ok){
         const success = await response.json()
-        console.log('Declined: returned from the backend', success)
+        // console.log('Declined: returned from the backend', success)
         dispatch(cancelTransactionActionCreator(success))
         return success
     }
@@ -274,58 +274,58 @@ const transactionsReducer = (state = initialState, action) => {
             return newState
         case APPROVE_TRANSACTION:
             newState = {...state}
-            console.log('Inside of the transactions reducer. What is the state before we alter it?', newState)
-            console.log(action.transaction)
+            // console.log('Inside of the transactions reducer. What is the state before we alter it?', newState)
+            // console.log(action.transaction)
             let alteredState = newState.sendTransactions.transactions.map(transaction => {
                 if (transaction.id == action.transaction.transaction.id){
                     return action.transaction.transaction
                 }
                 return transaction
             })
-            console.log('This is the altered state reflecting the changed status', alteredState)
+            // console.log('This is the altered state reflecting the changed status', alteredState)
             // We want to find our transaction and replace it.
             return {...state, sendTransactions:{'transactions':alteredState}}
         case CANCEL_TRANSACTION:
             newState = {...state}
-            console.log('Inside of the transactions reducer. What is the state before we alter it?', newState)
-            console.log(action.transaction)
+            // console.log('Inside of the transactions reducer. What is the state before we alter it?', newState)
+            // console.log(action.transaction)
             let cancelledState = newState.requestTransactions.transactions.map(transaction => {
-                console.log(transaction)
+                // console.log(transaction)
                 if (transaction.id == action.transaction.transaction.id){
                     return action.transaction.transaction
                 }
                 return transaction
             })
-            console.log('This is the cancelled altered state reflecting the changed status', cancelledState)
+            // console.log('This is the cancelled altered state reflecting the changed status', cancelledState)
             // We want to find our transaction and replace it.
             return {...state, requestTransactions: {...cancelledState}}
         case DECLINE_TRANSACTION:
             newState = {...state}
-            console.log('Inside of the transactions reducer. What is the state before we alter it?', newState)
-            console.log(action.transaction)
+            // console.log('Inside of the transactions reducer. What is the state before we alter it?', newState)
+            // console.log(action.transaction)
             let declinedState = newState.sendTransactions.transactions.map(transaction => {
-                console.log(transaction)
+                // console.log(transaction)
                 if (transaction.id == action.transaction.transaction.id){
                     return action.transaction.transaction
                 }
                 return transaction
             })
-            console.log('This is the declined altered state reflecting the changed status', declinedState)
+            // console.log('This is the declined altered state reflecting the changed status', declinedState)
             // We want to find our transaction and replace it.
             return {...state, sendTransactions: {'transactions':declinedState}}
         case EDIT_TRANSACTION:
             newState = {...state}
-            console.log('NEW STATE IN THE EDIT_TRANSACTION CASE IN THE REDUCER',newState)
+            // console.log('NEW STATE IN THE EDIT_TRANSACTION CASE IN THE REDUCER',newState)
             let replacementIndex = newState.allTransactions.transactions.findIndex((element) => element.id === action.transaction.id)
-            console.log('!!!!!!!replacement index', newState.allTransactions.transactions[replacementIndex])
-            console.log('!!!!!!!replacement index', action.transaction)
+            // console.log('!!!!!!!replacement index', newState.allTransactions.transactions[replacementIndex])
+            // console.log('!!!!!!!replacement index', action.transaction)
             let arr = newState.allTransactions.transactions
             arr[replacementIndex] = action.transaction
-            console.log('updated new State',newState)
+            // console.log('updated new State',newState)
             return {...state, allTransactions:{'transactions': arr}}
         case DELETE_TRANSACTION:
             newState = {...state}
-            console.log('action.id---->',action.transaction.id)
+            // console.log('action.id---->',action.transaction.id)
             let arrMinusOne = newState.allTransactions.transactions.filter(transaction => transaction.id !== action.transaction.id)
             return {...state,allTransactions:{'transactions': arrMinusOne}}
         case CLEAR_TRANSACTION:

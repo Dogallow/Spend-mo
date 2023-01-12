@@ -38,12 +38,12 @@ class Transaction(db.Model):
     def username_to_dict(self):
         sender = User.query.get(self.sender_id)
         author = User.query.get(self.author)
-        print(sender)
-        print(sender.username)
+        # print(sender)
+        # print(sender.username)
         sender = sender.username
         receiver = User.query.get(self.receiver_id)
-        print(receiver)
-        print(receiver.username)
+        # print(receiver)
+        # print(receiver.username)
         receiver = receiver.username
         
 

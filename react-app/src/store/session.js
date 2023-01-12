@@ -51,7 +51,7 @@ export const login = (email, password) => async (dispatch) => {
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
-    console.log('DATA RETURNED FROM THE BACKEND', data)
+    // console.log('DATA RETURNED FROM THE BACKEND', data)
     if (data.errors) {
       return data.errors;
     }
@@ -85,7 +85,7 @@ export const signUp = (obj) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
-    console.log('@@@@@@@@@@@@@@@ this returned from the signup backend', data )
+    // console.log('@@@@@@@@@@@@@@@ this returned from the signup backend', data )
     dispatch(setUser(data))
     dispatch(getBalanceThunk())
     return null;
@@ -108,7 +108,7 @@ export const deleteUserThunk = () => async dispatch => {
   
   if (response.ok) {
     const success = await response.json()
-    console.log('*********** This is returned from the delete route backend',success)
+    // console.log('*********** This is returned from the delete route backend',success)
     dispatch(removeUser())
     
     return null

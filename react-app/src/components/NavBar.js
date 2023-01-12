@@ -14,8 +14,8 @@ const NavBar = () => {
   const user = useSelector(state => state.session.user)
   const wallet = useSelector(state => state.wallet)
   const history = useHistory()
-  console.log(user)
-  console.log(wallet)
+  // console.log(user)
+  // console.log(wallet)
 
   const walletInfo = wallet.wallet ?( 
     <div>

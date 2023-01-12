@@ -10,7 +10,7 @@ function Incomplete(){
     const user = useSelector(state => state.session.user)
     const requests = useSelector(state => state.transactions.requestTransactions.transactions)
     
-    console.log(requests)
+    // console.log(requests)
 
     useEffect(() => {
         dispatch(getAllRequestedTransactions())

@@ -25,7 +25,7 @@ function RequestForm () {
         async function fetchData() {
             const response = await fetch('/api/users/');
             const responseData = await response.json();
-            console.log('Response Data is UsersList Component', responseData)
+            // console.log('Response Data is UsersList Component', responseData)
             setUsers(responseData.users)
         }
         fetchData();
@@ -79,13 +79,13 @@ function RequestForm () {
 
         let request = await dispatch(requestPaymentTransaction(obj)) 
         await dispatch(getBalanceThunk())
-        console.log(request)
+        // console.log(request)
         if (request.errors){
             validate = [request.errors]
         }
-        console.log('Frontend RequestForm Component', request)
+        // console.log('Frontend RequestForm Component', request)
         // Redirect to Incomplete page , CONDITIONALLY
-        console.log('Sent a request:', obj)
+        // console.log('Sent a request:', obj)
         
         if (!!validate.length) {
             setErrors([...validate])
@@ -121,7 +121,7 @@ function RequestForm () {
         }
 
         let sendTransaction = await dispatch(initiateTransactionAndSendPaymentThunk(obj))
-        console.log('Frontend Send Payment Form', sendTransaction)
+        // console.log('Frontend Send Payment Form', sendTransaction)
         if (sendTransaction.errors) {
             validate = [sendTransaction.errors]
         }
@@ -138,7 +138,7 @@ function RequestForm () {
     function handleFocus() {
         inputRef.current.blur(); // removing focus
     }
-    console.log('THIS IS THE INPUT REF', inputRef)
+    // console.log('THIS IS THE INPUT REF', inputRef)
     
     return (
         <>

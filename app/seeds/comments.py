@@ -7,7 +7,7 @@ def seed_comments():
     comment_4 = Comment(commenter=7,post=8,comment="WOW! Thanks that is super helpful!")
     comment_5 = Comment(commenter=7,post=12,comment="Invite me next time😡")
     comment_6 = Comment(commenter=3,post=12,comment="I'm playing next time")
-    comment_7 = Comment(commenter=2,post=12,comment="WOW NO INVITE IS CRAZY!💢")
+    comment_7 = Comment(commenter=4,post=12,comment="WOW NO INVITE IS CRAZY!💢")
     comment_8 = Comment(commenter=7,post=14,comment="Yea, we can set up a time and place👍")
     comment_9 = Comment(commenter=10,post=15,comment="THANKS, IT WAS A BLAST WORKING WITH YOU AS WELL🎉🥂")
     comment_10 = Comment(commenter=1,post=9,comment="happy birthday🎉")

@@ -62,13 +62,13 @@ def sign_up():
     Creates a new user and logs them in
     """
     form = SignUpForm()
-    print('///////////////////',form.data)
-    print('///////////////////',form.data['username'])
-    print('///////////////////',form.data['first_name'])
+    # print('///////////////////',form.data)
+    # print('///////////////////',form.data['username'])
+    # print('///////////////////',form.data['first_name'])
     # print('///////////////////',form.data('username'))
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print(form.data['first_name'])
+        # print(form.data['first_name'])
         user = User(
             first_name=form.data['first_name'],
             last_name=form.data['last_name'],
@@ -100,8 +100,8 @@ def delete_user():
     users = User.query.all()
     user = User.query.filter(User.id == current_user.id).first()
     alternate_user = User.query.get(current_user.id)
-    print('----------------------this is the user',user)
-    print('+++++++++++++++++++++this is the alternate user',alternate_user)
+    # print('----------------------this is the user',user)
+    # print('+++++++++++++++++++++this is the alternate user',alternate_user)
     ############### wallet= Wallet.query.filter(Wallet.user_id == user.id).first()
     # if environment == "production":
     #     db.session.execute(f"DELETE FROM {SCHEMA}.users WHERE id = {alternate_user.id}")

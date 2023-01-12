@@ -75,7 +75,7 @@ export const newCommentThunk = (obj) => async dispatch => {
 
     if (response.ok){
         const comment = await response.json()
-        console.log('COMMMENT RETURNED FROM CREATE COMMENT', comment)
+        // console.log('COMMMENT RETURNED FROM CREATE COMMENT', comment)
         dispatch(newCommentActionCreator(comment))
         return
 
@@ -120,15 +120,15 @@ const commentReducer = (state = initialState, action) => {
         case ALL_COMMENTS:
             let allComments = {...state}
             allComments.allComments = [...action.payload]
-            console.log('allComments', action.payload)
+            // console.log('allComments', action.payload)
             return allComments
         case POST_COMMENTS:
-            console.log('POST_COMMENT REDUCER', action.payload)
+            // console.log('POST_COMMENT REDUCER', action.payload)
             let postState = {...state, postComments: [...action.payload]}
             return postState
         case NEW_COMMENT:
             newState = {...state}
-            console.log('NEW_COMMENT REDUCER', action.payload)
+            // console.log('NEW_COMMENT REDUCER', action.payload)
             newState.postComments = [...state.postComments, action.payload]
             return newState
         case CLEAR_POST_COMMENTS:
