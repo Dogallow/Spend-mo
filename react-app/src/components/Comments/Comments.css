@@ -124,4 +124,5 @@
 
 .comment-delete-button{
     cursor: pointer;
+    padding-right: 3px;
 }

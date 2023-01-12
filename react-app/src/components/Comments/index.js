@@ -56,10 +56,12 @@ function Comments() {
         e.preventDefault()
         await dispatch(deleteCommentThunk(commentId))
     }
-
+    
     if (posts) {
         const post = posts?.find(post => post.id == postId)
         if (!post) return <EmptyPage />
+        let userComment = comments.filter(comment => comment.post === post.id && user.username === comment.commenter)
+        console.log(userComment)
         let amountStyling
         let plusMinusDefault
         if (post.receiver_id === user.username) {
@@ -99,7 +101,7 @@ function Comments() {
                             </div>
                             <div className='comment-like-icon-container'>
                                 {user.username && <Like username={user.username} postId={post.id} />}
-                                <button className={comments.length > 0 ? 'comment-count' : ''} style={{ border: '0', backgroundColor: 'transparent', marginLeft:'16px' }}><i class="fa-solid fa-comment fa-lg"></i></button>
+                                <button className = { comments.length > 0 && userComment.length > 0 ? 'comment-count' : ''} style={{ border: '0', backgroundColor: 'transparent', marginLeft:'16px' }}><i class="fa-solid fa-comment fa-lg"></i></button>
                                 {comments.length}
                             </div>
 
