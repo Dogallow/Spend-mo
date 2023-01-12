@@ -28,7 +28,7 @@ function Like({ postId, username }) {
        console.log('@@@ THIS IS THE LIKES OF THE CURRENT POST',likes[postId])
     console.log('@@@ THIS IS THE USING THE INCLUDES METHOD', likes[postId]?.includes(username))
 
-    if (likes[postId] && likes[postId]?.includes(username)) return <button style={{ border: '0', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={handleUnlike} ><i class="fa-solid fa-heart " style={{color: 'red'}}></i></button>
+    if (likes[postId] && likes[postId]?.includes(username)) return <button style={{ border: '0', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={handleUnlike} ><i class="fa-solid fa-heart fa-lg" style={{color: 'red'}}></i></button>
     
     
     return(

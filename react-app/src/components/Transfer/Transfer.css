@@ -5,10 +5,11 @@
     align-items: center;
     padding-top:27.2px;
     height:100%;
+    font-family: Scto Grotesk A, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .depositWithdrawContainer h2{
-    font-family: "Scto Grotesk A", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Scto Grotesk A, "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 15px 0 0 0;
     font-weight: 550;
 }
@@ -88,4 +89,6 @@ input::-webkit-inner-spin-button {
     border-radius: 2em;
     margin-top: 12px;
     border: 0;
+    font-family: Scto Grotesk A, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
 }

@@ -44,7 +44,7 @@ const NavBar = () => {
       <button style={{ backgroundColor: user.color }} className='avatar-container'><strong>{user.username[0]}</strong></button>
       <div className='user-info'>
         <h3>Hi, {user.username}</h3>
-        <span>@{user.username}-{Math.floor(Math.random() *10)}</span>
+        <span>@{user.username}</span>
       </div>
     </>
       ) : (
@@ -129,7 +129,7 @@ const NavBar = () => {
           <a target="_blank" href='https://github.com/Dogallow' >
             <i class="fa-brands fa-github fa-2xl" ></i>
         </a>
-          <a target="_blank" href='https://www.linkedin.com/in/donovan-galloway-927190233/'  ><i class="fa-brands fa-linkedin fa-2xl"></i></a>
+          <a style={{paddingLeft:'5px'}} target="_blank" href='https://www.linkedin.com/in/donovan-galloway-927190233/'  ><i class="fa-brands fa-linkedin fa-2xl"></i></a>
         </div>
       </div>
     </nav>

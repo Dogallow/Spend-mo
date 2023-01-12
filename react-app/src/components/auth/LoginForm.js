@@ -141,7 +141,7 @@ const LoginForm = () => {
           </div>
           <div className='login-page-buttons-container'>
           <button onClick={demo1Login} className='sign-in-button' type='submit'>Sign In Demo</button>
-          <button onClick={demo2Login} className='sign-in-button' type='submit'>Sign In Test</button>
+          <button onClick={demo2Login} className='sign-in-button' type='submit'>Sign In Demo2</button>
           <button className='sign-in-button' type='submit'>Sign In</button>
           </div>
       </form>

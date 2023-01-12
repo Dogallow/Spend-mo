@@ -72,6 +72,11 @@
     color: red;
 }
 
+.userTransactions-payment-amount-positive{
+    font-weight: bolder;
+    color: green;
+}
+
 .userTransactions-Links{
     width: 50%;
     margin: auto;

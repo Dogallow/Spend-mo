@@ -7,7 +7,7 @@ import random
 
 auth_routes = Blueprint('auth', __name__)
 
-colors = ['#fcec03', '#b6fc03', '#b6fc03', '#03dffc', '#9f73ff', '#ff73b4']
+colors = ['#53D8FB', '#66c3ff', '#dce1e9', '#d4afb9', '#F9EBE0', '#8dbbc7', '#624cab', '#a0ddff', '#C78283']
 
 def validation_errors_to_error_messages(validation_errors):
     """

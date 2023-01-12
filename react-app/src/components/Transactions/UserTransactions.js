@@ -82,7 +82,14 @@ function UserTransactions () {
                 } else {
                     status = 'Closed'
                 }
-
+                let amount 
+                if (transaction.transaction_state === 'approved' && transaction.sender_id === user.username){
+                    amount = <p className="userTransactions-payment-amount">-${transaction.request_amount}</p>
+                }else if (transaction.transaction_state === 'approved' && transaction.receiver_id === user.username){
+                    amount = <p className="userTransactions-payment-amount-positive">+${transaction.request_amount}</p>
+                }
+                
+                
                 if (transaction.transaction_state === 'cancelled') return
                 
                 return (
@@ -96,7 +103,7 @@ function UserTransactions () {
                                 {status === 'Closed' ? <p><strong>{user.username === transaction.sender_id ? 'You' : transaction.sender_id}</strong> {user.username === transaction.sender_id ? transaction.transaction_state : 'sent'} a payment to <strong>{transaction.receiver_id === user.username ? 'You' : transaction.receiver_id}</strong></p> :
                                         <p><strong>{transaction.receiver_id}</strong> requested a payment from <strong>You</strong></p>
                                 }
-                                <p  className={transaction.transaction_state === 'approved'?"userTransactions-payment-amount": ""}>${transaction.request_amount}</p>
+                                {transaction.is_Pending === true ? <p style={{color:'grey'}} >${transaction.request_amount}</p>  :amount}
                             </div>
                                 <p className="userTransactions-individual-payment-info-note" >{transaction.note}</p>
                                 <p className="userTransactions-individual-payment-info-status">Transaction Status: <strong>{status}</strong></p>
@@ -119,3 +126,6 @@ function UserTransactions () {
 }
 
 export default UserTransactions
+
+
+// { transaction.transaction_state === 'approved' ? "userTransactions-payment-amount" : "" }> ${ transaction.request_amount }

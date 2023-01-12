@@ -5,11 +5,13 @@
             min-width: 317px;
             overflow-y: auto;
             position: sticky;
+        
 }
 
 .nav-container{
     padding: 1.7rem 8px 1.7rem 40px;
     font-weight: 800;
+    background-color: #fff;
 }
 
 img {
@@ -143,6 +145,7 @@ li{
     display: flex;
     /* justify-content: space-between; */
     align-items: center;
+    z-index: -1;
 }
 
 .contact-footer-text{
@@ -153,4 +156,10 @@ li{
 
 .contact-footer-buttons a{
     height: 100%;
+}
+
+@media (max-height: 700px){
+    .contact-footer-container{
+        display: none;
+    }
 }
