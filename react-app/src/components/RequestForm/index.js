@@ -167,14 +167,23 @@ function RequestForm () {
                     <input ref={inputRef} required type="text" value={username} placeholder='Enter Username' onChange={(e) => setUsername(e.target.value)}/>
                 </div>
                 <div className="auto-dropdown-container">
-                {username.length > 0 && !hideDropdown && (
-                    filteredUsers.length > 0 ? filteredUsers.map((user, index) => {
-                        return <li key={index} onClick={() => {
-                            setUsername(user)
-                            setCount(1)
-                        }}>{user}</li>
-                    }) : <li>No Users Found</li>
-                )}
+                
+                        {!hideDropdown && <div className="auto-dropdown-background" onClick={(e) => {
+                            setHideDropdown(true)
+                            setCount(0)
+                        }}> </div>}
+                        {username.length > 0 && !hideDropdown && (
+                            filteredUsers.length > 0 ? filteredUsers.map((user, index) => {
+                                 
+                                
+                                return <li className="dropdown-list-items" key={index} onClick={() => {
+                                    setCount(1)
+                                    setUsername('')
+                                    setUsername(user)
+                                }}>{user}</li>
+                            }) : <li>No Users Found</li>
+                        )}
+                    
                 </div>
 
                 <div className="textarea-container">

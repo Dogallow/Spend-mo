@@ -209,7 +209,7 @@ export const approveTransactionThunk = (id) => async dispatch => {
         }
         
         // console.log('Returned from the backend', success)
-        // dispatch(approveTransactionActionCreator(success))
+        dispatch(approveTransactionActionCreator(success))
         return success
     }
 }
